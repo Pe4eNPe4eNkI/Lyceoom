@@ -1,4 +1,5 @@
 import pygame
+import sys
 from parameters import *
 '''from gamer import Gamer'''
 
@@ -11,7 +12,7 @@ timer = pygame.time.Clock()
 while True:
     for event in pygame.event.get():
         if pygame.event == pygame.QUIT:
-            exit()
+            terminate()
     '''gamer.movement()'''
     monitor.fill(BLACK)
 
@@ -19,3 +20,8 @@ while True:
 
     pygame.display.flip()
     timer.tick(FPS)
+
+
+def terminate():
+    pygame.quit()
+    sys.exit()
