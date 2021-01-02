@@ -14,6 +14,7 @@ def ray_casting(monitor, gamer_pos, gamer_angle):
             y = oy + i * sin_a
             '''pygame.draw.line(monitor, DARKGREY, gamer_pos, (x, y), 2)'''
             if (x // CELL * CELL, y // CELL * CELL) in txt_map:
+                i *= math.cos(gamer_angle - view_angle)
                 hight = PROJ_C / i
                 a = 255 / (1 + i * i * 0.0001)
                 color = (a, a, a)
