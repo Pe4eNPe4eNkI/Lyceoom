@@ -14,6 +14,7 @@ class Gamer:
         self.angle = gamer_angle
         self.sensitivity = 0.004
 
+    @property
     def pos(self):
         return (self.x, self.y)
 
