@@ -2,7 +2,7 @@ from parameters import *
 
 # тут создается карта и всё связанное с ней
 
-map = [
+map_x = [
     '1111111111111111111111111111111111111'
     '1.........11................1.......1'
     '1.........1.......11........11......1'
@@ -19,7 +19,7 @@ map = [
 # координаты стен
 
 txt_map = set()
-for j, row in enumerate(map):
+for j, row in enumerate(map_x):
     for i, char in enumerate(row):
         if char == '1':
             txt_map.add((i) * CELL * CELL)

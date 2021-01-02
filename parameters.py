@@ -4,8 +4,8 @@
 # общие настройки
 WIDTH = 1200
 HEIGHT = 800
-H_HEIGHT = HEIGHT // 2
-H_WIDTH = WIDTH // 2
+H_HEIGHT = float(HEIGHT // 2)
+H_WIDTH = float(WIDTH // 2)
 D_HEIGHT = HEIGHT * 2
 D_WIDTH = WIDTH * 2
 CELL = 100
