@@ -20,4 +20,4 @@ class Malen:
     def fps(self, clock):
         fps_clock = str(int(clock.get_fps()))
         render = self.font.render(fps_clock, 0, RED)
-        self.monitor.blit(render, (WIDTH - 65, 5))
+        self.monitor.blit(render, FPS_POS)
