@@ -27,6 +27,9 @@ while True:
     pygame.draw.line(monitor, RED, gamer.pos,
                      (gamer.x + WIDTH * math.cos(gamer.angle), gamer.y + WIDTH * math.sin(gamer.angle)))
 
+
+#отрисовка карты
+
     for x, y in txt_map:
         pygame.draw.rect(monitor, DARKGREY, (x, y, CELL, CELL), 2)
 
