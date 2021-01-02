@@ -5,6 +5,7 @@ from parameters import *
 from gamer import Gamer
 from map import txt_map
 from r_c import ray_casting
+from malen import Malen
 
 
 def terminate():
