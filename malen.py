@@ -13,13 +13,14 @@ class Malen:
         self.monitor_map = monitor_map
         self.gamer = gamer
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
+        self.texture = pygame.image.load('textures/wall3.png').convert()
 
     def bg(self):
         pygame.draw.rect(self.monitor, SKY_BLUE, (0, 0, WIDTH, H_HEIGHT))
         pygame.draw.rect(self.monitor, DARKGREY, (0, H_HEIGHT, WIDTH, H_HEIGHT))
 
     def world(self, gamer_pos, gamer_angle):
-        ray_casting(self.monitor, gamer_pos, gamer_angle)
+        ray_casting(self.monitor, gamer_pos, gamer_angle, self.texture)
 
     def fps(self, clock):
         fps_clock = str(int(clock.get_fps()))
