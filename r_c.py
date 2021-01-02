@@ -49,7 +49,8 @@ def ray_casting(monitor, gamer_pos, gamer_angle):
 
         depth = depth_v if depth_v < depth_h else depth_h
         depth *= math.cos(gamer_angle - view_angle)
-        hight = PROJ_C / depth
+        depth = max(depth, 0.00001)
+        hight = min(int(PROJ_C / depth), 2 * HEIGHT)
         a = 255 / (1 + depth * depth * 0.0001)
         color = (a, a, a)
         pygame.draw.rect(monitor, color, (ray * SCALE, H_HEIGHT - hight // 2, SCALE, hight))
