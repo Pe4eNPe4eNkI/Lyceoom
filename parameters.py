@@ -33,13 +33,14 @@ SCALE = WIDTH // N_RAYS
 # настройки для миникарты
 MAP_SCALE =  5
 MAP_CELL = CELL // MAP_SCALE
+MAP_POS = (0, HEIGHT - HEIGHT // MAP_SCALE)
 
 
 # цвета
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (220, 0, 0)
-GREEN = (0, 220, 0)
+GREEN = (0, 80, 0)
 BLUE = (0, 0, 220)
 DARKGREY = (110, 110, 110)
 DARKBROWN = (63, 42, 20)

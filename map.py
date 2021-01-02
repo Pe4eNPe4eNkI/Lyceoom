@@ -19,4 +19,4 @@ for j, row in enumerate(map_x):
     for i, char in enumerate(row):
         if char == '1':
             txt_map.add((i * CELL, j * CELL))
-            txt_map.add((i * MAP_CELL, j * CELL))
+            mini_map.add((i * MAP_CELL, j * CELL))

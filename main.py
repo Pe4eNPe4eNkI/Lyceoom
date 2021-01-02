@@ -30,5 +30,6 @@ while True:
     malen.world(gamer.pos, gamer.angle)
     malen.fps(timer)
     malen.mini_map(gamer)
+
     pygame.display.flip()
     timer.tick(FPS)
