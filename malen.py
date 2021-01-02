@@ -13,7 +13,9 @@ class Malen:
         self.monitor_map = monitor_map
         self.gamer = gamer
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
-        self.texture = pygame.image.load('textures/wall3.png').convert()
+        self.texture = {'1': pygame.image.load('textures/3.png').convert(),
+                        '2': pygame.image.load('textures/wall7.png').convert(),
+                        '3': pygame.image.load('textures/12.png').convert()}
 
     def bg(self):
         pygame.draw.rect(self.monitor, SKY_BLUE, (0, 0, WIDTH, H_HEIGHT))
