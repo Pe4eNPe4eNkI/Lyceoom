@@ -3,6 +3,7 @@ from parameters import *
 from r_c import ray_casting
 
 # для коммита
+# еще каммит
 
 class Malen:
     def __init__(self, monitor):
