@@ -25,7 +25,7 @@ while True:
             terminate()
     gamer.movement()
     monitor.fill(BLACK)
-    malen.background()
+    malen.bg()
     malen.world(player.pos, player.angle)
     malen.fps(clock)
     '''pygame.draw.rect(monitor, BLUE, (0, 0, WIDTH, H_HEIGHT))
