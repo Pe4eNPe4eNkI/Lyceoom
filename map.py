@@ -16,6 +16,8 @@ map = [
     '1111111111111111111111111111111111111'
 
 ]
+# координаты стен
+
 txt_map = set()
 for j, row in enumerate(map):
     for i, char in enumerate(row):
