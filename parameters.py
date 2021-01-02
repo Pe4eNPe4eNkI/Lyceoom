@@ -24,6 +24,9 @@ H_FOV = FOV / 2
 N_RAYS = 30
 MAX_DEPTH = 800
 DELTA_ANGLE = FOV / N_RAYS
+DISTANCE = N_RAYS / (2 * math.tan(H_FOV))
+PROJ_C = DISTANCE * CELL
+SCALE = WIDTH // N_RAYS
 
 
 # цвета 
