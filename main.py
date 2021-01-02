@@ -23,7 +23,7 @@ while True:
     gamer.movement()
     monitor.fill(BLACK)
 
-    pygame.draw.circle(monitor, RED, gamer.pos, 12)
+    pygame.draw.circle(monitor, RED, (int(gamer.x), int(gamer.y)), 12)
     pygame.draw.line(monitor, RED, gamer.pos,
                      (gamer.x + WIDTH * math.cos(gamer.angle), gamer.y + WIDTH * math.sin(gamer.angle)))
 
