@@ -18,7 +18,7 @@ monitor = pygame.display.set_mode((WIDTH, HEIGHT))
 mon_map = pygame.Surface((WIDTH // MAP_SCALE, HEIGHT // MAP_SCALE))
 timer = pygame.time.Clock()
 gamer = Gamer()
-malen = Malen(monitor, mon_map)
+malen = Malen(monitor, mon_map, gamer)
 
 while True:
     for event in pygame.event.get():

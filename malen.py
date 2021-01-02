@@ -7,9 +7,10 @@ from map import mini_map
 # еще каммит
 
 class Malen:
-    def __init__(self, monitor, monitor_map):
+    def __init__(self, monitor, monitor_map, gamer):
         self.monitor = monitor
         self.monitor_map = monitor_map
+        self.gamer = gamer
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
 
     def bg(self):
@@ -26,10 +27,10 @@ class Malen:
 
     def mini_map(self, gamer):
         self.monitor_map.fill(BLACK)
-        map_x, map_y = gamer.x // MAP_SCALE, gamer.y // MAP_SCALE
+        map_x, map_y = self.gamer.x // MAP_SCALE, self.gamer.y // MAP_SCALE
+        pygame.draw.line(self.monitor_map, YELLOW, (map_x, map_y), (map_x + 80 * math.cos(self.gamer.angle),
+                                                                    map_y + 80 * math.sin(self.gamer.angle)), 2)
         pygame.draw.circle(self.monitor_map, RED, (int(map_x), int(map_y)), 4)
-        pygame.draw.line(self.monitor_map, YELLOW, (map_x, map_y), (map_x + WIDTH * math.cos(gamer.angle),
-                                                                    map_y + WIDTH * math.sin(gamer.angle)), 2)
 
         for x, y in mini_map:
             pygame.draw.rect(self.monitor_map, DARKBROWN, (x, y, MAP_CELL, MAP_CELL), 2)
