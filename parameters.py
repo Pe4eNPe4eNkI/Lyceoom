@@ -22,7 +22,7 @@ gamer_speed = 2
 # настройки лучей
 FOV = math.pi / 3
 H_FOV = FOV / 2
-N_RAYS = 80
+N_RAYS = 300
 MAX_DEPTH = 800
 DELTA_ANGLE = FOV / N_RAYS
 DISTANCE = N_RAYS / (2 * math.tan(H_FOV))
