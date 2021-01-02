@@ -4,7 +4,7 @@ from main import terminate
 
 
 class Gamer:
-    def __init__(self, sprites):
+    def __init__(self):
         self.x, self.y = gamer_pos
         self.angle = gamer_angle
         self.sensitivity = 0.004
