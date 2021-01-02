@@ -6,7 +6,7 @@ from r_c import ray_casting
 # еще каммит
 
 class Malen:
-    def init(self, monitor):
+    def __init__(self, monitor):
         self.monitor = monitor
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
 
@@ -16,8 +16,6 @@ class Malen:
 
     def world(self, gamer_pos, gamer_angle):
         ray_casting(self.monitor, gamer_pos, gamer_angle)
-
-    # update, people, update
 
     def fps(self, clock):
         fps_clock = str(int(clock.get_fps()))

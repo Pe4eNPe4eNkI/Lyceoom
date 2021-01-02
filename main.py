@@ -26,8 +26,8 @@ while True:
     gamer.movement()
     monitor.fill(BLACK)
     malen.bg()
-    malen.world(player.pos, player.angle)
-    malen.fps(clock)
+    malen.world(gamer.pos, gamer.angle)
+    malen.fps(timer)
     '''pygame.draw.rect(monitor, BLUE, (0, 0, WIDTH, H_HEIGHT))
     pygame.draw.rect(monitor, DARKGREY, (0, H_HEIGHT, WIDTH, H_HEIGHT))'''
 
@@ -46,4 +46,4 @@ while True:
 
 
     pygame.display.flip()
-    timer.tick()
+    timer.tick(FPS)
