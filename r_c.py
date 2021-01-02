@@ -41,7 +41,7 @@ def ray_casting(monitor, gamer_pos, gamer_angle, texture):
         pygame.draw.rect(monitor, color, (ray * SCALE, H_HEIGHT - hight // 2, SCALE, hight))'''
 
         wall_c = texture.subsurface(offset * T_SCALE, 0, T_SCALE, T_H)
-        wall_c = pygame.transform.scale(wall_c, (SCALE, hight))
+        wall_c = pygame.transform.scale(wall_c, (int(SCALE), int(hight)))
         monitor.blit(wall_c, (ray * SCALE, H_HEIGHT - hight // 2))
 
         view_angle += DELTA_ANGLE
