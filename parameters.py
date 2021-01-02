@@ -30,6 +30,11 @@ PROJ_C = DISTANCE * CELL
 SCALE = WIDTH // N_RAYS
 
 
+# настройки для миникарты
+MAP_SCALE =  5
+MAP_CELL = CELL // MAP_SCALE
+
+
 # цвета 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -39,3 +44,5 @@ BLUE = (0, 0, 220)
 DARKGREY = (110, 110, 110)
 PURPLE = (120, 0, 120)
 SKY_BLUE = (0, 180, 255)
+YELLOW = (220, 220, 0)
+SANDY = (244, 164, 96)
