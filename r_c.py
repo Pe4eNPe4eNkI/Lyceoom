@@ -17,7 +17,7 @@ def ray_casting(monitor, gamer_pos, gamer_angle):
                 i *= math.cos(gamer_angle - view_angle)
                 hight = PROJ_C / i
                 a = 255 / (1 + i * i * 0.0001)
-                color = (a, a, a)
+                color = (a // 3, a  // 5, a // 2)
                 pygame.draw.rect(monitor, color, (ray * SCALE, H_HEIGHT - hight // 2, SCALE, hight))
                 break
         view_angle += DELTA_ANGLE
