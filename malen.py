@@ -2,6 +2,7 @@ import pygame
 from parameters import *
 from r_c import ray_casting
 
+# для коммита
 
 class Malen:
     def __init__(self, monitor):
