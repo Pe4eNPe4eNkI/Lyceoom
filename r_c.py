@@ -14,7 +14,7 @@ def ray_casting(monitor, gamer_pos, gamer_angle):
             y = oy + i * sin_a
             pygame.draw.line(monitor, DARKGREY, gamer_pos, (x, y), 2)
             if (x // CELL * CELL, y // CELL * CELL) in txt_map:
-                hight = PROJ_COEFF / depth
-                pygame.draw.rect(monitor, WHITE, (ray * SCALE, H_HEIGHT - proj_height // 2, SCALE))
+                hight = PROJ_C / i
+                pygame.draw.rect(monitor, WHITE, (ray * SCALE, H_HEIGHT - hight // 2, SCALE, hight))
                 break
         view_angle += DELTA_ANGLE
