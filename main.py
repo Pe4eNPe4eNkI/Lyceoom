@@ -46,4 +46,4 @@ while True:
 
 
     pygame.display.flip()
-    timer.tick(FPS)
+    timer.tick()
