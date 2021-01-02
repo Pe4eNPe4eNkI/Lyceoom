@@ -29,7 +29,7 @@ class Gamer:
             self.x += gamer_speed * cos_a
             self.y += gamer_speed * sin_a
         if keys[pygame.K_s]:
-            self.x += -gamer_speep * cos_a
+            self.x += -gamer_speed * cos_a
             self.y += -gamer_speed * sin_a
         if keys[pygame.K_a]:
             self.x += gamer_speed * sin_a
