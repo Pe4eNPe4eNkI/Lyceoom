@@ -1,11 +1,11 @@
 # здесь хранятся всякие разные константы для остальных файлов проекта
-
+import math
 
 # общие настройки
 WIDTH = 1200
 HEIGHT = 800
-H_HEIGHT = float(HEIGHT // 2)
-H_WIDTH = float(WIDTH // 2)
+H_HEIGHT = float(HEIGHT / 2)
+H_WIDTH = float(WIDTH / 2)
 D_HEIGHT = HEIGHT * 2
 D_WIDTH = WIDTH * 2
 CELL = 100
@@ -16,6 +16,14 @@ FPS = 60
 gamer_pos = (H_WIDTH, H_HEIGHT)
 gamer_angle = 0
 gamer_speed = 2
+
+
+# настройки лучей
+FOV = math.pi / 3
+H_FOV = FOV / 2
+N_RAYS = 120
+MAX_DEPTH = 800
+DELTA_ANGLE = FOV / N_RAYS
 
 
 # цвета 
