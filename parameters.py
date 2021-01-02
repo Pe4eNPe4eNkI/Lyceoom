@@ -9,6 +9,7 @@ H_WIDTH = WIDTH // 2
 D_HEIGHT = HEIGHT * 2
 D_WIDTH = WIDTH * 2
 CELL = 100
+FPS = 60
 
 
 # настройки игрока
@@ -24,3 +25,4 @@ RED = (220, 0, 0)
 GREEN = (0, 220, 0)
 BLUE = (0, 0, 220)
 DARKGREY = (110, 110, 110)
+PURPLE = (120, 0, 120)
