@@ -42,7 +42,7 @@ def ray_casting(monitor, gamer_pos, gamer_angle):
         y, dy = (ym + CELL, 1) if sin_a >= 0 else (ym, -1)
         for i in range(0, HEIGHT, CELL):
             depth_h = (y - oy) / sin_a
-            y = oy + depth_h * cos_a
+            x = ox + depth_h * cos_a
             if mapping(x, y + dy) in txt_map:
                 break
             y += dy * CELL
