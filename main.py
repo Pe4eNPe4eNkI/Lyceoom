@@ -23,7 +23,7 @@ while True:
             terminate()
     gamer.movement()
     monitor.fill(BLACK)
-    pygame.draw.rect(monitor, BLUE, (0, 0, WIDTH, H_HEIGHT))
+    pygame.draw.rect(monitor, SKY_BLUE, (0, 0, WIDTH, H_HEIGHT))
     pygame.draw.rect(monitor, DARKGREY, (0, H_HEIGHT, WIDTH, H_HEIGHT))
 
     ray_casting(monitor, gamer.pos, gamer.angle)
