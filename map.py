@@ -13,9 +13,10 @@ map_x = [
     '111111111111'
 ]
 # координаты стен
-
+mini_map = set()
 txt_map = set()
 for j, row in enumerate(map_x):
     for i, char in enumerate(row):
         if char == '1':
             txt_map.add((i * CELL, j * CELL))
+            txt_map.add((i * MAP_CELL, j * CELL))
