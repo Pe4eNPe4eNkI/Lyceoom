@@ -11,7 +11,7 @@ def ray_casting(monitor, gamer_pos, gamer_angle):
         cos_a = math.cos(view_angle)
         for i in range(MAX_DEPTH):
             x = ox + i * cos_a
-            y = ox + i * sin_a
+            y = oy + i * sin_a
             pygame.draw.line(monitor, DARKGREY, gamer_pos, (x, y), 2)
             if (x // CELL * CELL, y // CELL * CELL) in txt_map:
                 break
