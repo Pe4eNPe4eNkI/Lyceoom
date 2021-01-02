@@ -3,12 +3,16 @@ from parameters import *
 from map import txt_map
 
 
-def ray_casting(gamer_pos, gamer_angle, world_map):
-    casted_walls = []
+def ray_casting(monitor, gamer_pos, gamer_angle):
+    view_angle = gamer_angle - H_FOV
     ox, oy = gamer_pos
-    xm, ym = mapping(ox, oy)
-    cur_angle = gamer_angle - HALF_FOV
-    texture_v, texture_h = 1, 1
-    for ray in range(NUM_RAYS):
-        sin_a = math.sin(cur_angle)
-        cos_a = math.cos(cur_angle)
+    for ray in range(N_RAYS):
+        sin_a = math.sin(view_angle)
+        cos_a = math.cos(view_angle)
+        for i in range(MAX_DEPTH):
+            x = ox + i * cos_a
+            y = ox + i * sin_a
+            pygame.draw.line(monitor, DARKGREY, gamer_pos, (x, y), 2)
+            if (x // CELL * CELL, y // CELL * CELL) in txt_map:
+                break
+        view_angle += DELTA_ANGLE

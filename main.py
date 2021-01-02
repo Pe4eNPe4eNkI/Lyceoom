@@ -4,6 +4,7 @@ import math
 from parameters import *
 from gamer import Gamer
 from map import txt_map
+from r_c import ray_casting
 
 
 def terminate():
@@ -22,6 +23,8 @@ while True:
             terminate()
     gamer.movement()
     monitor.fill(BLACK)
+
+    ray_casting(monitor, gamer.pos, gamer.angle)
 
     pygame.draw.circle(monitor, RED, (int(gamer.x), int(gamer.y)), 12)
     pygame.draw.line(monitor, RED, gamer.pos,
