@@ -17,6 +17,8 @@ class Malen:
     def world(self, gamer_pos, gamer_angle):
         ray_casting(self.monitor, gamer_pos, gamer_angle)
 
+    # update, people, update
+
     def fps(self, clock):
         fps_clock = str(int(clock.get_fps()))
         render = self.font.render(fps_clock, 0, RED)
