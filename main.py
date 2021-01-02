@@ -3,9 +3,11 @@ import sys
 from parameters import *
 from gamer import Gamer
 
+
 def terminate():
     pygame.quit()
     sys.exit()
+
 
 pygame.init()
 monitor = pygame.display.set_mode((WIDTH, HEIGHT))
