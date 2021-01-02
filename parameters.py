@@ -10,6 +10,7 @@ D_HEIGHT = HEIGHT * 2
 D_WIDTH = WIDTH * 2
 CELL = 100
 FPS = 60
+FPS_POS = (WIDTH - 65, 5)
 
 
 # настройки игрока
