@@ -1,7 +1,7 @@
 import pygame
 import sys
 from parameters import *
-from gamer import Gamer
+from gamer import *
 
 
 def terminate():
