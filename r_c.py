@@ -3,23 +3,6 @@ from parameters import *
 from map import txt_map
 
 
-'''def ray_casting(monitor, gamer_pos, gamer_angle):
-    view_angle = gamer_angle - H_FOV
-    ox, oy = gamer_pos
-    for ray in range(N_RAYS):
-        sin_a = math.sin(view_angle)
-        cos_a = math.cos(view_angle)
-        for i in range(MAX_DEPTH):
-            x = ox + i * cos_a
-            y = oy + i * sin_a
-            if (x // CELL * CELL, y // CELL * CELL) in txt_map:
-                i *= math.cos(gamer_angle - view_angle)
-                hight = PROJ_C / i
-                a = 255 / (1 + i * i * 0.0001)
-                color = (a, a, a)
-                pygame.draw.rect(monitor, color, (ray * SCALE, H_HEIGHT - hight // 2, SCALE, hight))
-                break
-        view_angle += DELTA_ANGLE'''
 def mapping(a, b):
     return int((a // CELL) * CELL), int((b // CELL) * CELL)
 
@@ -49,8 +32,7 @@ def ray_casting(monitor, gamer_pos, gamer_angle):
 
         depth = depth_v if depth_v < depth_h else depth_h
         depth *= math.cos(gamer_angle - view_angle)
-        depth = max(depth, 0.00001)
-        hight = min(int(PROJ_C / depth), 2 * HEIGHT)
+        hight = PROJ_C / depth
         a = 255 / (1 + depth * depth * 0.0001)
         color = (a, a, a)
         pygame.draw.rect(monitor, color, (ray * SCALE, H_HEIGHT - hight // 2, SCALE, hight))

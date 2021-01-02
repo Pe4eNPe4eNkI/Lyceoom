@@ -15,9 +15,10 @@ def terminate():
 
 pygame.init()
 monitor = pygame.display.set_mode((WIDTH, HEIGHT))
+mon_map = pygame.Surface((WIDTH // MAP_SCALE, HEIGHT // MAP_SCALE))
 timer = pygame.time.Clock()
 gamer = Gamer()
-malen = Malen(monitor)
+malen = Malen(monitor, mon_map)
 
 while True:
     for event in pygame.event.get():
@@ -28,22 +29,6 @@ while True:
     malen.bg()
     malen.world(gamer.pos, gamer.angle)
     malen.fps(timer)
-    '''pygame.draw.rect(monitor, BLUE, (0, 0, WIDTH, H_HEIGHT))
-    pygame.draw.rect(monitor, DARKGREY, (0, H_HEIGHT, WIDTH, H_HEIGHT))'''
-
-
-    ray_casting(monitor, gamer.pos, gamer.angle)
-
-    '''pygame.draw.circle(monitor, RED, (int(gamer.x), int(gamer.y)), 12)
-    pygame.draw.line(monitor, RED, gamer.pos,
-                     (gamer.x + WIDTH * math.cos(gamer.angle), gamer.y + WIDTH * math.sin(gamer.angle)))
-
-    # отрисовка карты
-
-    for x, y in txt_map:
-        pygame.draw.rect(monitor, DARKGREY, (x, y, CELL, CELL), 2)'''
-
-
-
+    malen.mini_map(gamer)
     pygame.display.flip()
     timer.tick(FPS)
