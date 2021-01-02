@@ -21,7 +21,7 @@ while True:
     gamer.movement()
     monitor.fill(BLACK)
 
-    pygame.draw.rect(monitor, RED, (gamer_pos[0], gamer_pos[1], 6, 6))
+    pygame.draw.rect(monitor, RED, (gamer.pos[0], gamer.pos[1], 6, 6))
 
     pygame.display.flip()
     timer.tick(FPS)
