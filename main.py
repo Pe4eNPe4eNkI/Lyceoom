@@ -23,16 +23,13 @@ while True:
     gamer.movement()
     monitor.fill(BLACK)
 
-    # луч
-
     pygame.draw.circle(monitor, RED, gamer.pos, 12)
     pygame.draw.line(monitor, RED, gamer.pos,
                      (gamer.x + WIDTH * math.cos(gamer.angle), gamer.y + WIDTH * math.sin(gamer.angle)))
-
-    # отрисовка карты
-
-    for x, y in txt_map:
-        pygame.draw.rect(monitor, DARKGREY, (x, y, CELL, CELL), 2)
-
     pygame.display.flip()
     timer.tick(FPS)
+
+'''#отрисовка карты
+
+    for x, y in txt_map:
+        pygame.draw.rect(monitor, DARKGREY, (x, y, CELL, CELL), 2)'''
