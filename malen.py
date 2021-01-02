@@ -6,7 +6,7 @@ from r_c import ray_casting
 # еще каммит
 
 class Malen:
-    def __init__(self, monitor):
+    def init(self, monitor):
         self.monitor = monitor
         self.font = pygame.font.SysFont('Ariel', 36, bold=True)
 
