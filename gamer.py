@@ -1,6 +1,11 @@
 import pygame
+import sys
 from parameters import *
-from main import terminate
+
+
+def terminate():
+    pygame.quit()
+    sys.exit()
 
 
 class Gamer:
