@@ -8,7 +8,7 @@ from r_c import ray_casting
 class Malen:
     def init(self, monitor):
         self.monitor = monitor
-        self.font = pygame.font.SysFont('Ariel', 36, bold=True)
+        self.font = pygame.font.SysFont('Arial', 36, bold=True)
 
     def bg(self):
         pygame.draw.rect(self.monitor, SKY_BLUE, (0, 0, WIDTH, H_HEIGHT))
