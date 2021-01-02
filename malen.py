@@ -39,3 +39,5 @@ class Malen:
         for x, y in mini_map:
             pygame.draw.rect(self.monitor_map, DARKBROWN, (x, y, MAP_CELL, MAP_CELL), 2)
         self.monitor.blit(self.monitor_map, MAP_POS)
+
+# я спать, всем спокойной ночи (1:39)
