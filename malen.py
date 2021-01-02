@@ -23,7 +23,7 @@ class Malen:
         render = self.font.render(fps_clock, 0, RED)
         self.monitor.blit(render, FPS_POS)
 
-    def mini_map(self):
+    def mini_map(self, gamer):
         self.monitor_map.fill(BLACK)
         map_x, map_y = self.gamer.x // MAP_SCALE, self.gamer.y // MAP_SCALE
         pygame.draw.line(self.monitor_map, YELLOW, (map_x, map_y), (map_x + 8 * math.cos(self.gamer.angle),
