@@ -12,7 +12,7 @@ def ray_casting(monitor, gamer_pos, gamer_angle):
         for i in range(MAX_DEPTH):
             x = ox + i * cos_a
             y = oy + i * sin_a
-            pygame.draw.line(monitor, DARKGREY, gamer_pos, (x, y), 2)
+            '''pygame.draw.line(monitor, DARKGREY, gamer_pos, (x, y), 2)'''
             if (x // CELL * CELL, y // CELL * CELL) in txt_map:
                 hight = PROJ_C / i
                 pygame.draw.rect(monitor, WHITE, (ray * SCALE, H_HEIGHT - hight // 2, SCALE, hight))
