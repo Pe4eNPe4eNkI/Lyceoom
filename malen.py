@@ -15,11 +15,17 @@ class Malen:
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
         self.texture = {'1': pygame.image.load('data/text/3.png').convert(),
                         '2': pygame.image.load('data/text/wall7.png').convert(),
-                        '3': pygame.image.load('data/text/12.png').convert()
+                        '3': pygame.image.load('data/text/12.png').convert(),
+                        'S': pygame.image.load('data/text/6.png').convert()
+
                         }
 
-    def bg(self):
-        pygame.draw.rect(self.monitor, SKY_BLUE, (0, 0, WIDTH, H_HEIGHT))
+    def bg(self, angle):
+        sky_offset = -5 * math.degrees(angle) % WIDTH
+        self.monitor.blit(self.texture['S'], (sky_offset, 0))
+        self.monitor.blit(self.texture['S'], (sky_offset - WIDTH, 0))
+        self.monitor.blit(self.texture['S'], (sky_offset + WIDTH, 0))
+
         pygame.draw.rect(self.monitor, DARKGREY, (0, H_HEIGHT, WIDTH, H_HEIGHT))
 
     def world(self, gamer_pos, gamer_angle):

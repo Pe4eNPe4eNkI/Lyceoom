@@ -26,7 +26,7 @@ while True:
             terminate()
     gamer.movement()
     monitor.fill(BLACK)
-    malen.bg()
+    malen.bg(gamer.angle)
     malen.world(gamer.pos, gamer.angle)
     malen.fps(timer)
     malen.mini_map(gamer)
