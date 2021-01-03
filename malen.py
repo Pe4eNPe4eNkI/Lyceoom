@@ -13,13 +13,17 @@ class Malen:
         self.monitor_map = monitor_map
         self.gamer = gamer
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
+        self.texture = {'1': pygame.image.load('data/text/3.png').convert(),
+                        '2': pygame.image.load('data/text/wall7.png').convert(),
+                        '3': pygame.image.load('data/text/12.png').convert()
+                        }
 
     def bg(self):
         pygame.draw.rect(self.monitor, SKY_BLUE, (0, 0, WIDTH, H_HEIGHT))
         pygame.draw.rect(self.monitor, DARKGREY, (0, H_HEIGHT, WIDTH, H_HEIGHT))
 
     def world(self, gamer_pos, gamer_angle):
-        ray_casting(self.monitor, gamer_pos, gamer_angle)
+        ray_casting(self.monitor, gamer_pos, gamer_angle, self.texture)
 
     def fps(self, clock):
         fps_clock = str(int(clock.get_fps()))
@@ -36,3 +40,5 @@ class Malen:
         for x, y in mini_map:
             pygame.draw.rect(self.monitor_map, DARKBROWN, (x, y, MAP_CELL, MAP_CELL), 2)
         self.monitor.blit(self.monitor_map, MAP_POS)
+
+# я спать, всем спокойной ночи (1:39)
