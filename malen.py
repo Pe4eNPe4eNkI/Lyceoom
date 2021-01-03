@@ -1,8 +1,8 @@
 import pygame
 from parameters import *
 from r_c import ray_casting
-#from map import mini_map
-from new_map import mini_map
+from map import mini_map
+#from new_map import mini_map
 
 
 # для коммита
@@ -14,11 +14,12 @@ class Malen:
         self.monitor_map = monitor_map
         self.gamer = gamer
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
-        self.texture = {1: pygame.image.load('data/text/3.png').convert(),
+        self.texture = {1: pygame.image.load('data/text/wall3.png').convert(),
                         2: pygame.image.load('data/text/wall7.png').convert(),
-                        3: pygame.image.load('data/text/12.png').convert(),
+                        3: pygame.image.load('data/text/wall1.png').convert(),
                         4: pygame.image.load('data/text/wall2.png').convert(),
-                        'S': pygame.image.load('data/text/6.png').convert()
+                        'S': pygame.image.load('data/text/sky1.png').convert(),
+                        'F': pygame.image.load('data/text/down.png').convert()
 
                         }
 

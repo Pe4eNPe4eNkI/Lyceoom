@@ -17,7 +17,7 @@ class Gamer:
 
     @property
     def pos(self):
-        #  print(self.x, self.y)
+        print(self.x, self.y)
         return (self.x, self.y)
 
     def keys_check(self):

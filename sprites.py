@@ -23,14 +23,21 @@ def load_image(name, color_key=None):
 
 class Sprites:
     def __init__(self):
-        self.types =  {'barrel': pygame.image.load('data/sprites/0.png'),
-                       'fire': pygame.image.load('data/sprites/2.png')}
-        self.list_of_sprites = [AllSprites(self.types['barrel'], True, 1.8, (7.1, 2.1), 0.8),
-                                AllSprites(self.types['fire'], True, 0.7, (5.9, 2.1), 0.6)]
+        self.types = {'barrel': pygame.image.load('data/sprites/0.png'),
+                      'fire': pygame.image.load('data/sprites/2.png')}
+
+        self.list_of_sprites = [AllSprites(self.types['barrel'], True, (7.1, 2.1), 1.8, 0.4),
+                                AllSprites(self.types['barrel'], True, (14.62, 1.31), 1.8, 0.4),
+                                AllSprites(self.types['barrel'], True, (21.38, 7.8), 1.8, 0.4),
+                                AllSprites(self.types['barrel'], True, (21.37, 8.95), 1.8, 0.4),
+                                AllSprites(self.types['fire'], True, (5.9, 2.1), 0.7, 0.6),
+                                AllSprites(self.types['fire'], True, (16.47, 4.31), 0.7, 0.6),
+                                AllSprites(self.types['fire'], True, (14.27, 3.5), 0.7, 0.6),
+                                AllSprites(self.types['fire'], True, (9.41, 4.8), 0.7, 0.6)]
 
 
 class AllSprites:
-    def __init__(self, obj, static, shift, pos, scale):
+    def __init__(self, obj, static,  pos, shift, scale):
         self.obj = obj
         self.static = static
         self.shift = shift
@@ -48,7 +55,7 @@ class AllSprites:
 
         dx, dy = self.x - gamer.x, self.y - gamer.y
         dist_to_sprite = math.sqrt(dx ** 2 + dy ** 2)
-        betta = math.atan2(dx, dy)
+        betta = math.atan2(dy, dx)
         gamma = betta - gamer.angle
         if dx > 0 and 180 <= math.degrees(gamer.angle) <= 360 or dx < 0 and dy < 0:
             gamma += ZWEI_PI
@@ -76,5 +83,4 @@ class AllSprites:
             sprite = pygame.transform.scale(self.obj, (p_height, p_height))
             return (dist_to_sprite, sprite, sprite_pos)
         else:
-            print('ass')
             return (False,)
