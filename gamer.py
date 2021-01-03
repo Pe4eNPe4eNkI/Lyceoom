@@ -13,7 +13,7 @@ class Gamer:
     def __init__(self):
         self.x, self.y = 908, 142
         self.angle = gamer_angle
-        self.sensitivity = 0.0008
+        self.sensitivity = 0.002
 
     @property
     def pos(self):
