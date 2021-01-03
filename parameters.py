@@ -43,7 +43,7 @@ T_SCALE = T_W // CELL
 
 # спрайты
 ZWEI_PI = math.pi * 2
-C_RAY = N_RAYS // 2 - 1
+C_RAY = N_RAYS // 2 - 1  # аоаоаоаоа
 
 
 # цвета
