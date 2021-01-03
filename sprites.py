@@ -23,8 +23,11 @@ def load_image(name, color_key=None):
 
 class Sprites:
     def __init__(self):
-        self.types = {'barrel': pygame.image.load('data/sprites/0.png'),
-                      'fire': pygame.image.load('data/sprites/2.png')}
+        self.types = {'barrel': pygame.image.load('data/sprites/0.png').convert_alpha(),
+                      'fire': pygame.image.load('data/sprites/2.png').convert_alpha(),
+                      'sosademon': [pygame.image.load(f'data/sprites/' + \
+                                                      f'sosademon/base/{i}.png').convert_alpha() 
+                                    for i in range(8)]}
 
         self.list_of_sprites = [AllSprites(self.types['barrel'], True, (7.1, 2.1), 1.8, 0.4),
                                 AllSprites(self.types['barrel'], True, (14.62, 1.31), 1.8, 0.4),
@@ -33,7 +36,8 @@ class Sprites:
                                 AllSprites(self.types['fire'], True, (5.9, 2.1), 0.7, 0.6),
                                 AllSprites(self.types['fire'], True, (16.47, 4.31), 0.7, 0.6),
                                 AllSprites(self.types['fire'], True, (14.27, 3.5), 0.7, 0.6),
-                                AllSprites(self.types['fire'], True, (9.41, 4.8), 0.7, 0.6)]
+                                AllSprites(self.types['fire'], True, (9.41, 4.8), 0.7, 0.6),
+                                AllSprites(self.types['sosademon'], False, (5.51, 12.43), 0, 2)]
 
 
 class AllSprites:
@@ -49,9 +53,9 @@ class AllSprites:
             self.sprite_positions = {angle: pos for angle, pos in zip(self.sprite_angles, self.obj)}
 
     def object_locate(self, gamer, walls):
-        fake_wall0 = [walls[0] for _ in range(100)]
-        fake_wall1 = [walls[-1] for _ in range(100)]
-        fake_walls = fake_wall0 + walls + fake_wall1
+        fake_walls0 = [walls[0] for i in range(100)]
+        fake_walls1 = [walls[-1] for i in range(100)]
+        fake_walls = fake_walls0 + walls + fake_walls1
 
         dx, dy = self.x - gamer.x, self.y - gamer.y
         dist_to_sprite = math.sqrt(dx ** 2 + dy ** 2)
