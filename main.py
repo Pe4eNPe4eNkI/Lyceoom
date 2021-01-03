@@ -16,7 +16,6 @@ pygame.init()
 monitor = pygame.display.set_mode((WIDTH, HEIGHT))
 mon_map = pygame.Surface(MAP_RES)
 
-sprite = Sprite()
 timer = pygame.time.Clock()
 gamer = Gamer()
 malen = Malen(monitor, mon_map, gamer)
@@ -29,7 +28,7 @@ while True:
     monitor.fill(BLACK)
     malen.bg(gamer.angle)
     walls = ray_casting(gamer, malen.texture)
-    malen.world(walls + [obj.object_locate(gamer, walls) for obj in sprite.list_of_objects])
+    malen.world(walls + [obj.object_locate(gamer, walls) for obj in list_of_sprites])
     malen.fps(timer)
     malen.mini_map(gamer)
 

@@ -29,8 +29,8 @@ class Malen:
 
         pygame.draw.rect(self.monitor, DARKGREY, (0, H_HEIGHT, WIDTH, H_HEIGHT))
 
-    def world(self, gamer_pos, gamer_angle):
-        ray_casting(self.monitor, gamer_pos, gamer_angle, self.texture)
+    def world(self, world_objects):
+        ray_casting(self.monitor, self.texture)
 
     def fps(self, clock):
         fps_clock = str(int(clock.get_fps()))
