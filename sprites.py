@@ -50,25 +50,18 @@ class AllSprites:
         return (False,)
 
 
-class Fire:
-    def __init__(self):
-        # super().__init__(all_sprites)
-        self.image = pygame.image.load('data/sprites/0.png')
-        self.look_angle = None
-        self.shift = 0.7
-        self.scale = (0.6, 0.6)
-        self.side = 30
-        self.is_dead = None
-        self.mission = 'decor'
+#class Fire:
+#    def __init__(self):
+#        # super().__init__(all_sprites)
+#        self.image = pygame.image.load('data/sprites/0.png')
+#        self.look_angle = None
+#        self.shift = 0.7
+#        self.scale = (0.6, 0.6)
+#        self.side = 30
+#        self.is_dead = None
+#        self.mission = 'decor'
 
 
 
 all_sprites = pygame.sprite.Group()
-fire_sprite = Fire()
-list_of_sprites = [AllSprites(fire_sprite, True, (602, 397), 0.7, 0.8), 
-                   AllSprites(fire_sprite, True, (598, 400), 1.8, 0.4),
-                   AllSprites(fire_sprite, True, (9.47, 2.1), 1.8, 0.4),
-                   AllSprites(fire_sprite, True, (10.21, 2.1), 1.8, 0.4),
-                   AllSprites(fire_sprite, True, (142.1, 2.1), 1.8, 0.4),
-                   AllSprites(fire_sprite, True, (14.1, 2.1), 1.8, 0.4),
-                   AllSprites(fire_sprite, True, (36.1, 2.1), 1.8, 0.4)]
+list_of_sprites = []
