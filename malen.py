@@ -13,9 +13,10 @@ class Malen:
         self.monitor_map = monitor_map
         self.gamer = gamer
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
-        self.texture = {'1': pygame.image.load('data/text/3.png').convert(),
-                        '2': pygame.image.load('data/text/wall7.png').convert(),
-                        '3': pygame.image.load('data/text/12.png').convert(),
+        self.texture = {1: pygame.image.load('data/text/3.png').convert(),
+                        2: pygame.image.load('data/text/wall7.png').convert(),
+                        3: pygame.image.load('data/text/12.png').convert(),
+                        4: pygame.image.load('data/text/wall2.png').convert(),
                         'S': pygame.image.load('data/text/6.png').convert()
 
                         }
@@ -44,7 +45,7 @@ class Malen:
         pygame.draw.circle(self.monitor_map, RED, (int(map_x), int(map_y)), 4)
 
         for x, y in mini_map:
-            pygame.draw.rect(self.monitor_map, DARKBROWN, (x, y, MAP_CELL, MAP_CELL), 2)
+            pygame.draw.rect(self.monitor_map, DARKORANGE, (x, y, MAP_CELL, MAP_CELL), 2)
         self.monitor.blit(self.monitor_map, MAP_POS)
 
 # я спать, всем спокойной ночи (1:39)

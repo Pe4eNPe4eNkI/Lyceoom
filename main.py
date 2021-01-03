@@ -14,7 +14,7 @@ def terminate():
 
 pygame.init()
 monitor = pygame.display.set_mode((WIDTH, HEIGHT))
-mon_map = pygame.Surface((WIDTH // MAP_SCALE, HEIGHT // MAP_SCALE))
+mon_map = pygame.Surface(MAP_RES)
 
 sprite = Sprite()
 timer = pygame.time.Clock()
