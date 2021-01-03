@@ -11,16 +11,16 @@ def terminate():
 
 class Gamer:
     def __init__(self):
-        self.x, self.y = gamer_pos
+        self.x, self.y = 908, 142
         self.angle = gamer_angle
-        self.sensitivity = 0.004
+        self.sensitivity = 0.0008
 
     @property
     def pos(self):
         #  print(self.x, self.y)
         return (self.x, self.y)
 
-    def movement(self):
+    def keys_check(self):
         sin_a = math.sin(self.angle)
         cos_a = math.cos(self.angle)
         keys = pygame.key.get_pressed()
@@ -42,3 +42,14 @@ class Gamer:
             self.angle -= 0.02
         if keys[pygame.K_RIGHT]:
             self.angle += 0.02
+        
+    def movement(self):
+        self.keys_check()
+        self.mouse_verific()
+        self.angle %= ZWEI_PI
+
+    def mouse_verific(self):
+        if pygame.mouse.get_focused():
+            diff = pygame.mouse.get_pos()[0] - H_WIDTH
+            pygame.mouse.set_pos((H_WIDTH, H_HEIGHT))
+            self.angle += diff * self.sensitivity

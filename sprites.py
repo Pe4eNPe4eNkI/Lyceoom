@@ -21,15 +21,32 @@ def load_image(name, color_key=None):
     return image
 
 
+class Sprites:
+    def __init__(self):
+        self.types =  {'barrel': pygame.image.load('data/sprites/0.png'),
+                       'fire': pygame.image.load('data/sprites/2.png')}
+        self.list_of_sprites = [AllSprites(self.types['barrel'], True,
+                                1.8, (1214, 142), 0.8),
+                                AllSprites(self.types['fire'], True, 1.8, (1200, 120), 0.8)]
+
+
 class AllSprites:
-    def __init__(self, obj, static, pos, shift, scale):
+    def __init__(self, obj, static, shift, pos, scale):
         self.obj = obj
         self.static = static
-        self.pos = self.x, self.y = pos[0] * CELL, pos[1] * CELL
         self.shift = shift
         self.scale = scale
+        self.pos = self.x, self.y = pos[0] * CELL, pos[1] * CELL
+
+        if not static:
+            self.sprite_angles = [frozenset(range(i, i + 45)) for i in range(0, 360, 45)]
+            self.sprite_positions = {angle: pos for angle, pos in zip(self.sprite_angles, self.obj)}
 
     def object_locate(self, gamer, walls):
+        fake_wall0 = [walls[0] for _ in range(100)]
+        fake_wall1 = [walls[-1] for _ in range(100)]
+        fake_walls = fake_wall0 + walls + fake_wall1
+
         dx, dy = self.x - gamer.x, self.y - gamer.y
         dist_to_sprite = math.sqrt(dx ** 2 + dy ** 2)
         betta = math.atan2(dx, dy)
@@ -40,28 +57,25 @@ class AllSprites:
         current_ray = C_RAY + d_rays
         dist_to_sprite *= math.cos(H_FOV - current_ray * DELTA_ANGLE)
 
-        if 0 <= current_ray <= N_RAYS - 1 and dist_to_sprite < walls[current_ray][0]:
+        fake_ray = current_ray + 100
+        if 0 <= fake_ray <= N_RAYS - 1 + 2 * 100 and dist_to_sprite < fake_walls[fake_ray][0]:
             p_height = int(PROJ_C / dist_to_sprite * self.scale)
             h_p_height = p_height // 2
             shift = h_p_height * self.shift
+
+            if not self.static:
+                if betta < 0:
+                    betta += ZWEI_PI
+                betta = 360 - int(math.degrees(betta))
+
+                for angles in self.sprite_angles:
+                    if betta in angles:
+                        self.obj = self.sprite_positions[angles]
+                        break
+
             sprite_pos = (current_ray * SCALE - h_p_height, H_HEIGHT - h_p_height + shift)
             sprite = pygame.transform.scale(self.obj, (p_height, p_height))
             return (dist_to_sprite, sprite, sprite_pos)
-        return (False,)
-
-
-#class Fire:
-#    def __init__(self):
-#        # super().__init__(all_sprites)
-#        self.image = pygame.image.load('data/sprites/0.png')
-#        self.look_angle = None
-#        self.shift = 0.7
-#        self.scale = (0.6, 0.6)
-#        self.side = 30
-#        self.is_dead = None
-#        self.mission = 'decor'
-
-
-
-all_sprites = pygame.sprite.Group()
-list_of_sprites = []
+        else:
+            print('ass')
+            return (False,)
