@@ -36,19 +36,23 @@ map_x = [
         ]
 # координаты стен
 
-W_WORLD = len(map_x[:][0]) * CELL
-H_WORLD = len(map_x[:]) * CELL
+W_WORLD = len(map_x[0][0])* CELL
+H_WORLD = len(map_x[0]) * CELL
 mini_map = set()
 txt_map = {}
-for j, row in enumerate(map_x[0]):
-    for i, char in enumerate(row):
-        if char:
-            mini_map.add((i * MAP_CELL, j * MAP_CELL))
-            if char == 1:
-                txt_map[(i * CELL, j * CELL)] = 1
-            elif char == 2:
-                txt_map[(i * CELL, j * CELL)] = 2
-            elif char == 3:
-                txt_map[(i * CELL, j * CELL)] = 3
-            elif char == 4:
-                txt_map[(i * CELL, j * CELL)] = 4
+for x in range(len(map_x)):
+    print(x)
+    for j, row in enumerate(map_x[x]):
+        for i, char in enumerate(row):
+            if char:
+                mini_map.add((i * MAP_CELL, j * MAP_CELL))
+                if char == 1:
+                    txt_map[(i * CELL, j * CELL)] = 1
+                elif char == 2:
+                    txt_map[(i * CELL, j * CELL)] = 2
+                elif char == 3:
+                    txt_map[(i * CELL, j * CELL)] = 3
+                elif char == 4:
+                    txt_map[(i * CELL, j * CELL)] = 4
+
+
