@@ -41,6 +41,11 @@ T_W = 1200
 T_H = 1200
 T_SCALE = T_W // CELL
 
+# спрайты
+ZWEI_PI = math.pi * 2
+C_RAY = N_RAYS // 2 - 1
+
+
 # цвета
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
