@@ -36,7 +36,7 @@ MAP_CELL = CELL // MAP_SCALE
 MAP_POS = (0, HEIGHT - HEIGHT // MAP_SCALE)
 
 
-#текстуры
+# текстуры
 T_W = 1200
 T_H = 1200
 T_SCALE = T_W // CELL
