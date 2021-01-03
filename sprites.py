@@ -42,7 +42,7 @@ class AllSprites:
 
         if 0 <= current_ray <= N_RAYS - 1 and dist_to_sprite < walls[current_ray][0]:
             p_height = int(PROJ_C / dist_to_sprite * self.scale)
-            h_p_height = pygame // 2
+            h_p_height = p_height // 2
             shift = h_p_height * self.shift
             sprite_pos = (current_ray * SCALE - h_p_height, H_HEIGHT - h_p_height + shift)
             sprite = pygame.transform.scale(self.obj, (p_height, p_height))
@@ -65,4 +65,10 @@ class Fire:
 
 all_sprites = pygame.sprite.Group()
 fire_sprite = Fire()
-list_of_sprites = [AllSprites(fire_sprite, True, (7.1, 2.1), 1.8, 0.4)]
+list_of_sprites = [AllSprites(fire_sprite, True, (602, 397), 0.7, 0.8), 
+                   AllSprites(fire_sprite, True, (598, 400), 1.8, 0.4),
+                   AllSprites(fire_sprite, True, (9.47, 2.1), 1.8, 0.4),
+                   AllSprites(fire_sprite, True, (10.21, 2.1), 1.8, 0.4),
+                   AllSprites(fire_sprite, True, (142.1, 2.1), 1.8, 0.4),
+                   AllSprites(fire_sprite, True, (14.1, 2.1), 1.8, 0.4),
+                   AllSprites(fire_sprite, True, (36.1, 2.1), 1.8, 0.4)]

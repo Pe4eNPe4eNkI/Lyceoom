@@ -11,10 +11,10 @@ def mapping(a, b):
 
 def ray_casting(gamer, textures):
     walls = []
-    ox, oy = gamer_pos
+    ox, oy = gamer.pos
     texture_v, texture_h = 1, 1
     xm, ym = mapping(ox, oy)
-    view_angle = gamer_angle - H_FOV
+    view_angle = gamer.angle - H_FOV
     for ray in range(N_RAYS):
         sin_a = math.sin(view_angle)
         cos_a = math.cos(view_angle)
@@ -41,7 +41,7 @@ def ray_casting(gamer, textures):
 
         depth, offset, texture = (depth_v, yv, texture_v) if depth_v < depth_h else (depth_h, xh, texture_h)
         offset = int(offset) % CELL
-        depth *= math.cos(gamer_angle - view_angle)
+        depth *= math.cos(gamer.angle - view_angle)
         depth = max(depth, 0.00001)
         hight = min((PROJ_C / depth), P_HEIGHT)
 
