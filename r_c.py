@@ -7,7 +7,8 @@ def mapping(a, b):
     return int((a // CELL) * CELL), int((b // CELL) * CELL)
 
 
-def ray_casting(monitor, gamer_pos, gamer_angle, textures):
+def ray_casting(gamer, textures):
+    walls = []
     ox, oy = gamer_pos
     xm, ym = mapping(ox, oy)
     view_angle = gamer_angle - H_FOV
@@ -47,6 +48,8 @@ def ray_casting(monitor, gamer_pos, gamer_angle, textures):
 
         wall_c = textures[texture].subsurface(offset * T_SCALE, 0, T_SCALE, T_H)
         wall_c = pygame.transform.scale(wall_c, (int(SCALE), int(hight)))
-        monitor.blit(wall_c, (ray * SCALE, H_HEIGHT - hight // 2))
+        walls_pos = (ray * SCALE, H_HEIGHT - hight // 2)
 
+        walls.append((depth, wall_c, walls_pos))
         view_angle += DELTA_ANGLE
+    return walls
