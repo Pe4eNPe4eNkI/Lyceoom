@@ -25,9 +25,8 @@ class Sprites:
     def __init__(self):
         self.types =  {'barrel': pygame.image.load('data/sprites/0.png'),
                        'fire': pygame.image.load('data/sprites/2.png')}
-        self.list_of_sprites = [AllSprites(self.types['barrel'], True,
-                                1.8, (1214, 142), 0.8),
-                                AllSprites(self.types['fire'], True, 1.8, (1200, 120), 0.8)]
+        self.list_of_sprites = [AllSprites(self.types['barrel'], True, 1.8, (7.1, 2.1), 0.8),
+                                AllSprites(self.types['fire'], True, 0.7, (5.9, 2.1), 0.6)]
 
 
 class AllSprites:

@@ -1,8 +1,8 @@
 import pygame
 from parameters import *
 from r_c import ray_casting
-from map import mini_map
-#from new_map import mini_map
+#from map import mini_map
+from new_map import mini_map
 
 
 # для коммита
