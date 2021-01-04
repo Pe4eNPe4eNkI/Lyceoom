@@ -3,7 +3,7 @@ import sys
 from parameters import *
 from gamer import Gamer
 from sprites import *
-from r_c import ray_casting
+from r_c import walls_with_ray_cast
 from malen import Malen
 
 
@@ -29,7 +29,7 @@ while True:
     gamer.movement()
     monitor.fill(BLACK)
     malen.bg(gamer.angle)
-    walls = ray_casting(gamer, malen.texture)
+    walls = walls_with_ray_cast(gamer, malen.texture)
     malen.world(walls + [obj.object_locate(gamer, walls) for obj in sprite.list_of_sprites])
     malen.fps(timer)
     malen.mini_map(gamer)

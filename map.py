@@ -1,6 +1,8 @@
 from parameters import *
+from numba.core import types
+from numba.typed import Dict
+from numba import int32
 import pygame
-#  щас тут будет намба)))
 
 # тут создается карта и всё связанное с ней
 _ = False
@@ -28,7 +30,7 @@ map_x = [
 W_WORLD = len(map_x[0]) * CELL
 H_WORLD = len(map_x) * CELL
 mini_map = set()
-txt_map = {}
+txt_map = Dict.empty(key_type=types.UniTuple(int32, 2), value_type=int32)
 collision_walls = []
 for j, row in enumerate(map_x):
     for i, char in enumerate(row):
