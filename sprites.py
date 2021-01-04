@@ -2,6 +2,7 @@ from parameters import *
 import pygame
 import os
 import math
+from collections import deque
 
 
 def load_image(name, color_key=None):
@@ -23,13 +24,30 @@ def load_image(name, color_key=None):
 
 class Sprites:
     def __init__(self):
-        self.types = {'barrel': pygame.image.load('data/sprites/0.png').convert_alpha(),
-                      'fire': pygame.image.load('data/sprites/2.png').convert_alpha(),
+        self.new_types = {
+            'fire': {
+                'way': pygame.image.load('data/sprites/fire/base/3.png').convert_alpha(),
+                'viewing_angles': None,
+                'shift': 0.7,
+                'scale': 0.6,
+                'animation': deque([pygame.image.load(f'data/sprites/fire/action/{i}.png').convert_alpha()
+                                    for i in range(1, 16)]),
+                'animation_dist': 800,
+                'animation_speed': 10
+            }
+        }
+        '''self.types = {'barrel': pygame.image.load('data/sprites/barrel/0.png').convert_alpha(),
+                      'fire': pygame.image.load('data/sprites/fire/base/3.png').convert_alpha(),
                       'sosademon': [pygame.image.load(f'data/sprites/' + \
                                                       f'sosademon/base/{i}.png').convert_alpha() 
-                                    for i in range(8)]}
+                                    for i in range(8)]}'''
 
-        self.list_of_sprites = [AllSprites(self.types['barrel'], True, (7.1, 2.1), 1.8, 0.4),
+        self.list_of_sprites = [AllSprites(self.new_types['fire'], (7.1, 2.1)),
+                                AllSprites(self.new_types['fire'], (7.1, 4.1)),
+                                AllSprites(self.new_types['fire'], (5.1, 2.1)),
+                                AllSprites(self.new_types['fire'], (10.1, 2.1)),
+                                AllSprites(self.new_types['fire'], (7.1, 5.1))]
+        '''self.list_of_sprites = [AllSprites(self.new_types['barrel'], True, (7.1, 2.1), 1.8, 0.4),
                                 AllSprites(self.types['barrel'], True, (14.62, 1.31), 1.8, 0.4),
                                 AllSprites(self.types['barrel'], True, (21.38, 7.8), 1.8, 0.4),
                                 AllSprites(self.types['barrel'], True, (21.37, 8.95), 1.8, 0.4),
@@ -37,18 +55,22 @@ class Sprites:
                                 AllSprites(self.types['fire'], True, (16.47, 4.31), 0.7, 0.6),
                                 AllSprites(self.types['fire'], True, (14.27, 3.5), 0.7, 0.6),
                                 AllSprites(self.types['fire'], True, (9.41, 4.8), 0.7, 0.6),
-                                AllSprites(self.types['sosademon'], False, (5.51, 12.43), 0, 1)]
+                                AllSprites(self.types['sosademon'], False, (5.51, 12.43), 0, 1)]'''
 
 
 class AllSprites:
-    def __init__(self, obj, static,  pos, shift, scale):
-        self.obj = obj
-        self.static = static
-        self.shift = shift
-        self.scale = scale
+    def __init__(self, parameters,  pos):
+        self.obj = parameters['way']
+        self.viewing_angles = parameters['viewing_angles']
+        self.shift = parameters['shift']
+        self.scale = parameters['scale']
+        self.animation = parameters['animation']
+        self.animation_dist = parameters['animation_dist']
+        self.animation_speed = parameters['animation_speed']
+        self.animation_count = 0
         self.pos = self.x, self.y = pos[0] * CELL, pos[1] * CELL
 
-        if not static:
+        if self.viewing_angles:
             self.sprite_angles = [frozenset(range(i, i + 45)) for i in range(0, 360, 45)]
             self.sprite_positions = {angle: pos for angle, pos in zip(self.sprite_angles, self.obj)}
 
@@ -73,7 +95,7 @@ class AllSprites:
             h_p_height = p_height // 2
             shift = h_p_height * self.shift
 
-            if not self.static:
+            if self.viewing_angles:
                 if betta < 0:
                     betta += ZWEI_PI
                 betta = 360 - int(math.degrees(betta))
@@ -83,8 +105,16 @@ class AllSprites:
                         self.obj = self.sprite_positions[angles]
                         break
 
+            sprite_object = self.obj
+            if self.animation and dist_to_sprite < self.animation_dist:
+                sprite_object = self.animation[0]
+                if self.animation_count < self.animation_speed:
+                    self.animation_count += 1
+                else:
+                    self.animation.rotate()
+                    self.animation_count = 0
             sprite_pos = (current_ray * SCALE - h_p_height, H_HEIGHT - h_p_height + shift)
-            sprite = pygame.transform.scale(self.obj, (p_height, p_height))
+            sprite = pygame.transform.scale(sprite_object, (p_height, p_height))
             return (dist_to_sprite, sprite, sprite_pos)
         else:
             return (False,)

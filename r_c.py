@@ -45,9 +45,6 @@ def ray_casting(gamer, textures):
         depth = max(depth, 0.00001)
         hight = min((PROJ_C / depth), P_HEIGHT)
 
-        '''a = 255 / (1 + depth * depth * 0.0001)
-        color = (a, a, a)
-        pygame.draw.rect(monitor, color, (ray * SCALE, H_HEIGHT - hight // 2, SCALE, hight))'''
 
         wall_c = textures[texture].subsurface(offset * T_SCALE, 0, T_SCALE, T_H)
         wall_c = pygame.transform.scale(wall_c, (int(SCALE), int(hight)))
