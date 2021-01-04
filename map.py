@@ -1,5 +1,6 @@
 from parameters import *
 import pygame
+#  щас тут будет намба)))
 
 # тут создается карта и всё связанное с ней
 _ = False
