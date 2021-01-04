@@ -27,35 +27,42 @@ class Sprites:
         self.new_types = {
             'fire': {
                 'way': pygame.image.load('data/sprites/fire/base/3.png').convert_alpha(),
-                'viewing_angles': None,
+                'viewing_angles': False,
                 'shift': 0.7,
                 'scale': 0.6,
                 'animation': deque([pygame.image.load(f'data/sprites/fire/action/{i}.png').convert_alpha()
                                     for i in range(1, 16)]),
                 'animation_dist': 800,
                 'animation_speed': 10
+            },
+            'sosademon': {
+                'way': [pygame.image.load(f'data/sprites/sosademon/base/{i}.png').convert_alpha() for i in range(8)],
+                'viewing_angles': True,
+                'shift': 0,
+                'scale': 1,
+                'animation': deque([pygame.image.load(f'data/sprites/sosademon/action/{i}.png').convert_alpha()
+                                    for i in range(6)]),
+                'animation_dist': 150,
+                'animation_speed': 5
+            },
+            'barrel': {
+                'way': pygame.image.load('data/sprites/barrel/0.png').convert_alpha(),
+                'viewing_angles': False,
+                'shift': 1.8,
+                'scale': 0.4,
+                'animation': None,
+                'animation_dist': 150,
+                'animation_speed': 5
             }
         }
-        '''self.types = {'barrel': pygame.image.load('data/sprites/barrel/0.png').convert_alpha(),
-                      'fire': pygame.image.load('data/sprites/fire/base/3.png').convert_alpha(),
-                      'sosademon': [pygame.image.load(f'data/sprites/' + \
-                                                      f'sosademon/base/{i}.png').convert_alpha() 
-                                    for i in range(8)]}'''
 
         self.list_of_sprites = [AllSprites(self.new_types['fire'], (7.1, 2.1)),
                                 AllSprites(self.new_types['fire'], (7.1, 4.1)),
                                 AllSprites(self.new_types['fire'], (5.1, 2.1)),
                                 AllSprites(self.new_types['fire'], (10.1, 2.1)),
-                                AllSprites(self.new_types['fire'], (7.1, 5.1))]
-        '''self.list_of_sprites = [AllSprites(self.new_types['barrel'], True, (7.1, 2.1), 1.8, 0.4),
-                                AllSprites(self.types['barrel'], True, (14.62, 1.31), 1.8, 0.4),
-                                AllSprites(self.types['barrel'], True, (21.38, 7.8), 1.8, 0.4),
-                                AllSprites(self.types['barrel'], True, (21.37, 8.95), 1.8, 0.4),
-                                AllSprites(self.types['fire'], True, (5.9, 2.1), 0.7, 0.6),
-                                AllSprites(self.types['fire'], True, (16.47, 4.31), 0.7, 0.6),
-                                AllSprites(self.types['fire'], True, (14.27, 3.5), 0.7, 0.6),
-                                AllSprites(self.types['fire'], True, (9.41, 4.8), 0.7, 0.6),
-                                AllSprites(self.types['sosademon'], False, (5.51, 12.43), 0, 1)]'''
+                                AllSprites(self.new_types['fire'], (7.1, 5.1)),
+                                AllSprites(self.new_types['barrel'], (8.1, 9.1)),
+                                AllSprites(self.new_types['sosademon'], (5.51, 12.43))]
 
 
 class AllSprites:
