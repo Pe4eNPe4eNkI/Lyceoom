@@ -33,7 +33,8 @@ class Sprites:
                 'animation': deque([pygame.image.load(f'data/sprites/fire/action/{i}.png').convert_alpha()
                                     for i in range(1, 16)]),
                 'animation_dist': 800,
-                'animation_speed': 10
+                'animation_speed': 10,
+                'blocked': False
             },
             'sosademon': {
                 'way': [pygame.image.load(f'data/sprites/sosademon/base/{i}.png').convert_alpha() for i in range(8)],
@@ -43,16 +44,18 @@ class Sprites:
                 'animation': deque([pygame.image.load(f'data/sprites/sosademon/action/{i}.png').convert_alpha()
                                     for i in range(6)]),
                 'animation_dist': 150,
-                'animation_speed': 5
+                'animation_speed': 5,
+                'blocked': True
             },
             'barrel': {
-                'way': pygame.image.load('data/sprites/barrel/0.png').convert_alpha(),
+                'way': pygame.image.load('data/sprites/barrel/base/0.png').convert_alpha(),
                 'viewing_angles': False,
                 'shift': 1.8,
                 'scale': 0.4,
                 'animation': None,
                 'animation_dist': 150,
-                'animation_speed': 5
+                'animation_speed': 5,
+                'blocked': True
             }
         }
 
@@ -74,8 +77,11 @@ class AllSprites:
         self.animation = parameters['animation']
         self.animation_dist = parameters['animation_dist']
         self.animation_speed = parameters['animation_speed']
+        self.blocked = parameters['blocked']
         self.animation_count = 0
+        self.side = 30
         self.pos = self.x, self.y = pos[0] * CELL, pos[1] * CELL
+        self.pos = self.x - self.side // 2, self.y - self.side // 2
 
         if self.viewing_angles:
             self.sprite_angles = [frozenset(range(i, i + 45)) for i in range(0, 360, 45)]
