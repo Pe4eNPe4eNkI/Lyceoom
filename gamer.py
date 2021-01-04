@@ -94,4 +94,4 @@ class Gamer:
             pygame.mouse.set_pos((H_WIDTH, H_HEIGHT))
             self.angle += diff * self.sensitivity
 
-# test
+# tests
