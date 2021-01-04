@@ -10,13 +10,13 @@ D_HEIGHT = HEIGHT * 2
 D_WIDTH = WIDTH * 2
 P_HEIGHT = 5 * HEIGHT
 CELL = 100
-FPS = 60
+FPS = 90
 FPS_POS = (WIDTH - 65, 5)
 
 # настройки игрока
 gamer_pos = (H_WIDTH, H_HEIGHT)
 gamer_angle = 0
-gamer_speed = 2
+gamer_speed = 2.5
 
 # настройки лучей
 FOV = math.pi / 3
