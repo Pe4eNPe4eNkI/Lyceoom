@@ -37,7 +37,7 @@ class Sprites:
                                 AllSprites(self.types['fire'], True, (16.47, 4.31), 0.7, 0.6),
                                 AllSprites(self.types['fire'], True, (14.27, 3.5), 0.7, 0.6),
                                 AllSprites(self.types['fire'], True, (9.41, 4.8), 0.7, 0.6),
-                                AllSprites(self.types['sosademon'], False, (5.51, 12.43), 0, 2)]
+                                AllSprites(self.types['sosademon'], False, (5.51, 12.43), 0, 1)]
 
 
 class AllSprites:
@@ -68,8 +68,8 @@ class AllSprites:
         dist_to_sprite *= math.cos(H_FOV - current_ray * DELTA_ANGLE)
 
         fake_ray = current_ray + 100
-        if 0 <= fake_ray <= N_RAYS - 1 + 2 * 100 and dist_to_sprite < fake_walls[fake_ray][0]:
-            p_height = int(PROJ_C / dist_to_sprite * self.scale)
+        if 0 <= fake_ray <= N_RAYS - 1 + 2 * 100 and dist_to_sprite > 30:
+            p_height = min(int(PROJ_C / dist_to_sprite * self.scale), D_HEIGHT)
             h_p_height = p_height // 2
             shift = h_p_height * self.shift
 
