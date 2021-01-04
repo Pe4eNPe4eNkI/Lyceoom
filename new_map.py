@@ -52,8 +52,7 @@ map_x = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 
-#W_WORLD = len(map_x[0][0]) * CELL
-#H_WORLD = len(map_x[0]) * CELL
+
 W_WORLD = len(map_x[0]) * CELL
 H_WORLD = len(map_x) * CELL
 mini_map = set()

@@ -65,4 +65,4 @@ def walls_with_ray_cast(gamer, textures):
         walls.append((depth, wall_c, walls_pos))
     return walls
 
-# test
+# tests

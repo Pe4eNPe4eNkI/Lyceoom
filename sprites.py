@@ -132,4 +132,4 @@ class AllSprites:
         else:
             return (False,)
 
-# test
+# tests
