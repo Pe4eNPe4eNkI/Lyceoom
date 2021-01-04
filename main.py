@@ -1,9 +1,8 @@
 import pygame
 import sys
-import math
 from parameters import *
 from gamer import Gamer
-from map import txt_map
+from sprites import *
 from r_c import ray_casting
 from malen import Malen
 
@@ -15,9 +14,12 @@ def terminate():
 
 pygame.init()
 monitor = pygame.display.set_mode((WIDTH, HEIGHT))
-mon_map = pygame.Surface((WIDTH // MAP_SCALE, HEIGHT // MAP_SCALE))
+mon_map = pygame.Surface(MAP_RES)
+pygame.mouse.set_visible(False)
 timer = pygame.time.Clock()
-gamer = Gamer()
+sprites = Sprites()
+gamer = Gamer(sprites)
+sprite = Sprites()
 malen = Malen(monitor, mon_map, gamer)
 
 while True:
@@ -26,8 +28,9 @@ while True:
             terminate()
     gamer.movement()
     monitor.fill(BLACK)
-    malen.bg()
-    malen.world(gamer.pos, gamer.angle)
+    malen.bg(gamer.angle)
+    walls = ray_casting(gamer, malen.texture)
+    malen.world(walls + [obj.object_locate(gamer, walls) for obj in sprite.list_of_sprites])
     malen.fps(timer)
     malen.mini_map(gamer)
 
