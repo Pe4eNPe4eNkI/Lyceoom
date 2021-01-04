@@ -54,3 +54,5 @@ class Malen:
         self.monitor.blit(self.monitor_map, MAP_POS)
 
 # я спать, всем спокойной ночи (1:39)
+
+# test

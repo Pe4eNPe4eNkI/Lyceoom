@@ -36,3 +36,5 @@ while True:
 
     pygame.display.flip()
     timer.tick(FPS)
+
+# test

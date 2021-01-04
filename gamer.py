@@ -93,3 +93,5 @@ class Gamer:
             diff = pygame.mouse.get_pos()[0] - H_WIDTH
             pygame.mouse.set_pos((H_WIDTH, H_HEIGHT))
             self.angle += diff * self.sensitivity
+
+# test

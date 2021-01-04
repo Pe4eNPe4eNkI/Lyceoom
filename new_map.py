@@ -72,3 +72,5 @@ for j, row in enumerate(map_x):
                 txt_map[(i * CELL, j * CELL)] = 3
             elif char == 4:
                 txt_map[(i * CELL, j * CELL)] = 4
+
+# test

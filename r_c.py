@@ -64,3 +64,5 @@ def walls_with_ray_cast(gamer, textures):
         walls_pos = (ray * SCALE, H_HEIGHT - hight // 2)
         walls.append((depth, wall_c, walls_pos))
     return walls
+
+# test
