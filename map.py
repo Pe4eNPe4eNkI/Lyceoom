@@ -28,10 +28,12 @@ W_WORLD = len(map_x[0]) * CELL
 H_WORLD = len(map_x) * CELL
 mini_map = set()
 txt_map = {}
+collision_walls = []
 for j, row in enumerate(map_x):
     for i, char in enumerate(row):
         if char:
             mini_map.add((i * MAP_CELL, j * MAP_CELL))
+            collision_walls.append(pygame.Rect(i * CELL, j * CELL, CELL, CELL))
             if char == 1:
                 txt_map[(i * CELL, j * CELL)] = 1
             elif char == 2:
