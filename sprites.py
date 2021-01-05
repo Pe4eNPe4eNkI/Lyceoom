@@ -67,10 +67,10 @@ class Sprites:
                 'animation_dist': 1,
                 'animation_speed': 8,
                 'blocked': True
-                }
+            }
         }
 
-        #self.list_of_sprites = [AllSprites(self.new_types['fire'], (7.1, 2.1)),
+        # self.list_of_sprites = [AllSprites(self.new_types['fire'], (7.1, 2.1)),
         #                        AllSprites(self.new_types['fire'], (7.1, 4.1)),
         #                        AllSprites(self.new_types['fire'], (5.1, 2.1)),
         #                        AllSprites(self.new_types['fire'], (10.1, 2.1)),
@@ -85,6 +85,7 @@ class Sprites:
                                 AllSprites(Pinky(), (8.1, 6.1)),
                                 AllSprites(Obama(), (8.1, 9.1)),
                                 AllSprites(Sosademon(), (5.51, 12.43))]
+
     @property
     def sprite_shot(self):
         return min([obj.is_on_fire for obj in self.list_of_sprites], default=(float('inf')))
@@ -115,7 +116,7 @@ class AllSprites:
         if self.viewing_angles:
             self.sprite_angles = [frozenset(range(i, i + 45)) for i in range(0, 360, 45)]
             self.sprite_positions = {angle: pos for angle, pos in zip(self.sprite_angles, self.obj)}
-            print(self.sprite_angles)
+            #  print(self.sprite_angles)
 
     @property
     def is_on_fire(self):
@@ -232,11 +233,11 @@ class Fire:
                                 for i in range(6)])
         self.tp = 'object'
         self.blocked = True
-                                
+
 
 class Sosademon:
     def __init__(self):
-        self.way = [pygame.image.load(f'data/sprites/sosademon/base/{i}.png').convert_alpha() 
+        self.way = [pygame.image.load(f'data/sprites/sosademon/base/{i}.png').convert_alpha()
                     for i in range(8)]
         self.viewing_angles = True
         self.shift = 0

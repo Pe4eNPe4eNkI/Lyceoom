@@ -1,7 +1,6 @@
 import pygame
 from parameters import *
 from r_c import ray_casting
-#from map import mini_map
 from new_map import mini_map
 from collections import deque
 
@@ -57,10 +56,10 @@ class Malen:
 
     def mini_map(self):
         self.monitor_map.fill(BLACK)
-        map_x, map_y = self.gamer.x // MAP_SCALE, self.gamer.y // MAP_SCALE
-        pygame.draw.line(self.monitor_map, YELLOW, (map_x, map_y), (map_x + 4 * math.cos(self.gamer.angle),
-                                                                    map_y + 4 * math.sin(self.gamer.angle)), 2)
-        pygame.draw.circle(self.monitor_map, RED, (int(map_x), int(map_y)), 4)
+        xmap, ymap = self.gamer.x // MAP_SCALE, self.gamer.y // MAP_SCALE
+        pygame.draw.line(self.monitor_map, YELLOW, (xmap, ymap), (xmap + 4 * math.cos(self.gamer.angle),
+                                                                    ymap + 4 * math.sin(self.gamer.angle)), 2)
+        pygame.draw.circle(self.monitor_map, RED, (int(xmap), int(ymap)), 4)
 
         for x, y in mini_map:
             pygame.draw.rect(self.monitor_map, DARKORANGE, (x, y, MAP_CELL, MAP_CELL), 2)

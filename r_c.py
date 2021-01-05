@@ -1,7 +1,6 @@
 import pygame
 from parameters import *
 from numba import njit
-#from map import txt_map, H_WORLD, W_WORLD
 from new_map import txt_map, H_WORLD, W_WORLD
 
 @njit(fastmath=True)
