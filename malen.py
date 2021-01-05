@@ -1,7 +1,8 @@
 import pygame
 from parameters import *
 from r_c import ray_casting
-from map import mini_map
+#from map import mini_map
+from new_map import mini_map
 from collections import deque
 
 
@@ -54,7 +55,7 @@ class Malen:
         render = self.font.render(fps_clock, 0, RED)
         self.monitor.blit(render, FPS_POS)
 
-    def mini_map(self, gamer):
+    def mini_map(self):
         self.monitor_map.fill(BLACK)
         map_x, map_y = self.gamer.x // MAP_SCALE, self.gamer.y // MAP_SCALE
         pygame.draw.line(self.monitor_map, YELLOW, (map_x, map_y), (map_x + 4 * math.cos(self.gamer.angle),
