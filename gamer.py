@@ -3,6 +3,7 @@ import sys
 import math
 from parameters import *
 from map import collision_walls
+from sprites import *
 
 
 def terminate():
@@ -15,19 +16,21 @@ class Gamer:
         self.x, self.y = 908, 142
         self.angle = gamer_angle
         self.sensitivity = 0.002
-        # Параметры игрока для того, чтобы не ходить сквозь объекты
         self.sprites = sprites
-        self.collision_sprites = [pygame.Rect(*obj.pos, obj.side, obj.side) for obj in
-                                  self.sprites.list_of_sprites if obj.blocked]
-        self.collision_list = collision_walls + self.collision_sprites
         # Параметры игрока для того, чтобы не ходить сквозь стены
         self.side = 50
         self.rect = pygame.Rect(*gamer_pos, self.side, self.side)
+        self.shot = False
 
     @property
     def pos(self):
         print(self.x, self.y)
         return (self.x, self.y)
+
+    @property
+    def collision_list(self):
+        return collision_walls + [pygame.Rect(*obj.pos, obj.side, obj.side) for obj
+                                  in self.sprites.list_of_sprites if obj.blocked]
 
     def detect_collision(self, dx, dy):
         next_rect = self.rect.copy()
@@ -81,6 +84,12 @@ class Gamer:
             self.angle -= 0.02
         if keys[pygame.K_RIGHT]:
             self.angle += 0.02
+        for event in pygame.event.get():
+            if pygame.event == pygame.QUIT:
+                terminate()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1 and not self.shot:
+                    self.shot = True
 
     def movement(self):
         self.keys_check()

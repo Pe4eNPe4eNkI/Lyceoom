@@ -1,9 +1,7 @@
-import pygame
 import sys
-from parameters import *
 from gamer import Gamer
 from sprites import *
-from r_c import ray_casting
+from r_c import walls_with_ray_cast
 from malen import Malen
 
 
@@ -19,20 +17,16 @@ pygame.mouse.set_visible(False)
 timer = pygame.time.Clock()
 sprites = Sprites()
 gamer = Gamer(sprites)
-sprite = Sprites()
 malen = Malen(monitor, mon_map, gamer)
 
 while True:
-    for event in pygame.event.get():
-        if pygame.event == pygame.QUIT:
-            terminate()
     gamer.movement()
-    monitor.fill(BLACK)
     malen.bg(gamer.angle)
-    walls = ray_casting(gamer, malen.texture)
-    malen.world(walls + [obj.object_locate(gamer, walls) for obj in sprite.list_of_sprites])
+    walls, wall_shot = walls_with_ray_cast(gamer, malen.texture)
+    malen.world(walls + [obj.object_locate(gamer, walls) for obj in sprites.list_of_sprites])
     malen.fps(timer)
-    malen.mini_map(gamer)
+    malen.mini_map()
+    malen.player_weapon_shotgun([wall_shot, sprites.sprite_shot])
 
     pygame.display.flip()
     timer.tick(FPS)

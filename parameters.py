@@ -10,13 +10,13 @@ D_HEIGHT = HEIGHT * 2
 D_WIDTH = WIDTH * 2
 P_HEIGHT = 5 * HEIGHT
 CELL = 100
-FPS = 60
+FPS = 90
 FPS_POS = (WIDTH - 65, 5)
 
 # настройки игрока
 gamer_pos = (H_WIDTH, H_HEIGHT)
 gamer_angle = 0
-gamer_speed = 2
+gamer_speed = 2.5
 
 # настройки лучей
 FOV = math.pi / 3
@@ -39,6 +39,7 @@ MAP_POS = (0, 0)
 # текстуры
 T_W = 1200
 T_H = 1200
+H_T_H = T_H // 2
 T_SCALE = T_W // CELL
 
 # спрайты
@@ -58,3 +59,5 @@ PURPLE = (120, 0, 120)
 SKY_BLUE = (0, 180, 255)
 YELLOW = (220, 220, 0)
 SANDY = (244, 164, 96)
+
+# test
