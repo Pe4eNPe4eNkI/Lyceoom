@@ -55,3 +55,12 @@ class Interaction:
                             obj.blocked = None
                             self.malen.shotgun_shot_animation_trigger = False
                     break
+
+    def npc_action(self):
+        for obj in self.sprites.list_of_sprites:
+            if obj.tp == 'enemy' and not obj.dead:
+                if ray_casting_npc_player(obj.x, obj.y, txt_map, self.gamer.pos):
+                    obj.is_trigger = True
+                else:
+                    obj.is_trigger = False
+

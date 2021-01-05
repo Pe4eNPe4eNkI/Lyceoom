@@ -31,6 +31,7 @@ while True:
     malen.player_weapon_shotgun([wall_shot, sprites.sprite_shot])
 
     interaction.interaction_objects()
+    interaction.npc_action()
 
     pygame.display.flip()
     timer.tick(FPS)
