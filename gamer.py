@@ -13,9 +13,6 @@ def terminate():
 
 class Gamer:
     def __init__(self, sprites):
-        '''self.collision_sprites = [pygame.Rect(*obj.pos, obj.side, obj.side) for obj in
-                                          sprites.list_of_sprites if obj.blocked]
-                self.collision_list = collision_walls + self.collision_sprites'''
         self.x, self.y = 908, 142
         self.angle = gamer_angle
         self.sensitivity = 0.002
@@ -105,5 +102,3 @@ class Gamer:
             diff = pygame.mouse.get_pos()[0] - H_WIDTH
             pygame.mouse.set_pos((H_WIDTH, H_HEIGHT))
             self.angle += diff * self.sensitivity
-
-# tests

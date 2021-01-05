@@ -3,11 +3,7 @@ from parameters import *
 from r_c import ray_casting
 from map import mini_map
 from collections import deque
-#from new_map import mini_map
 
-
-# для коммита
-# еще каммит
 
 class Malen:
     def __init__(self, monitor, monitor_map, gamer):
@@ -80,7 +76,3 @@ class Malen:
                 self.shotgun_shot_animation_trigger = True
         else:
             self.monitor.blit(self.shotgun_base_sprite, self.shotgun_pos)
-
-# я спать, всем спокойной ночи (1:39)
-
-# test
