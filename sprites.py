@@ -79,9 +79,9 @@ class Sprites:
         #                        AllSprites(self.new_types['sosademon'], (5.51, 12.43))]
 
         self.list_of_sprites = [AllSprites(Human1(), (7.1, 2.1)),
-                                AllSprites(Human1(), (7.1, 4.1)),
+                                AllSprites(Human2(), (7.1, 4.1)),
                                 AllSprites(Pinky(), (5.1, 2.1)),
-                                AllSprites(Obama(), (10.1, 2.1)),
+                                AllSprites(Human2(), (10.1, 2.1)),
                                 AllSprites(Pinky(), (8.1, 6.1)),
                                 AllSprites(Obama(), (8.1, 9.1)),
                                 AllSprites(Sosademon(), (5.51, 12.43))]
@@ -246,7 +246,7 @@ class Sosademon:
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(6)])
         self.animation_dist = 800
-        self.animation_speed = 18
+        self.animation_speed = 17
         self.dead = None
         self.dead_shift = 0.5
         self.dead_anim = deque([pygame.image.load(f'data/sprites/sosademon/' + \
@@ -306,7 +306,7 @@ class Human1:
                     for i in range(8)]
         self.viewing_angles = True
         self.shift = 0.9
-        self.scale = (0.3, 0.5)
+        self.scale = (0.4, 0.6)
         self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/human1/' + \
                                                   f'action/{i}.png').convert_alpha()
@@ -316,6 +316,28 @@ class Human1:
         self.dead = None
         self.dead_shift = 1.5
         self.dead_anim = deque([pygame.image.load(f'data/sprites/human1/' + \
+                                                  f'death/{i}.png').convert_alpha()
+                                for i in range(5)])
+        self.tp = 'enemy'
+        self.blocked = True
+
+
+class Human2:
+    def __init__(self):
+        self.way = [pygame.image.load(f'data/sprites/stas/base/{i}.png').convert_alpha()
+                    for i in range(8)]
+        self.viewing_angles = True
+        self.shift = 0.8
+        self.scale = (0.4, 0.6)
+        self.side = 30
+        self.animation = deque([pygame.image.load(f'data/sprites/stas/' + \
+                                                  f'action/{i}.png').convert_alpha()
+                                for i in range(4)])
+        self.animation_dist = 800
+        self.animation_speed = 10
+        self.dead = None
+        self.dead_shift = 1.7
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/stas/' + \
                                                   f'death/{i}.png').convert_alpha()
                                 for i in range(5)])
         self.tp = 'enemy'
