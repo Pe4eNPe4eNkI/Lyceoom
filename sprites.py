@@ -81,9 +81,9 @@ class Sprites:
         self.list_of_sprites = [AllSprites(Fire(), (7.1, 2.1)),
                                 AllSprites(Fire(), (7.1, 4.1)),
                                 AllSprites(Pinky(), (5.1, 2.1)),
-                                AllSprites(Fire(), (10.1, 2.1)),
+                                AllSprites(Obama(), (10.1, 2.1)),
                                 AllSprites(Pinky(), (8.1, 6.1)),
-                                AllSprites(Barrel(), (8.1, 9.1)),
+                                AllSprites(Obama(), (8.1, 9.1)),
                                 AllSprites(Sosademon(), (5.51, 12.43))]
 
 
@@ -197,6 +197,21 @@ class Pinky:
                                 for i in range(4)])
         self.animation_dist = 800
         self.animation_speed = 12
+        self.blocked = True
+
+
+class Obama:
+    def __init__(self):
+        self.way = [pygame.image.load(f'data/sprites/obama/base/{i}.png').convert_alpha()
+                    for i in range(8)]
+        self.viewing_angles = True
+        self.shift = 0.2
+        self.scale = 0.9
+        self.animation = deque([pygame.image.load(f'data/sprites/obama/' + \
+                                                  f'action/{i}.png').convert_alpha()
+                                for i in range(4)])
+        self.animation_dist = 800
+        self.animation_speed = 10
         self.blocked = True
 
 
