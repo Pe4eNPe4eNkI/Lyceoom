@@ -30,6 +30,7 @@ class Malen:
         self.shotgun_shot_animation_speed = 5
         self.shotgun_shot_animation_count = 0
         self.shotgun_shot_animation_trigger = True
+        self.shotgun_shot_sound = pygame.mixer.Sound('sound/shotgun.mp3')
         #sfx
         self.sfx = deque([pygame.image.load(f'data/sprites/'
                                             f'shoot_sfx/action/{i}.png').convert_alpha() for i in range(9)])
@@ -68,6 +69,8 @@ class Malen:
 
     def player_weapon_shotgun(self, shots):
         if self.gamer.shot:
+            if not self.shotgun_shot_length_count:
+                self.shotgun_shot_sound.play()
             self.shot_projection = int(min(shots)[1] // 2)
             self.bullet_sfx()
             shotgun_shot_sprite = self.shotgun_shot_animation[0]

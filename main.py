@@ -21,6 +21,8 @@ gamer = Gamer(sprites)
 malen = Malen(monitor, mon_map, gamer)
 interaction = Interaction(gamer, sprites, malen)
 
+interaction.play_music()
+
 while True:
     gamer.movement()
     malen.bg(gamer.angle)

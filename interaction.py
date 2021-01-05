@@ -44,6 +44,7 @@ class Interaction:
         self.gamer = gamer
         self.sprites = sprites
         self.malen = malen
+        self.pain_sound = pygame.mixer.Sound('sound/pain.mp3')
 
     def interaction_objects(self):
         if self.gamer.shot and self.malen.shotgun_shot_animation_trigger:
@@ -51,6 +52,8 @@ class Interaction:
                 if obj.is_on_fire[1]:
                     if obj.dead != 'immortal' and not obj.dead:
                         if ray_casting_npc_player(obj.x, obj.y, txt_map, self.gamer.pos):
+                            if obj.tp == 'enemy':
+                                self.pain_sound.play()
                             obj.dead = True
                             obj.blocked = None
                             self.malen.shotgun_shot_animation_trigger = False
@@ -71,5 +74,11 @@ class Interaction:
             dy = obj.y - self.gamer.pos[1]
             obj.x = obj.x + 1 if dx < 0 else obj.x - 1
             obj.y = obj.y + 1 if dy < 0 else obj.y - 1
+
+    def play_music(self):
+        pygame.mixer.pre_init(44100, -16, 2, 2048)
+        pygame.mixer.init()
+        pygame.mixer.music.load('sound/theme.mp3')
+        pygame.mixer.music.play(10)
 
 
