@@ -99,9 +99,17 @@ class AllSprites:
         self.animation = kind.animation
         self.animation_dist = kind.animation_dist
         self.animation_speed = kind.animation_speed
+
+        self.dead_anim = kind.dead_anim.copy()
+        self.dead = kind.dead
+        self.dead_shift = kind.dead_shift
+        self.dead_anim_count = 0
+
+        self.tp = kind.tp
         self.blocked = kind.blocked
         self.animation_count = 0
-        self.side = 30
+        self.side = kind.side
+        self.is_trigger = False
         self.x, self.y = pos[0] * CELL, pos[1] * CELL
 
         if self.viewing_angles:
@@ -126,6 +134,7 @@ class AllSprites:
 
         dx, dy = self.x - gamer.x, self.y - gamer.y
         self.dist_to_sprite = math.sqrt(dx ** 2 + dy ** 2)
+
         self.betta = math.atan2(dy, dx)
         gamma = self.betta - gamer.angle
         if dx > 0 and 180 <= math.degrees(gamer.angle) <= 360 or dx < 0 and dy < 0:
@@ -136,36 +145,72 @@ class AllSprites:
 
         fake_ray = self.current_ray + 100
         if 0 <= fake_ray <= N_RAYS - 1 + 2 * 100 and self.dist_to_sprite > 30:
-            self.p_height = min(int(PROJ_C / self.dist_to_sprite * self.scale), D_HEIGHT)
-            h_p_height = self.p_height // 2
-            shift = h_p_height * self.shift
+            self.p_height = min(int(PROJ_C / self.dist_to_sprite), D_HEIGHT)
+            sprite_width = int(self.p_height * self.scale[0])
+            sprite_heigth = int(self.p_height * self.scale[1])
+            h_s_width = sprite_width // 2
+            h_s_height = sprite_heigth // 2
+            shift = h_s_height * self.shift
 
-            if self.viewing_angles:
-                if self.betta < 0:
-                    self.betta += ZWEI_PI
-                self.betta = 360 - int(math.degrees(self.betta))
+            if self.dead and self.dead != 'never':
+                sprite_object = self.dead_animation()
+                shift = h_s_height * self.dead_shift
+                sprite_heigth = int(sprite_heigth / 1.3)
+            elif self.is_trigger:
+                sprite_object = self.s_action()
+            else:
+                self.obj = self.show_sprite()
+                sprite_object = self.s_animation()
 
-                for angles in self.sprite_angles:
-                    if self.betta in angles:
-                        self.obj = self.sprite_positions[angles]
-                        break
-
-            sprite_object = self.obj
-            if self.animation and self.dist_to_sprite < self.animation_dist:
-                sprite_object = self.animation[0]
-                if self.animation_count < self.animation_speed:
-                    self.animation_count += 1
-                else:
-                    self.animation.rotate()
-                    self.animation_count = 0
-            sprite_pos = (self.current_ray * SCALE - h_p_height, H_HEIGHT - h_p_height + shift)
+            sprite_pos = (self.current_ray * SCALE - h_s_width, H_HEIGHT - h_s_height + shift)
             if type(sprite_object) == list:
                 sprite = pygame.transform.scale(sprite_object[0], (self.p_height, self.p_height))
             else:
-                sprite = pygame.transform.scale(sprite_object, (self.p_height, self.p_height))
+                sprite = pygame.transform.scale(sprite_object, (sprite_width, sprite_heigth))
             return (self.dist_to_sprite, sprite, sprite_pos)
         else:
             return (False,)
+
+    def s_animation(self):
+        if self.animation and self.dist_to_sprite < self.animation_dist:
+            sprite_object = self.animation[0]
+            if self.animation_count < self.animation_speed:
+                self.animation_count += 1
+            else:
+                self.animation.rotate()
+                self.animation_count = 0
+            return sprite_object
+        return self.obj
+
+    def show_sprite(self):
+        if self.viewing_angles:
+            if self.betta < 0:
+                self.betta += ZWEI_PI
+            self.betta = 360 - int(math.degrees(self.betta))
+
+            for angles in self.sprite_angles:
+                if self.betta in angles:
+                    return self.sprite_positions[angles]
+        return self.obj
+
+    def dead_animation(self):
+        if len(self.dead_anim):
+            if self.dead_anim_count < self.animation_speed:
+                self.d_sprite = self.dead_anim[0]
+                self.dead_anim_count += 1
+            else:
+                self.d_sprite = self.dead_anim.popleft()
+                self.dead_anim_count = 0
+        return self.d_sprite
+
+    def s_action(self):
+        sprite_object = self.animation[0]
+        if self.animation_count < self.animation_speed:
+            self.animation_count += 1
+        else:
+            self.animation.rotate()
+            self.animation_count = 0
+        return sprite_object
 
 
 class Fire:
@@ -173,13 +218,20 @@ class Fire:
         self.way = [pygame.image.load('data/sprites/fire/base/3.png').convert_alpha()]
         self.viewing_angles = False
         self.shift = 0.7
-        self.scale = 0.6
+        self.scale = (0.6, 0.6)
+        self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/fire/' + \
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(1, 16)])
-        self.animation_dist = 800
+        self.animation_dist = 1800
         self.animation_speed = 10
-        self.blocked = False
+        self.dead = 'never'
+        self.dead_shift = 1.8
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/fire/' + \
+                                                  f'death/{i}.png').convert_alpha()
+                                for i in range(6)])
+        self.tp = 'object'
+        self.blocked = True
                                 
 
 class Sosademon:
@@ -188,12 +240,19 @@ class Sosademon:
                     for i in range(8)]
         self.viewing_angles = True
         self.shift = 0
-        self.scale = 1
+        self.scale = (1, 1)
+        self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/sosademon/' + \
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(6)])
         self.animation_dist = 800
         self.animation_speed = 18
+        self.dead = None
+        self.dead_shift = 0.5
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/sosademon/' + \
+                                                  f'death/{i}.png').convert_alpha()
+                                for i in range(6)])
+        self.tp = 'enemy'
         self.blocked = True
 
 
@@ -203,12 +262,19 @@ class Pinky:
                     for i in range(8)]
         self.viewing_angles = True
         self.shift = 0.2
-        self.scale = 0.9
+        self.scale = (0.8, 0.9)
+        self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/pinky/' + \
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(4)])
         self.animation_dist = 800
         self.animation_speed = 12
+        self.dead = None
+        self.dead_shift = 0.8
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/sosademon/' + \
+                                                  f'death/{i}.png').convert_alpha()
+                                for i in range(6)])
+        self.tp = 'enemy'
         self.blocked = True
 
 
@@ -218,12 +284,19 @@ class Obama:
                     for i in range(8)]
         self.viewing_angles = True
         self.shift = 0.2
-        self.scale = 0.9
+        self.scale = (0.8, 0.9)
+        self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/obama/' + \
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(4)])
         self.animation_dist = 800
         self.animation_speed = 10
+        self.dead = None
+        self.dead_shift = 0.9
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/obama/' + \
+                                                  f'death/{i}.png').convert_alpha()
+                                for i in range(4)])
+        self.tp = 'enemy'
         self.blocked = True
 
 
@@ -233,12 +306,19 @@ class Human1:
                     for i in range(8)]
         self.viewing_angles = True
         self.shift = 0.9
-        self.scale = 0.6
+        self.scale = (0.3, 0.5)
+        self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/human1/' + \
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(4)])
         self.animation_dist = 800
         self.animation_speed = 7
+        self.dead = None
+        self.dead_shift = 1.5
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/human1/' + \
+                                                  f'death/{i}.png').convert_alpha()
+                                for i in range(5)])
+        self.tp = 'enemy'
         self.blocked = True
 
 
@@ -248,7 +328,16 @@ class Barrel:
         self.viewing_angles = False
         self.shift = 1.8
         self.scale = 0.4
+        self.side = 30
         self.animation = None
         self.animation_dist = 150
         self.animation_speed = 5
+        self.animation_dist = 1800
+        self.animation_speed = 10
+        self.dead = 'never'
+        self.dead_shift = 1.8
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/sosademon/' + \
+                                                  f'death/{i}.png').convert_alpha()
+                                for i in range(6)])
+        self.tp = 'object'
         self.blocked = True
