@@ -283,16 +283,17 @@ class Barrel:
     def __init__(self):
         self.way = [pygame.image.load('data/sprites/barrel/base/0.png').convert_alpha()]
         self.viewing_angles = False
-        self.shift = 0.9
+        self.shift = 1.8
         self.scale = (0.4, 0.4)
         self.side = 30
-        self.animation = None
+        self.animation = deque([pygame.image.load(f'data/sprites/'
+                                                  f'barrel/anim/{i}.png').convert_alpha() for i in range(12)])
         self.animation_dist = 150
         self.animation_speed = 5
         self.animation_dist = 1800
         self.animation_speed = 10
         self.dead = None
-        self.dead_shift = 1.5
+        self.dead_shift = 2.6
         self.dead_anim = deque([pygame.image.load(f'data/sprites/barrel/' + \
                                                   f'death/{i}.png').convert_alpha()
                                 for i in range(4)])
