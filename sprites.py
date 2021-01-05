@@ -40,11 +40,11 @@ class Sprites:
                 'way': [pygame.image.load(f'data/sprites/sosademon/base/{i}.png').convert_alpha() for i in range(8)],
                 'viewing_angles': True,
                 'shift': 0,
-                'scale': 1,
+                'scale': (1.1, 1.1),
                 'animation': deque([pygame.image.load(f'data/sprites/sosademon/action/{i}.png').convert_alpha()
                                     for i in range(6)]),
-                'animation_dist': 150,
-                'animation_speed': 5,
+                'animation_dist': None,
+                'animation_speed': 10,
                 'blocked': True
             },
             'barrel': {
@@ -56,7 +56,18 @@ class Sprites:
                 'animation_dist': 150,
                 'animation_speed': 5,
                 'blocked': True
-            }
+            },
+            'pinky': {
+                'way': pygame.image.load('data/sprites/pinky/base/0.png').convert_alpha(),
+                'viewing_angles': True,
+                'shift': 0,
+                'scale': (0.9, 1.0),
+                'animation': deque([pygame.image.load(f'data/sprites/pinky/action/{i}.png').convert_alpha()
+                                    for i in range(4)]),
+                'animation_dist': 1500,
+                'animation_speed': 8,
+                'blocked': True
+                }
         }
 
         #self.list_of_sprites = [AllSprites(self.new_types['fire'], (7.1, 2.1)),
@@ -69,9 +80,9 @@ class Sprites:
 
         self.list_of_sprites = [AllSprites(Fire(), (7.1, 2.1)),
                                 AllSprites(Fire(), (7.1, 4.1)),
-                                AllSprites(Fire(), (5.1, 2.1)),
+                                AllSprites(Pinky(), (5.1, 2.1)),
                                 AllSprites(Fire(), (10.1, 2.1)),
-                                AllSprites(Fire(), (7.1, 5.1)),
+                                AllSprites(Pinky(), (7.1, 5.1)),
                                 AllSprites(Barrel(), (8.1, 9.1)),
                                 AllSprites(Sosademon(), (5.51, 12.43))]
 
@@ -159,7 +170,6 @@ class Fire:
         self.blocked = False
                                 
 
-
 class Sosademon:
     def __init__(self):
         self.way = [pygame.image.load(f'data/sprites/sosademon/base/{i}.png').convert_alpha() 
@@ -170,8 +180,23 @@ class Sosademon:
         self.animation = deque([pygame.image.load(f'data/sprites/sosademon/' + \
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(6)])
-        self.animation_dist = 150
-        self.animation_speed = 5
+        self.animation_dist = 1500
+        self.animation_speed = 18
+        self.blocked = True
+
+
+class Pinky:
+    def __init__(self):
+        self.way = [pygame.image.load(f'data/sprites/pinky/base/{i}.png').convert_alpha()
+                    for i in range(8)]
+        self.viewing_angles = True
+        self.shift = 0
+        self.scale = 1
+        self.animation = deque([pygame.image.load(f'data/sprites/pinky/' + \
+                                                  f'action/{i}.png').convert_alpha()
+                                for i in range(4)])
+        self.animation_dist = 1500
+        self.animation_speed = 12
         self.blocked = True
 
 
