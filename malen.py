@@ -26,9 +26,14 @@ class Malen:
         self.shotgun_pos = (H_WIDTH - self.shotgun_rect.width // 2, HEIGHT - self.shotgun_rect.height)
         self.shotgun_shot_length = len(self.shotgun_shot_animation)
         self.shotgun_shot_length_count = 0
-        self.shotgun_shot_animation_speed = 3
+        self.shotgun_shot_animation_speed = 8
         self.shotgun_shot_animation_count = 0
         self.shotgun_shot_animation_trigger = True
+        #sfx
+        self.sfx = deque([pygame.image.load(f'data/sprites/'
+                                            f'shoot_sfx/action/{i}.png').convert_alpha() for i in range(9)])
+        self.sfx_length_count = 0
+        self.sfx_length = len(self.sfx)
 
     def bg(self, angle):
         sky_offset = -5 * math.degrees(angle) % WIDTH
@@ -60,8 +65,10 @@ class Malen:
             pygame.draw.rect(self.monitor_map, DARKORANGE, (x, y, MAP_CELL, MAP_CELL), 2)
         self.monitor.blit(self.monitor_map, MAP_POS)
 
-    def player_weapon_shotgun(self):
+    def player_weapon_shotgun(self, shots):
         if self.gamer.shot:
+            self.shot_projection = int(min(shots)[1] // 2)
+            self.bullet_sfx()
             shotgun_shot_sprite = self.shotgun_shot_animation[0]
             self.monitor.blit(shotgun_shot_sprite, self.shotgun_pos)
             self.shotgun_shot_animation_count += 1
@@ -73,6 +80,15 @@ class Malen:
             if self.shotgun_shot_length_count == self.shotgun_shot_length:
                 self.gamer.shot = False
                 self.shotgun_shot_length_count = 0
+                self.sfx_length_count = 0
                 self.shotgun_shot_animation_trigger = True
         else:
             self.monitor.blit(self.shotgun_base_sprite, self.shotgun_pos)
+
+    def bullet_sfx(self):
+        if self.sfx_length_count < self.sfx_length:
+            sfx = pygame.transform.scale(self.sfx[0], (self.shot_projection, self.shot_projection))
+            sfx_rect = sfx.get_rect()
+            self.monitor.blit(sfx, (H_WIDTH - sfx_rect.w // 2, H_HEIGHT - sfx_rect.h // 2))
+            self.sfx_length_count += 1
+            self.sfx.rotate(-1)

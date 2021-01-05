@@ -22,13 +22,11 @@ malen = Malen(monitor, mon_map, gamer)
 while True:
     gamer.movement()
     malen.bg(gamer.angle)
-    walls = walls_with_ray_cast(gamer, malen.texture)
+    walls, wall_shot = walls_with_ray_cast(gamer, malen.texture)
     malen.world(walls + [obj.object_locate(gamer, walls) for obj in sprites.list_of_sprites])
     malen.fps(timer)
     malen.mini_map(gamer)
-    malen.player_weapon_shotgun()
+    malen.player_weapon_shotgun([wall_shot, sprites.sprite_shot])
 
     pygame.display.flip()
     timer.tick(FPS)
-
-# test

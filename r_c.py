@@ -56,6 +56,7 @@ def ray_casting(pos_gamer, angle_gamer, txt_map):
 
 def walls_with_ray_cast(gamer, textures):
     verific_walls = ray_casting(gamer.pos, gamer.angle, txt_map)
+    wall_shot = verific_walls[C_RAY][0], verific_walls[C_RAY][2]
     walls = []
     for ray, casted_values in enumerate(verific_walls):
         depth, offset, hight, texture = casted_values
@@ -71,6 +72,4 @@ def walls_with_ray_cast(gamer, textures):
             wall_c = pygame.transform.scale(wall_c, (int(SCALE), int(hight)))
             walls_pos = (ray * SCALE, H_HEIGHT - hight // 2)
         walls.append((depth, wall_c, walls_pos))
-    return walls
-
-# test
+    return walls, wall_shot
