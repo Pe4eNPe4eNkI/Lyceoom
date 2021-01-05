@@ -190,8 +190,8 @@ class Pinky:
         self.way = [pygame.image.load(f'data/sprites/pinky/base/{i}.png').convert_alpha()
                     for i in range(8)]
         self.viewing_angles = True
-        self.shift = 0
-        self.scale = 1
+        self.shift = 0.2
+        self.scale = 0.9
         self.animation = deque([pygame.image.load(f'data/sprites/pinky/' + \
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(4)])
