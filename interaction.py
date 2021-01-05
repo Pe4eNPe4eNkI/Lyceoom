@@ -61,6 +61,15 @@ class Interaction:
             if obj.tp == 'enemy' and not obj.dead:
                 if ray_casting_npc_player(obj.x, obj.y, txt_map, self.gamer.pos):
                     obj.is_trigger = True
+                    self.npc_move(obj)
                 else:
                     obj.is_trigger = False
+
+    def npc_move(self, obj):
+        if abs(obj.dist_to_sprite) > CELL:
+            dx = obj.x - self.gamer.pos[0]
+            dy = obj.y - self.gamer.pos[1]
+            obj.x = obj.x + 1 if dx < 0 else obj.x - 1
+            obj.y = obj.y + 1 if dy < 0 else obj.y - 1
+
 
