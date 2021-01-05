@@ -11,11 +11,11 @@ class Malen:
         self.monitor_map = monitor_map
         self.gamer = gamer
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
-        self.texture = {1: pygame.image.load('data/text/wall/wall3.png').convert(),
-                        2: pygame.image.load('data/text/wall/wall7.png').convert(),
-                        3: pygame.image.load('data/text/wall/wall1.png').convert(),
-                        4: pygame.image.load('data/text/wall/wall2.png').convert(),
-                        'S': pygame.image.load('data/text/sky/sky1.png').convert(),
+        self.texture = {1: pygame.image.load('data/img/lvl1/wall11.png').convert(),
+                        2: pygame.image.load('data/img/lvl1/wall8.png').convert(),
+                        3: pygame.image.load('data/img/lvl1/wall9.png').convert(),
+                        4: pygame.image.load('data/img/lvl1/wall10.png').convert(),
+                        'S': pygame.image.load('data/img/lvl1/sk1.jpeg').convert(),
                         'F': pygame.image.load('data/text/down/down.png').convert()
                         }
         #Пушки
