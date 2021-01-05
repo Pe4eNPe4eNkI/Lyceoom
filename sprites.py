@@ -224,9 +224,9 @@ class Pinky:
         self.animation_speed = 12
         self.dead = None
         self.dead_shift = 0.8
-        self.dead_anim = deque([pygame.image.load(f'data/sprites/sosademon/' + \
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/pinky/' + \
                                                   f'death/{i}.png').convert_alpha()
-                                for i in range(6)])
+                                for i in range(1, 6)])
         self.tp = 'enemy'
         self.blocked = True
         self.obj_action = []
