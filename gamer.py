@@ -3,6 +3,7 @@ import sys
 import math
 from parameters import *
 from map import collision_walls
+from sprites import *
 
 
 def terminate():
@@ -16,9 +17,8 @@ class Gamer:
         self.angle = gamer_angle
         self.sensitivity = 0.002
         # Параметры игрока для того, чтобы не ходить сквозь объекты
-        self.sprites = sprites
         self.collision_sprites = [pygame.Rect(*obj.pos, obj.side, obj.side) for obj in
-                                  self.sprites.list_of_sprites if obj.blocked]
+                                  sprites.list_of_sprites if obj.blocked]
         self.collision_list = collision_walls + self.collision_sprites
         # Параметры игрока для того, чтобы не ходить сквозь стены
         self.side = 50

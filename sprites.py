@@ -59,25 +59,33 @@ class Sprites:
             }
         }
 
-        self.list_of_sprites = [AllSprites(self.new_types['fire'], (7.1, 2.1)),
-                                AllSprites(self.new_types['fire'], (7.1, 4.1)),
-                                AllSprites(self.new_types['fire'], (5.1, 2.1)),
-                                AllSprites(self.new_types['fire'], (10.1, 2.1)),
-                                AllSprites(self.new_types['fire'], (7.1, 5.1)),
-                                AllSprites(self.new_types['barrel'], (8.1, 9.1)),
-                                AllSprites(self.new_types['sosademon'], (5.51, 12.43))]
+        #self.list_of_sprites = [AllSprites(self.new_types['fire'], (7.1, 2.1)),
+        #                        AllSprites(self.new_types['fire'], (7.1, 4.1)),
+        #                        AllSprites(self.new_types['fire'], (5.1, 2.1)),
+        #                        AllSprites(self.new_types['fire'], (10.1, 2.1)),
+        #                        AllSprites(self.new_types['fire'], (7.1, 5.1)),
+        #                        AllSprites(self.new_types['barrel'], (8.1, 9.1)),
+        #                        AllSprites(self.new_types['sosademon'], (5.51, 12.43))]
+
+        self.list_of_sprites = [AllSprites(Fire(), (7.1, 2.1)),
+                                AllSprites(Fire(), (7.1, 4.1)),
+                                AllSprites(Fire(), (5.1, 2.1)),
+                                AllSprites(Fire(), (10.1, 2.1)),
+                                AllSprites(Fire(), (7.1, 5.1)),
+                                AllSprites(Barrel(), (8.1, 9.1)),
+                                AllSprites(Sosademon(), (5.51, 12.43))]
 
 
 class AllSprites:
-    def __init__(self, parameters,  pos):
-        self.obj = parameters['way']
-        self.viewing_angles = parameters['viewing_angles']
-        self.shift = parameters['shift']
-        self.scale = parameters['scale']
-        self.animation = parameters['animation']
-        self.animation_dist = parameters['animation_dist']
-        self.animation_speed = parameters['animation_speed']
-        self.blocked = parameters['blocked']
+    def __init__(self, kind, pos):
+        self.obj = kind.way
+        self.viewing_angles = kind.viewing_angles
+        self.shift = kind.shift
+        self.scale = kind.scale
+        self.animation = kind.animation
+        self.animation_dist = kind.animation_dist
+        self.animation_speed = kind.animation_speed
+        self.blocked = kind.blocked
         self.animation_count = 0
         self.side = 30
         self.pos = self.x, self.y = pos[0] * CELL, pos[1] * CELL
@@ -86,6 +94,7 @@ class AllSprites:
         if self.viewing_angles:
             self.sprite_angles = [frozenset(range(i, i + 45)) for i in range(0, 360, 45)]
             self.sprite_positions = {angle: pos for angle, pos in zip(self.sprite_angles, self.obj)}
+            print(self.sprite_angles)
 
     def object_locate(self, gamer, walls):
         fake_walls0 = [walls[0] for i in range(100)]
@@ -127,9 +136,52 @@ class AllSprites:
                     self.animation.rotate()
                     self.animation_count = 0
             sprite_pos = (current_ray * SCALE - h_p_height, H_HEIGHT - h_p_height + shift)
-            sprite = pygame.transform.scale(sprite_object, (p_height, p_height))
+            if type(sprite_object) == list:
+                sprite = pygame.transform.scale(sprite_object[0], (p_height, p_height))
+            else:
+                sprite = pygame.transform.scale(sprite_object, (p_height, p_height))
             return (dist_to_sprite, sprite, sprite_pos)
         else:
             return (False,)
 
-# test
+
+class Fire:
+    def __init__(self):
+        self.way = [pygame.image.load('data/sprites/fire/base/3.png').convert_alpha()]
+        self.viewing_angles = False
+        self.shift = 0.7
+        self.scale = 0.6
+        self.animation = deque([pygame.image.load(f'data/sprites/fire/' + \
+                                                  f'action/{i}.png').convert_alpha()
+                                for i in range(1, 16)])
+        self.animation_dist = 800
+        self.animation_speed = 10
+        self.blocked = False
+                                
+
+
+class Sosademon:
+    def __init__(self):
+        self.way = [pygame.image.load(f'data/sprites/sosademon/base/{i}.png').convert_alpha() 
+                    for i in range(8)]
+        self.viewing_angles = True
+        self.shift = 0
+        self.scale = 1
+        self.animation = deque([pygame.image.load(f'data/sprites/sosademon/' + \
+                                                  f'action/{i}.png').convert_alpha()
+                                for i in range(6)])
+        self.animation_dist = 150
+        self.animation_speed = 5
+        self.blocked = True
+
+
+class Barrel:
+    def __init__(self):
+        self.way = [pygame.image.load('data/sprites/barrel/base/0.png').convert_alpha()]
+        self.viewing_angles = False
+        self.shift = 1.8
+        self.scale = 0.4
+        self.animation = None
+        self.animation_dist = 150
+        self.animation_speed = 5
+        self.blocked = True
