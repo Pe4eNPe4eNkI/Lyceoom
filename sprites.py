@@ -82,7 +82,7 @@ class Sprites:
                                 AllSprites(Fire(), (7.1, 4.1)),
                                 AllSprites(Pinky(), (5.1, 2.1)),
                                 AllSprites(Fire(), (10.1, 2.1)),
-                                AllSprites(Pinky(), (7.1, 5.1)),
+                                AllSprites(Pinky(), (8.1, 6.1)),
                                 AllSprites(Barrel(), (8.1, 9.1)),
                                 AllSprites(Sosademon(), (5.51, 12.43))]
 
