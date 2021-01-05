@@ -85,6 +85,9 @@ class Sprites:
                                 AllSprites(Pinky(), (8.1, 6.1)),
                                 AllSprites(Obama(), (8.1, 9.1)),
                                 AllSprites(Sosademon(), (5.51, 12.43))]
+    @property
+    def sprite_shot(self):
+        return min([obj.is_on_fire for obj in self.list_of_sprites], default=(float('inf')))
 
 
 class AllSprites:
@@ -99,13 +102,22 @@ class AllSprites:
         self.blocked = kind.blocked
         self.animation_count = 0
         self.side = 30
-        self.pos = self.x, self.y = pos[0] * CELL, pos[1] * CELL
-        self.pos = self.x - self.side // 2, self.y - self.side // 2
+        self.x, self.y = pos[0] * CELL, pos[1] * CELL
 
         if self.viewing_angles:
             self.sprite_angles = [frozenset(range(i, i + 45)) for i in range(0, 360, 45)]
             self.sprite_positions = {angle: pos for angle, pos in zip(self.sprite_angles, self.obj)}
             print(self.sprite_angles)
+
+    @property
+    def is_on_fire(self):
+        if C_RAY - self.side // 2 < self.current_ray < C_RAY + self.side // 2 and self.blocked:
+            return self.dist_to_sprite, self.p_height
+        return float('inf'), None
+
+    @property
+    def pos(self):
+        return self.x - self.side // 2, self.y - self.side // 2
 
     def object_locate(self, gamer, walls):
         fake_walls0 = [walls[0] for i in range(100)]
@@ -113,45 +125,45 @@ class AllSprites:
         fake_walls = fake_walls0 + walls + fake_walls1
 
         dx, dy = self.x - gamer.x, self.y - gamer.y
-        dist_to_sprite = math.sqrt(dx ** 2 + dy ** 2)
-        betta = math.atan2(dy, dx)
-        gamma = betta - gamer.angle
+        self.dist_to_sprite = math.sqrt(dx ** 2 + dy ** 2)
+        self.betta = math.atan2(dy, dx)
+        gamma = self.betta - gamer.angle
         if dx > 0 and 180 <= math.degrees(gamer.angle) <= 360 or dx < 0 and dy < 0:
             gamma += ZWEI_PI
         d_rays = int(gamma / DELTA_ANGLE)
-        current_ray = C_RAY + d_rays
-        dist_to_sprite *= math.cos(H_FOV - current_ray * DELTA_ANGLE)
+        self.current_ray = C_RAY + d_rays
+        self.dist_to_sprite *= math.cos(H_FOV - self.current_ray * DELTA_ANGLE)
 
-        fake_ray = current_ray + 100
-        if 0 <= fake_ray <= N_RAYS - 1 + 2 * 100 and dist_to_sprite > 30:
-            p_height = min(int(PROJ_C / dist_to_sprite * self.scale), D_HEIGHT)
-            h_p_height = p_height // 2
+        fake_ray = self.current_ray + 100
+        if 0 <= fake_ray <= N_RAYS - 1 + 2 * 100 and self.dist_to_sprite > 30:
+            self.p_height = min(int(PROJ_C / self.dist_to_sprite * self.scale), D_HEIGHT)
+            h_p_height = self.p_height // 2
             shift = h_p_height * self.shift
 
             if self.viewing_angles:
-                if betta < 0:
-                    betta += ZWEI_PI
-                betta = 360 - int(math.degrees(betta))
+                if self.betta < 0:
+                    self.betta += ZWEI_PI
+                self.betta = 360 - int(math.degrees(self.betta))
 
                 for angles in self.sprite_angles:
-                    if betta in angles:
+                    if self.betta in angles:
                         self.obj = self.sprite_positions[angles]
                         break
 
             sprite_object = self.obj
-            if self.animation and dist_to_sprite < self.animation_dist:
+            if self.animation and self.dist_to_sprite < self.animation_dist:
                 sprite_object = self.animation[0]
                 if self.animation_count < self.animation_speed:
                     self.animation_count += 1
                 else:
                     self.animation.rotate()
                     self.animation_count = 0
-            sprite_pos = (current_ray * SCALE - h_p_height, H_HEIGHT - h_p_height + shift)
+            sprite_pos = (self.current_ray * SCALE - h_p_height, H_HEIGHT - h_p_height + shift)
             if type(sprite_object) == list:
-                sprite = pygame.transform.scale(sprite_object[0], (p_height, p_height))
+                sprite = pygame.transform.scale(sprite_object[0], (self.p_height, self.p_height))
             else:
-                sprite = pygame.transform.scale(sprite_object, (p_height, p_height))
-            return (dist_to_sprite, sprite, sprite_pos)
+                sprite = pygame.transform.scale(sprite_object, (self.p_height, self.p_height))
+            return (self.dist_to_sprite, sprite, sprite_pos)
         else:
             return (False,)
 
