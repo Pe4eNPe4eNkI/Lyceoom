@@ -64,7 +64,7 @@ class Sprites:
                 'scale': (0.9, 1.0),
                 'animation': deque([pygame.image.load(f'data/sprites/pinky/action/{i}.png').convert_alpha()
                                     for i in range(4)]),
-                'animation_dist': 1500,
+                'animation_dist': 1,
                 'animation_speed': 8,
                 'blocked': True
                 }
@@ -180,7 +180,7 @@ class Sosademon:
         self.animation = deque([pygame.image.load(f'data/sprites/sosademon/' + \
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(6)])
-        self.animation_dist = 1500
+        self.animation_dist = 800
         self.animation_speed = 18
         self.blocked = True
 
@@ -195,7 +195,7 @@ class Pinky:
         self.animation = deque([pygame.image.load(f'data/sprites/pinky/' + \
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(4)])
-        self.animation_dist = 1500
+        self.animation_dist = 800
         self.animation_speed = 12
         self.blocked = True
 
