@@ -78,8 +78,8 @@ class Sprites:
         #                        AllSprites(self.new_types['barrel'], (8.1, 9.1)),
         #                        AllSprites(self.new_types['sosademon'], (5.51, 12.43))]
 
-        self.list_of_sprites = [AllSprites(Fire(), (7.1, 2.1)),
-                                AllSprites(Fire(), (7.1, 4.1)),
+        self.list_of_sprites = [AllSprites(Human1(), (7.1, 2.1)),
+                                AllSprites(Human1(), (7.1, 4.1)),
                                 AllSprites(Pinky(), (5.1, 2.1)),
                                 AllSprites(Obama(), (10.1, 2.1)),
                                 AllSprites(Pinky(), (8.1, 6.1)),
@@ -224,6 +224,21 @@ class Obama:
                                 for i in range(4)])
         self.animation_dist = 800
         self.animation_speed = 10
+        self.blocked = True
+
+
+class Human1:
+    def __init__(self):
+        self.way = [pygame.image.load(f'data/sprites/human1/base/{i}.png').convert_alpha()
+                    for i in range(8)]
+        self.viewing_angles = True
+        self.shift = 0.9
+        self.scale = 0.6
+        self.animation = deque([pygame.image.load(f'data/sprites/human1/' + \
+                                                  f'action/{i}.png').convert_alpha()
+                                for i in range(4)])
+        self.animation_dist = 800
+        self.animation_speed = 7
         self.blocked = True
 
 
