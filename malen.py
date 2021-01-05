@@ -2,6 +2,7 @@ import pygame
 from parameters import *
 from r_c import ray_casting
 from map import mini_map
+from collections import deque
 #from new_map import mini_map
 
 
@@ -20,8 +21,18 @@ class Malen:
                         4: pygame.image.load('data/text/wall/wall2.png').convert(),
                         'S': pygame.image.load('data/text/sky/sky1.png').convert(),
                         'F': pygame.image.load('data/text/down/down.png').convert()
-
                         }
+        #Пушки
+        self.shotgun_base_sprite = pygame.image.load('data/sprites/weapons/shot-gun/base/1.png').convert_alpha()
+        self.shotgun_shot_animation = deque([pygame.image.load(f'data/sprites/weapons/shot-gun/'
+                                                            f'shot1/{i}.png').convert_alpha() for i in range(14)])
+        self.shotgun_rect = self.shotgun_base_sprite.get_rect()
+        self.shotgun_pos = (H_WIDTH - self.shotgun_rect.width // 2, HEIGHT - self.shotgun_rect.height)
+        self.shotgun_shot_length = len(self.shotgun_shot_animation)
+        self.shotgun_shot_length_count = 0
+        self.shotgun_shot_animation_speed = 3
+        self.shotgun_shot_animation_count = 0
+        self.shotgun_shot_animation_trigger = True
 
     def bg(self, angle):
         sky_offset = -5 * math.degrees(angle) % WIDTH
@@ -52,6 +63,23 @@ class Malen:
         for x, y in mini_map:
             pygame.draw.rect(self.monitor_map, DARKORANGE, (x, y, MAP_CELL, MAP_CELL), 2)
         self.monitor.blit(self.monitor_map, MAP_POS)
+
+    def player_weapon_shotgun(self):
+        if self.gamer.shot:
+            shotgun_shot_sprite = self.shotgun_shot_animation[0]
+            self.monitor.blit(shotgun_shot_sprite, self.shotgun_pos)
+            self.shotgun_shot_animation_count += 1
+            if self.shotgun_shot_animation_count == self.shotgun_shot_animation_speed:
+                self.shotgun_shot_animation.rotate(-1)
+                self.shotgun_shot_animation_count = 0
+                self.shotgun_shot_length_count += 1
+                self.shotgun_shot_animation_trigger = False
+            if self.shotgun_shot_length_count == self.shotgun_shot_length:
+                self.gamer.shot = False
+                self.shotgun_shot_length_count = 0
+                self.shotgun_shot_animation_trigger = True
+        else:
+            self.monitor.blit(self.shotgun_base_sprite, self.shotgun_pos)
 
 # я спать, всем спокойной ночи (1:39)
 

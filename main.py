@@ -22,16 +22,17 @@ gamer = Gamer(sprites)
 malen = Malen(monitor, mon_map, gamer)
 
 while True:
-    for event in pygame.event.get():
+    '''for event in pygame.event.get():
         if pygame.event == pygame.QUIT:
-            terminate()
+            terminate()'''
     gamer.movement()
-    monitor.fill(BLACK)
+    '''monitor.fill(BLACK)'''
     malen.bg(gamer.angle)
     walls = walls_with_ray_cast(gamer, malen.texture)
     malen.world(walls + [obj.object_locate(gamer, walls) for obj in sprites.list_of_sprites])
     malen.fps(timer)
     malen.mini_map(gamer)
+    malen.player_weapon_shotgun()
 
     pygame.display.flip()
     timer.tick(FPS)
