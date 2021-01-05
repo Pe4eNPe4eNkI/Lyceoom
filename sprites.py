@@ -24,7 +24,8 @@ def load_image(name, color_key=None):
 
 class Sprites:
     def __init__(self):
-        self.list_of_sprites = [AllSprites(Human1(), (7.1, 2.1)),
+        self.list_of_sprites = [AllSprites(Barrel(), (9.1, 4)),
+                                AllSprites(Human1(), (7.1, 2.1)),
                                 AllSprites(Human1(), (7.1, 4.1)),
                                 AllSprites(Pinky(), (5.1, 2.1)),
                                 AllSprites(Obama(), (10.1, 2.1)),
@@ -282,7 +283,7 @@ class Barrel:
     def __init__(self):
         self.way = [pygame.image.load('data/sprites/barrel/base/0.png').convert_alpha()]
         self.viewing_angles = False
-        self.shift = 1.8
+        self.shift = 0.9
         self.scale = (0.4, 0.4)
         self.side = 30
         self.animation = None
@@ -291,10 +292,10 @@ class Barrel:
         self.animation_dist = 1800
         self.animation_speed = 10
         self.dead = None
-        self.dead_shift = 1.8
-        self.dead_anim = deque([pygame.image.load(f'data/sprites/sosademon/' + \
+        self.dead_shift = 1.5
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/barrel/' + \
                                                   f'death/{i}.png').convert_alpha()
-                                for i in range(6)])
+                                for i in range(4)])
         self.tp = 'object'
         self.blocked = True
         self.obj_action = []
