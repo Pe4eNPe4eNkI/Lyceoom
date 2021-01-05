@@ -27,7 +27,7 @@ class Malen:
         self.shotgun_pos = (H_WIDTH - self.shotgun_rect.width // 2, HEIGHT - self.shotgun_rect.height)
         self.shotgun_shot_length = len(self.shotgun_shot_animation)
         self.shotgun_shot_length_count = 0
-        self.shotgun_shot_animation_speed = 8
+        self.shotgun_shot_animation_speed = 5
         self.shotgun_shot_animation_count = 0
         self.shotgun_shot_animation_trigger = True
         #sfx
