@@ -34,6 +34,7 @@ while True:
 
     interaction.interaction_objects()
     interaction.npc_action()
+    interaction.clear()
 
     pygame.display.flip()
     timer.tick(FPS)

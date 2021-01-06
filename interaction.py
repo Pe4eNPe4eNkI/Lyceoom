@@ -7,7 +7,7 @@ from numba import njit
 
 
 @njit(fastmath=True, cache=True)
-def ray_casting_npc_player(npc_x, npc_y, txt_map, pos_gamer):
+def ray_casting_npc_player(npc_x, npc_y, blocked_doors, txt_map, pos_gamer):
     ox, oy = pos_gamer
     xm, ym = mapping(ox, oy)
     delta_x, delta_y = ox - npc_x, oy - npc_y
@@ -24,7 +24,7 @@ def ray_casting_npc_player(npc_x, npc_y, txt_map, pos_gamer):
         depth_v = (x - ox) / cos_a
         yv = oy + depth_v * sin_a
         tile_v = mapping(x + dx, yv)
-        if tile_v in txt_map:
+        if tile_v in txt_map or tile_v in blocked_doors:
             return False
         x += dx * CELL
 
@@ -33,7 +33,7 @@ def ray_casting_npc_player(npc_x, npc_y, txt_map, pos_gamer):
         depth_h = (y - oy) / sin_a
         xh = ox + depth_h * cos_a
         tile_h = mapping(xh, y + dy)
-        if tile_h in txt_map:
+        if tile_h in txt_map or tile_h in blocked_doors:
             return False
         y += dy * CELL
     return True
@@ -44,25 +44,28 @@ class Interaction:
         self.gamer = gamer
         self.sprites = sprites
         self.malen = malen
-        self.pain_sound = pygame.mixer.Sound('sound/pain.mp3')
+        self.pain_sound = pygame.mixer.Sound('sound/pain.ogg')
 
     def interaction_objects(self):
         if self.gamer.shot and self.malen.shotgun_shot_animation_trigger:
             for obj in sorted(self.sprites.list_of_sprites, key=lambda obj: obj.dist_to_sprite):
                 if obj.is_on_fire[1]:
-                    if obj.dead != 'immortal' and not obj.dead:
-                        if ray_casting_npc_player(obj.x, obj.y, txt_map, self.gamer.pos):
+                    if obj.dead != 'never' and not obj.dead:
+                        if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
                             if obj.tp == 'enemy':
                                 self.pain_sound.play()
                             obj.dead = True
                             obj.blocked = None
                             self.malen.shotgun_shot_animation_trigger = False
+                    if obj.tp in {'h_door', 'v_door'} and obj.dist_to_sprite < CELL:
+                        obj.d_open_trigger = True
+                        obj.blocked = None
                     break
 
     def npc_action(self):
         for obj in self.sprites.list_of_sprites:
             if obj.tp == 'enemy' and not obj.dead:
-                if ray_casting_npc_player(obj.x, obj.y, txt_map, self.gamer.pos):
+                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
                     obj.is_trigger = True
                     self.npc_move(obj)
                 else:
@@ -75,10 +78,14 @@ class Interaction:
             obj.x = obj.x + 1 if dx < 0 else obj.x - 1
             obj.y = obj.y + 1 if dy < 0 else obj.y - 1
 
+    def clear(self):
+        del_sprites = self.sprites.list_of_sprites[:]
+        [self.sprites.list_of_sprites.remove(obj) for obj in del_sprites if obj.cls]
+
     def play_music(self):
         pygame.mixer.pre_init(44100, -16, 2, 2048)
         pygame.mixer.init()
-        pygame.mixer.music.load('sound/theme.mp3')
+        pygame.mixer.music.load('sound/theme.ogg')
         pygame.mixer.music.play(10)
 
 
