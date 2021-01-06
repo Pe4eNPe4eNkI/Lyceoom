@@ -13,18 +13,21 @@ def terminate():
 
 class Gamer:
     def __init__(self, sprites):
-        self.x, self.y = 124, 753
+        self.x, self.y = gamer_pos
         self.angle = gamer_angle
         self.sensitivity = 0.002
         self.sprites = sprites
         # Параметры игрока для того, чтобы не ходить сквозь стены
         self.side = 50
         self.rect = pygame.Rect(*gamer_pos, self.side, self.side)
+        self.minirect = pygame.Rect(gamer_pos[0] // MAP_SCALE, gamer_pos[1] // MAP_SCALE, 
+                                    self.side // MAP_SCALE, 
+                                    self.side // MAP_SCALE)
         self.shot = False
 
     @property
     def pos(self):
-        print(self.x, self.y)
+        # print(self.x, self.y)
         return (self.x, self.y)
 
     @property
@@ -95,6 +98,7 @@ class Gamer:
         self.keys_check()
         self.mouse_verific()
         self.rect.center = self.x, self.y
+        self.minirect.center = self.x // MAP_SCALE, self.y // MAP_SCALE
         self.angle %= ZWEI_PI
 
     def mouse_verific(self):

@@ -1,7 +1,7 @@
 import pygame
 from parameters import *
 from r_c import ray_casting
-from map import mini_map
+from map import mini_map, Camera
 from collections import deque
 
 
@@ -10,6 +10,7 @@ class Malen:
         self.monitor = monitor
         self.monitor_map = monitor_map
         self.gamer = gamer
+        self.camera = Camera(self.monitor_map, self.gamer)
         self.font = pygame.font.SysFont('Arial', 36, bold=True)
         self.texture = {1: pygame.image.load('data/img/lvl1/wall11.png').convert(),
                         2: pygame.image.load('data/img/lvl1/wall8.png').convert(),
@@ -57,14 +58,18 @@ class Malen:
 
     def mini_map(self):
         self.monitor_map.fill(BLACK)
+        # позиции персонажа на миникарте
         xmap, ymap = self.gamer.x // MAP_SCALE, self.gamer.y // MAP_SCALE
-        pygame.draw.line(self.monitor_map, YELLOW, (xmap, ymap), (xmap + 4 * math.cos(self.gamer.angle),
-                                                                    ymap + 4 * math.sin(self.gamer.angle)), 2)
-        pygame.draw.circle(self.monitor_map, RED, (int(xmap), int(ymap)), 4)
-
+        # короткий луч для определения направления
+        pygame.draw.line(self.monitor_map, YELLOW, (xmap, ymap), 
+                         (xmap + 4 * math.cos(self.gamer.angle),
+                          ymap + 4 * math.sin(self.gamer.angle)), 2)
+        # отрисовка самого персонажа
         for x, y in mini_map:
-            pygame.draw.rect(self.monitor_map, DARKORANGE, (x, y, MAP_CELL, MAP_CELL), 2)
+            self.camera.apply(x, y)
+            pygame.draw.circle(self.monitor_map, RED, (int(xmap), int(ymap)), 4)
         self.monitor.blit(self.monitor_map, MAP_POS)
+        self.camera.update()
 
     def player_weapon_shotgun(self, shots):
         if self.gamer.shot:

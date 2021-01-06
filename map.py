@@ -2,9 +2,9 @@ from parameters import *
 from numba.core import types
 from numba.typed import Dict
 from numba import int32
+from numba import njit
 import pygame
 from random import choice
-from pprint import pprint
 
 # тут создается карта и всё связанное с ней
 _ = False
@@ -107,3 +107,17 @@ for j, row in enumerate(new_maps):
                 txt_map[(i * CELL, j * CELL)] = 3
             elif char == 4:
                 txt_map[(i * CELL, j * CELL)] = 4
+
+
+class Camera:
+    def __init__(self, monitor_map, gamer):
+        self.gamer = gamer
+        self.monitor_map = monitor_map
+        self.dx = 0
+
+    def update(self):
+        self.dx = -(self.gamer.minirect.x + self.gamer.minirect.w // 2  - MAP_RES[0] // 2) - self.dx
+
+    def apply(self, x, y):
+        x += self.dx
+        pygame.draw.rect(self.monitor_map, DARKORANGE, (x, y, MAP_CELL, MAP_CELL), 2)

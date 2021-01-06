@@ -14,7 +14,7 @@ FPS = 90
 FPS_POS = (WIDTH - 65, 5)
 
 # настройки игрока
-gamer_pos = (H_WIDTH, H_HEIGHT)
+gamer_pos = (124, 753)
 gamer_angle = 0
 gamer_speed = 2.5
 
@@ -34,7 +34,7 @@ MINIMAP_SCALE = 5
 MAP_RES = (WIDTH // MINIMAP_SCALE, HEIGHT // MINIMAP_SCALE)
 MAP_SCALE = 2 * MINIMAP_SCALE
 MAP_CELL = CELL // MAP_SCALE
-MAP_POS = (0, 0)
+MAP_POS = (15, 50)
 
 # текстуры
 T_W = 1200
