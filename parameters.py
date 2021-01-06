@@ -39,6 +39,7 @@ MAP_POS = (0, 0)
 # текстуры
 T_W = 1200
 T_H = 1200
+H_T_H = T_H // 2
 T_SCALE = T_W // CELL
 
 # спрайты
@@ -59,4 +60,4 @@ SKY_BLUE = (0, 180, 255)
 YELLOW = (220, 220, 0)
 SANDY = (244, 164, 96)
 
-# tests
+# test
