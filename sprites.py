@@ -288,7 +288,7 @@ class Pinky:
         self.animation_dist = 800
         self.animation_speed = 12
         self.dead = None
-        self.dead_shift = 0.9
+        self.dead_shift = 0.8
         self.dead_anim = deque([pygame.image.load(f'data/sprites/pinky/' + \
                                                   f'death/{i}.png').convert_alpha()
                                 for i in range(1, 6)])
@@ -311,7 +311,7 @@ class Obama:
         self.animation_dist = 800
         self.animation_speed = 10
         self.dead = None
-        self.dead_shift = 0.9
+        self.dead_shift = 0.8
         self.dead_anim = deque([pygame.image.load(f'data/sprites/obama/' + \
                                                   f'death/{i}.png').convert_alpha()
                                 for i in range(6)])
@@ -325,7 +325,7 @@ class Human1:
         self.way = [pygame.image.load(f'data/sprites/human1/base/{i}.png').convert_alpha()
                     for i in range(8)]
         self.viewing_angles = True
-        self.shift = 0.6
+        self.shift = 0.5
         self.scale = (0.5, 0.8)
         self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/human1/' + \
@@ -334,7 +334,7 @@ class Human1:
         self.animation_dist = 800
         self.animation_speed = 7
         self.dead = None
-        self.dead_shift = 1.1
+        self.dead_shift = 1
         self.dead_anim = deque([pygame.image.load(f'data/sprites/human1/' + \
                                                   f'death/{i}.png').convert_alpha()
                                 for i in range(5)])
@@ -348,7 +348,7 @@ class Human2:
         self.way = [pygame.image.load(f'data/sprites/stas/base/{i}.png').convert_alpha()
                     for i in range(8)]
         self.viewing_angles = True
-        self.shift = 0.6
+        self.shift = 0.5
         self.scale = (0.6, 0.8)
         self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/stas/' + \
@@ -357,7 +357,7 @@ class Human2:
         self.animation_dist = 800
         self.animation_speed = 10
         self.dead = None
-        self.dead_shift = 1.2
+        self.dead_shift = 1
         self.dead_anim = deque([pygame.image.load(f'data/sprites/stas/' + \
                                                   f'death/{i}.png').convert_alpha()
                                 for i in range(5)])
