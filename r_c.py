@@ -1,7 +1,8 @@
 import pygame
 from parameters import *
 from numba import njit
-from new_map import txt_map, H_WORLD, W_WORLD
+#from new_map import txt_map, H_WORLD, W_WORLD
+from map import txt_map, H_WORLD, W_WORLD
 
 @njit(fastmath=True)
 def mapping(a, b):
@@ -17,7 +18,9 @@ def ray_casting(pos_gamer, angle_gamer, txt_map):
     view_angle = angle_gamer - H_FOV
     for ray in range(N_RAYS):
         sin_a = math.sin(view_angle)
+        sin_a = sin_a if sin_a else 0.000001
         cos_a = math.cos(view_angle)
+        cos_a = cos_a if cos_a else 0.000001
 
         x, dx = (xm + CELL, 1) if cos_a >= 0 else (xm, -1)
         for i in range(0, W_WORLD, CELL):

@@ -1,7 +1,8 @@
 import pygame
 from parameters import *
 from r_c import ray_casting
-from new_map import mini_map
+#from new_map import mini_map
+from map import mini_map
 from collections import deque
 
 
@@ -26,9 +27,10 @@ class Malen:
         self.shotgun_pos = (H_WIDTH - self.shotgun_rect.width // 2, HEIGHT - self.shotgun_rect.height)
         self.shotgun_shot_length = len(self.shotgun_shot_animation)
         self.shotgun_shot_length_count = 0
-        self.shotgun_shot_animation_speed = 8
+        self.shotgun_shot_animation_speed = 5
         self.shotgun_shot_animation_count = 0
         self.shotgun_shot_animation_trigger = True
+        self.shotgun_shot_sound = pygame.mixer.Sound('sound/shotgun.mp3')
         #sfx
         self.sfx = deque([pygame.image.load(f'data/sprites/'
                                             f'shoot_sfx/action/{i}.png').convert_alpha() for i in range(9)])
@@ -67,6 +69,8 @@ class Malen:
 
     def player_weapon_shotgun(self, shots):
         if self.gamer.shot:
+            if not self.shotgun_shot_length_count:
+                self.shotgun_shot_sound.play()
             self.shot_projection = int(min(shots)[1] // 2)
             self.bullet_sfx()
             shotgun_shot_sprite = self.shotgun_shot_animation[0]
