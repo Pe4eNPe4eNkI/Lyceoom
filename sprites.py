@@ -30,7 +30,8 @@ class Sprites:
                                 AllSprites(Obama(), (10.1, 2.1)),
                                 AllSprites(Pinky(), (8.1, 6.1)),
                                 AllSprites(Obama(), (8.1, 9.1)),
-                                AllSprites(Sosademon(), (5.51, 12.43))]
+                                AllSprites(Sosademon(), (5.51, 12.43)),
+                                AllSprites(Human2(), (7.1, 6.3))]
 
     @property
     def sprite_shot(self):
@@ -296,5 +297,28 @@ class Barrel:
                                                   f'death/{i}.png').convert_alpha()
                                 for i in range(6)])
         self.tp = 'object'
+        self.blocked = True
+        self.obj_action = []
+
+
+class Human2:
+    def __init__(self):
+        self.way = [pygame.image.load(f'data/sprites/stas/base/{i}.png').convert_alpha()
+                    for i in range(8)]
+        self.viewing_angles = True
+        self.shift = 0.8
+        self.scale = (0.4, 0.6)
+        self.side = 30
+        self.animation = deque([pygame.image.load(f'data/sprites/stas/' + \
+                                                  f'action/{i}.png').convert_alpha()
+                                for i in range(4)])
+        self.animation_dist = 800
+        self.animation_speed = 10
+        self.dead = None
+        self.dead_shift = 1.7
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/stas/' + \
+                                                  f'death/{i}.png').convert_alpha()
+                                for i in range(5)])
+        self.tp = 'enemy'
         self.blocked = True
         self.obj_action = []
