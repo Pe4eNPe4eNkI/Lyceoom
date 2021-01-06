@@ -29,7 +29,13 @@ def load_image(name, color_key=None):
 class Sprites:
     def __init__(self):
         self.list_of_sprites = [AllSprites(Barrel(), (9.1, 4)),  # карта №1
-                                AllSprites(Door(), (10.96, 2.53)),
+                                AllSprites(Door(), (10.96, 2.55)),
+                                AllSprites(Door(), (2.6, 3.55)),
+                                AllSprites(Door(), (22.8, 7.55)),
+                                AllSprites(Door(), (25.99, 1.55)),
+                                AllSprites(Door(), (38.01, 10.55)),
+                                AllSprites(Door(), (39.01, 1.55)),
+                                AllSprites(Door(), (46.27, 7.55)),
                                 AllSprites(Human1(), (7.1, 2.1)),
                                 AllSprites(Human1(), (13.37, 3.31)),
                                 AllSprites(Human1(), (8.51, 1.7)),
