@@ -227,6 +227,29 @@ class Fire:
         self.blocked = True
         self.obj_action = []
 
+class Barrel:
+    def __init__(self):
+        self.way = [pygame.image.load('data/sprites/barrel/base/0.png').convert_alpha()]
+        self.viewing_angles = False
+        self.shift = 1.8
+        self.scale = (0.4, 0.4)
+        self.side = 30
+        self.animation = deque([pygame.image.load(f'data/sprites/'
+                                                  f'barrel/anim/{i}.png').convert_alpha() for i in range(12)])
+        self.animation_dist = 150
+        self.animation_speed = 5
+        self.animation_dist = 1800
+        self.animation_speed = 10
+        self.dead = None
+        self.dead_shift = 2.6
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/barrel/' + \
+                                                  f'death/{i}.png').convert_alpha()
+                                for i in range(4)])
+        self.tp = 'object'
+        self.blocked = True
+        self.obj_action = []
+
+
 
 class Sosademon:
     def __init__(self):
@@ -235,7 +258,7 @@ class Sosademon:
         self.viewing_angles = True
         self.shift = 0
         self.scale = (1, 1)
-        self.side = 50
+        self.side = 70
         self.animation = deque([pygame.image.load(f'data/sprites/sosademon/' + \
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(6)])
@@ -265,7 +288,7 @@ class Pinky:
         self.animation_dist = 800
         self.animation_speed = 12
         self.dead = None
-        self.dead_shift = 0.8
+        self.dead_shift = 0.9
         self.dead_anim = deque([pygame.image.load(f'data/sprites/pinky/' + \
                                                   f'death/{i}.png').convert_alpha()
                                 for i in range(1, 6)])
@@ -302,8 +325,8 @@ class Human1:
         self.way = [pygame.image.load(f'data/sprites/human1/base/{i}.png').convert_alpha()
                     for i in range(8)]
         self.viewing_angles = True
-        self.shift = 0.85
-        self.scale = (0.3, 0.5)
+        self.shift = 0.6
+        self.scale = (0.5, 0.8)
         self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/human1/' + \
                                                   f'action/{i}.png').convert_alpha()
@@ -311,34 +334,11 @@ class Human1:
         self.animation_dist = 800
         self.animation_speed = 7
         self.dead = None
-        self.dead_shift = 1.5
+        self.dead_shift = 1.1
         self.dead_anim = deque([pygame.image.load(f'data/sprites/human1/' + \
                                                   f'death/{i}.png').convert_alpha()
                                 for i in range(5)])
         self.tp = 'enemy'
-        self.blocked = True
-        self.obj_action = []
-
-
-class Barrel:
-    def __init__(self):
-        self.way = [pygame.image.load('data/sprites/barrel/base/0.png').convert_alpha()]
-        self.viewing_angles = False
-        self.shift = 1.8
-        self.scale = (0.4, 0.4)
-        self.side = 30
-        self.animation = deque([pygame.image.load(f'data/sprites/'
-                                                  f'barrel/anim/{i}.png').convert_alpha() for i in range(12)])
-        self.animation_dist = 150
-        self.animation_speed = 5
-        self.animation_dist = 1800
-        self.animation_speed = 10
-        self.dead = None
-        self.dead_shift = 2.6
-        self.dead_anim = deque([pygame.image.load(f'data/sprites/barrel/' + \
-                                                  f'death/{i}.png').convert_alpha()
-                                for i in range(4)])
-        self.tp = 'object'
         self.blocked = True
         self.obj_action = []
 
@@ -348,8 +348,8 @@ class Human2:
         self.way = [pygame.image.load(f'data/sprites/stas/base/{i}.png').convert_alpha()
                     for i in range(8)]
         self.viewing_angles = True
-        self.shift = 0.8
-        self.scale = (0.4, 0.6)
+        self.shift = 0.6
+        self.scale = (0.6, 0.8)
         self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/stas/' + \
                                                   f'action/{i}.png').convert_alpha()
@@ -357,7 +357,7 @@ class Human2:
         self.animation_dist = 800
         self.animation_speed = 10
         self.dead = None
-        self.dead_shift = 1.7
+        self.dead_shift = 1.2
         self.dead_anim = deque([pygame.image.load(f'data/sprites/stas/' + \
                                                   f'death/{i}.png').convert_alpha()
                                 for i in range(5)])
