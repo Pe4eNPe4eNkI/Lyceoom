@@ -116,7 +116,7 @@ class Camera:
         self.dx = 0
 
     def update(self):
-        self.dx = -(self.gamer.minirect.x + self.gamer.minirect.w // 2  - MAP_RES[0] // 20) 
+        self.dx = -(self.gamer.minirect.x + self.gamer.minirect.w // 2  - MAP_RES[0] // 10) 
 
     def apply(self, x, y):
         x += self.dx
