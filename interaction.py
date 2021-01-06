@@ -44,7 +44,7 @@ class Interaction:
         self.gamer = gamer
         self.sprites = sprites
         self.malen = malen
-        self.pain_sound = pygame.mixer.Sound('sound/pain.mp3')
+        self.pain_sound = pygame.mixer.Sound('sound/pain.ogg')
 
     def interaction_objects(self):
         if self.gamer.shot and self.malen.shotgun_shot_animation_trigger:
@@ -78,7 +78,7 @@ class Interaction:
     def play_music(self):
         pygame.mixer.pre_init(44100, -16, 2, 2048)
         pygame.mixer.init()
-        pygame.mixer.music.load('sound/theme.mp3')
+        pygame.mixer.music.load('sound/theme.ogg')
         pygame.mixer.music.play(10)
 
 
