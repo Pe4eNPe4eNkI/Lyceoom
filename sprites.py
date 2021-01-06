@@ -251,7 +251,7 @@ class Obama:
         self.dead_shift = 0.9
         self.dead_anim = deque([pygame.image.load(f'data/sprites/obama/' + \
                                                   f'death/{i}.png').convert_alpha()
-                                for i in range(4)])
+                                for i in range(6)])
         self.tp = 'enemy'
         self.blocked = True
         self.obj_action = []
