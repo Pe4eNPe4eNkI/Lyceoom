@@ -61,13 +61,13 @@ class Malen:
         # позиции персонажа на миникарте
         xmap, ymap = self.gamer.x // MAP_SCALE, self.gamer.y // MAP_SCALE
         # короткий луч для определения направления
-        pygame.draw.line(self.monitor_map, YELLOW, (xmap, ymap), 
-                         (xmap + 4 * math.cos(self.gamer.angle),
+        pygame.draw.line(self.monitor_map, YELLOW, (xmap + self.camera.dx, ymap), 
+                         (xmap + self.camera.dx + 4 * math.cos(self.gamer.angle),
                           ymap + 4 * math.sin(self.gamer.angle)), 2)
+        pygame.draw.circle(self.monitor_map, RED, (int(xmap) + self.camera.dx, int(ymap)), 4)
         # отрисовка самого персонажа
         for x, y in mini_map:
             self.camera.apply(x, y)
-            pygame.draw.circle(self.monitor_map, RED, (int(xmap), int(ymap)), 4)
         self.monitor.blit(self.monitor_map, MAP_POS)
         self.camera.update()
 
