@@ -13,7 +13,7 @@ def terminate():
 
 class Gamer:
     def __init__(self, sprites):
-        self.x, self.y = 908, 142
+        self.x, self.y = 124, 753
         self.angle = gamer_angle
         self.sensitivity = 0.002
         self.sprites = sprites
