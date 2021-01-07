@@ -62,7 +62,7 @@ class Malen:
         render = self.font.render(fps_clock, 0, RED)
         self.monitor.blit(render, FPS_POS)
 
-    def terminate():
+    def terminate(self):
         pygame.quit()
         sys.exit()
 

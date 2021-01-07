@@ -48,7 +48,9 @@ class Interaction:
 
     def interaction_objects(self):
         if self.gamer.shot and self.malen.shotgun_animation_trigger:
-            for obj in sorted(self.sprites.list_of_sprites, key=lambda obj: obj.dist_to_sprite):
+            for obj in sorted(self.sprites.list_of_sprites
+                              + self.sprites.list_of_sprites_2
+                              + self.sprites.list_of_sprites_3, key=lambda obj: obj.dist_to_sprite):
                 if obj.is_on_fire[1]:
                     if obj.dead != 'never' and not obj.dead:
                         if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
@@ -56,14 +58,36 @@ class Interaction:
                                 self.pain_sound.play()
                             obj.dead = True
                             obj.blocked = None
+                            obj.status = False
                             self.malen.shotgun_animation_trigger = False  # простел всех если добавить _shot_
+                    if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:
+                        key = 0
+                        for elem in self.sprites.list_of_sprites:
+                            if elem.tp == 'object':
+                                pass
+                            elif elem.dead == 'never':
+                                pass
+                            elif elem.dead != True:
+                                key += 1
+                        if key == 0:
+                            obj.d_open_trigger = True
+                            obj.blocked = None
+                        print(key)
+                    if obj.tp == 'h_nextdoor_second' and obj.dist_to_sprite < CELL:
+                        key = 0
+                        for elem in self.sprites.list_of_sprites_2:
+                            if elem.dead != True:
+                                key += 1
+                        if key == 0:
+                            obj.d_open_trigger = True
+                            obj.blocked = None
                     if obj.tp in {'h_door', 'v_door'} and obj.dist_to_sprite < CELL:
                         obj.d_open_trigger = True
                         obj.blocked = None
                     break
 
     def npc_action(self):
-        for obj in self.sprites.list_of_sprites:
+        for obj in self.sprites.list_of_sprites + self.sprites.list_of_sprites_2 + self.sprites.list_of_sprites_3:
             if obj.tp == 'enemy' and not obj.dead:
                 if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
                     obj.is_trigger = True
@@ -79,8 +103,9 @@ class Interaction:
             obj.y = obj.y + 1 if dy < 0 else obj.y - 1
 
     def clear(self):
-        del_sprites = self.sprites.list_of_sprites[:]
-        [self.sprites.list_of_sprites.remove(obj) for obj in del_sprites if obj.cls]
+        all = self.sprites.list_of_sprites + self.sprites.list_of_sprites_2 + self.sprites.list_of_sprites_3
+        del_sprites = all[:]
+        [all.remove(obj) for obj in del_sprites if obj.cls]
 
     def play_music(self):
         pygame.mixer.pre_init(44100, -16, 2, 2048)
@@ -89,7 +114,7 @@ class Interaction:
         pygame.mixer.music.play(10)
 
     def wins(self):
-        if not len([obj for obj in self.sprites.list_of_sprites if obj.tp == 'enemy' and not obj.dead]):
+        if not len([obj for obj in self.sprites.list_of_sprites_3 if obj.tp == 'enemy' and not obj.dead]):
             pygame.mixer.music.stop()
             pygame.mixer.music.load('sound/win.mp3')
             pygame.mixer.music.play()

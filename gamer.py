@@ -27,13 +27,15 @@ class Gamer:
 
     @property
     def pos(self):
-        # print(self.x, self.y)
+        #print(self.x, self.y)
         return (self.x, self.y)
 
     @property
     def collision_list(self):
-        return collision_walls + [pygame.Rect(*obj.pos, obj.side, obj.side) for obj
-                                  in self.sprites.list_of_sprites if obj.blocked]
+        return collision_walls \
+               + [pygame.Rect(*obj.pos, obj.side, obj.side) for obj in self.sprites.list_of_sprites if obj.blocked] \
+               + [pygame.Rect(*obj.pos, obj.side, obj.side) for obj in self.sprites.list_of_sprites_2 if obj.blocked] \
+               + [pygame.Rect(*obj.pos, obj.side, obj.side) for obj in self.sprites.list_of_sprites_3 if obj.blocked]
 
     def detect_collision(self, dx, dy):
         next_rect = self.rect.copy()

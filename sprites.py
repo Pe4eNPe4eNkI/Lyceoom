@@ -28,150 +28,50 @@ def load_image(name, color_key=None):
 
 class Sprites:
     def __init__(self):
-                self.list_of_sprites = [AllSprites(Barrel(), (9.1, 4)),  # карта №1
-                                        AllSprites(Door(), (10.96, 2.55)),
-                                        AllSprites(Door(), (2.6, 3.55)),
-                                        AllSprites(Door(), (22.8, 7.55)),
-                                        AllSprites(Door(), (25.99, 1.55)),
-                                        AllSprites(Door(), (38.01, 10.55)),
-                                        AllSprites(Door(), (39.01, 1.55)),
-                                        AllSprites(Door(), (46.27, 7.55)),
-                                        AllSprites(Door(), (11.5, 6.55)),
-                                        AllSprites(Door(), (7.25, 13.5)),
-                                        AllSprites(Door(), (24.5, 5.43)),
-                                        AllSprites(Door(), (30.85, 11.5)),
-                                        AllSprites(Door(), (37.5, 14.5)),
-                                        AllSprites(Door(), (44.5, 5.55)),
-                                        AllSprites(Door(), (47.55, 9.5)),
-                                        AllSprites(Door(), (51.5, 6.75)),
-                                        AllSprites(Door(), (53.05, 2.5)),
-                                        AllSprites(Door(), (63.75, 8.55)),
-                                        AllSprites(Door(), (52.45, 14.5)),
-                                        AllSprites(Door(), (14.5, 9.5)),
-                                        AllSprites(Door(), (34.5, 5.5)),
-                                        AllSprites(Door(), (1.5, 8.55)),
-                                        AllSprites(Door(), (65.5, 1.55)),
-                                        AllSprites(Human1(), (7.1, 2.1)),
-                                        AllSprites(Human1(), (13.37, 3.31)),
-                                        AllSprites(Human1(), (8.51, 1.7)),
-                                        AllSprites(Human1(), (7.26, 1.3)),
-                                        AllSprites(Human1(), (20.36, 14.76)),
-                                        AllSprites(Human1(), (7.1, 4.1)),
-                                        AllSprites(Obama(), (5.1, 2.1)),
-                                        AllSprites(Obama(), (10.1, 2.1)),
-                                        AllSprites(Obama(), (1.67, 1.45)),
-                                        AllSprites(Obama(), (16.94, 1.9)),
-                                        AllSprites(Obama(), (8.1, 9.1)),
-                                        AllSprites(Obama(), (16.75, 14.51)),
-                                        AllSprites(Obama(), (21.5, 9.72)),
-                                        AllSprites(Pinky(), (7.31, 5.88)),
-                                        AllSprites(Pinky(), (7.51, 7.68)),
-                                        AllSprites(Pinky(), (18.68, 14.74)),
-                                        AllSprites(Pinky(), (8.1, 6.1)),
-                                        AllSprites(Pinky(), (13.82, 4.62)),
-                                        AllSprites(Pinky(), (19.72, 1.24)),
-                                        AllSprites(Sosademon(), (8.54, 14.45)),
-                                        AllSprites(Sosademon(), (13.44, 11.12)),
-                                        AllSprites(Sosademon(), (11.72, 14.69)),
-                                        AllSprites(Sosademon(), (11.74, 6.66)),
-                                        AllSprites(Sosademon(), (14.84, 6.9)),
-                                        AllSprites(Sosademon(), (21.71, 11.36)),
-                                        AllSprites(Human2(), (6.51, 13.43)),
-                                        AllSprites(Human2(), (18.7, 4.58)),
-                                        AllSprites(Human2(), (7.78, 11.76)),
-                                        AllSprites(Human2(), (9.54, 8.15)),
-                                        AllSprites(Human2(), (8.28, 13.26)),
-                                        AllSprites(Human1(), (25.74, 6.37)),  # карта №2
-                                        AllSprites(Human1(), (36.61, 5.37)),
-                                        AllSprites(Human1(), (41.64, 3.33)),
-                                        AllSprites(Human1(), (32.74, 14.55)),
-                                        AllSprites(Human1(), (31.76, 11.25)),
-                                        AllSprites(Human1(), (34.74, 4.37)),
-                                        AllSprites(Human1(), (34.74, 5.25)),
-                                        AllSprites(Sosademon(), (25.74, 6.25)),
-                                        AllSprites(Sosademon(), (42.58, 4.05)),
-                                        AllSprites(Sosademon(), (40.01, 5.72)),
-                                        AllSprites(Sosademon(), (33.24, 13.75)),
-                                        AllSprites(Sosademon(), (40.37, 7.35)),
-                                        AllSprites(Sosademon(), (33.26, 14.76)),
-                                        AllSprites(Sosademon(), (25.68, 1.24)),
-                                        AllSprites(Sosademon(), (36.44, 3.44)),
-                                        AllSprites(Pinky(), (25.76, 4.74)),
-                                        AllSprites(Pinky(), (44.76, 14.76)),
-                                        AllSprites(Pinky(), (40.38, 13.03)),
-                                        AllSprites(Pinky(), (30.24, 1.25)),
-                                        AllSprites(Pinky(), (44.25, 9.81)),
-                                        AllSprites(Pinky(), (24.5, 13.27)),
-                                        AllSprites(Pinky(), (30.29, 13.33)),
-                                        AllSprites(Pinky(), (24.24, 11.75)),
-                                        AllSprites(Pinky(), (33.47, 1.53)),
-                                        AllSprites(Obama(), (24.46, 1.5)),
-                                        AllSprites(Obama(), (35.28, 1.55)),
-                                        AllSprites(Obama(), (42.26, 13.24)),
-                                        AllSprites(Obama(), (42.24, 12.52)),
-                                        AllSprites(Obama(), (31.24, 14.76)),
-                                        AllSprites(Obama(), (27.48, 13.52)),
-                                        AllSprites(Obama(), (35.39, 2.33)),
-                                        AllSprites(Human2(), (34.58, 7.2)),
-                                        AllSprites(Human2(), (38.7, 1.87)),
-                                        AllSprites(Human2(), (33.25, 10.24)),
-                                        AllSprites(Human2(), (29.74, 12.75)),
-                                        AllSprites(Human2(), (29.23, 14.69)),
-                                        AllSprites(Human2(), (28.75, 12.4)),
-                                        AllSprites(Human2(), (47.41, 1.37)),  # карта №3
-                                        AllSprites(Human2(), (58.65, 2.56)),
-                                        AllSprites(Human2(), (57.56, 5.86)),
-                                        AllSprites(Human2(), (57.46, 7.19)),
-                                        AllSprites(Human2(), (59.45, 7.65)),
-                                        AllSprites(Human2(), (59.46, 6.31)),
-                                        AllSprites(Human2(), (49.5, 1.31)),
-                                        AllSprites(Obama(), (47.24, 3.47)),
-                                        AllSprites(Obama(), (54.57, 3.34)),
-                                        AllSprites(Obama(), (51.5, 6.35)),
-                                        AllSprites(Obama(), (53.83, 5.94)),
-                                        AllSprites(Obama(), (62.76, 9.74)),
-                                        AllSprites(Obama(), (58.58, 9.43)),
-                                        AllSprites(Obama(), (57.75, 9.46)),
-                                        AllSprites(Obama(), (59.91, 12.68)),
-                                        AllSprites(Obama(), (56.58, 3.27)),
-                                        AllSprites(Obama(), (50.46, 7.5)),
-                                        AllSprites(Pinky(), (58.8, 2.45)),
-                                        AllSprites(Pinky(), (50.73, 5.74)),
-                                        AllSprites(Pinky(), (56.74, 3.25)),
-                                        AllSprites(Pinky(), (48.77, 6.7)),
-                                        AllSprites(Pinky(), (63.4, 11.82)),
-                                        AllSprites(Pinky(), (64.76, 14.29)),
-                                        AllSprites(Pinky(), (57.6, 14.76)),
-                                        AllSprites(Pinky(), (56.35, 13.46)),
-                                        AllSprites(Human1(), (49.28, 7.61)),
-                                        AllSprites(Human1(), (53.35, 1.24)),
-                                        AllSprites(Sosademon(), (49.24, 8.96)),
-                                        AllSprites(Sosademon(), (61.69, 6.47)),
-                                        AllSprites(Sosademon(), (58.16, 14.29)),
-                                        AllSprites(Sosademon(), (57.35, 11.57)),
-                                        AllSprites(Sosademon(), (54.71, 12.76)),
-                                        AllSprites(Sosademon(), (53.26, 13.46)),
-                                        AllSprites(Sosademon(), (52.66, 14.46)),
-                                        AllSprites(Sosademon(), (51.76, 12.42)),
-                                        AllSprites(Sosademon(), (49.42, 12.24)),
-                                        AllSprites(Sosademon(), (48.76, 14.75)),
-                                        AllSprites(Sosademon(), (50.72, 13.1)),
-                                        AllSprites(Sosademon(), (55.04, 7.14)),
-                                        AllSprites(Sosademon(), (65.28, 5.34)),
-                                        AllSprites(Sosademon(), (66.72, 7.36)),
-                                        AllSprites(Sosademon(), (64.66, 9.36)),
-                                        AllSprites(Sosademon(), (56.24, 1.57)),
-                                        AllSprites(Sosademon(), (50.97, 1.28))]
+        self.list_of_sprites = [AllSprites(Barrel(), (9.1, 4)),  # карта №1
+                                AllSprites(Door(), (10.96, 2.55)),
+                                AllSprites(Door(), (2.6, 3.55)),
+                                AllSprites(NextDoorFirst(), (22.8, 7.55)),
+                                AllSprites(Door(), (25.99, 1.55)),
+                                AllSprites(Door(), (38.01, 10.55)),
+                                AllSprites(Door(), (39.01, 1.55)),
+                                AllSprites(NextDoorSecond(), (46.27, 7.55)),
+                                AllSprites(Door(), (11.5, 6.55)),
+                                AllSprites(Door(), (7.25, 13.5)),
+                                AllSprites(Door(), (24.5, 5.43)),
+                                AllSprites(Door(), (30.85, 11.5)),
+                                AllSprites(Door(), (37.5, 14.5)),
+                                AllSprites(Door(), (44.5, 5.55)),
+                                AllSprites(Door(), (47.55, 9.5)),
+                                AllSprites(Door(), (51.5, 6.75)),
+                                AllSprites(Door(), (53.05, 2.5)),
+                                AllSprites(Door(), (63.75, 8.55)),
+                                AllSprites(Door(), (52.45, 14.5)),
+                                AllSprites(Door(), (14.5, 9.5)),
+                                AllSprites(Door(), (34.5, 5.5)),
+                                AllSprites(Door(), (1.5, 8.55)),
+                                AllSprites(Door(), (65.5, 1.55)),
+                                AllSprites(Human1(), (7.1, 2.1)),
+                                AllSprites(Pinky(), (7.31, 5.88)),
+                                AllSprites(Sosademon(), (8.54, 14.45))]
+        self.list_of_sprites_2 = [AllSprites(Human1(), (36.61, 5.37)),
+                                  AllSprites(Pinky(), (25.76, 4.74)),
+                                  AllSprites(Sosademon(), (25.74, 6.25))]
+        self.list_of_sprites_3 = [AllSprites(Human2(), (47.41, 1.37)),
+                                  AllSprites(Pinky(), (58.8, 2.45)),
+                                  AllSprites(Sosademon(), (49.24, 8.96))]
 
     @property
     def sprite_shot(self):
-        return min([obj.is_on_fire for obj in self.list_of_sprites], default=(float('inf'), 0))
+        return min([obj.is_on_fire for obj in self.list_of_sprites
+                    + self.list_of_sprites_2
+                    + self.list_of_sprites_3], default=(float('inf'), 0))
 
     @property
     def b_doors(self):
         blocked_doors = Dict.empty(key_type=types.UniTuple(int32, 2), value_type=int32)
         for obj in self.list_of_sprites:
-            if obj.tp == 'h_door' or obj.tp == 'v_door' and obj.blocked:
+            if obj.tp == 'h_door' or obj.tp == 'h_nextdoor_first' or obj.tp == 'h_nextdoor_second' and obj.blocked:
                     i, j = mapping(obj.x, obj.y)
                     blocked_doors[(i, j)] = 0
         return blocked_doors
@@ -199,7 +99,8 @@ class AllSprites:
         self.side = kind.side
         self.is_trigger = False
         self.d_open_trigger = False
-        self.d_last_pos = self.y if self.tp == 'h_door' else self.x
+        self.d_last_pos = self.y if self.tp == 'h_door' \
+                                    or self.tp == 'h_nextdoor_first' or self.tp == 'h_nextdoor_second' else self.x
         self.cls = False
         self.obj_action = kind.obj_action.copy()
 
@@ -240,12 +141,16 @@ class AllSprites:
         d_rays = int(gamma / DELTA_ANGLE)
         self.current_ray = C_RAY + d_rays
 
-        if self.tp not in {'h_door', 'v_door'}:
+        if self.tp not in {'h_door', 'v_door', 'h_nextdoor_first', 'h_nextdoor_second'}:
             self.dist_to_sprite *= math.cos(H_FOV - self.current_ray * DELTA_ANGLE)
 
         fake_ray = self.current_ray + 100
         if 0 <= fake_ray <= N_RAYS - 1 + 2 * 100 and self.dist_to_sprite > 30:
-            self.p_height = min(int(PROJ_C / self.dist_to_sprite), D_HEIGHT if self.tp not in {'h_door', 'v_door'} else HEIGHT)
+            self.p_height = min(int(PROJ_C
+                                    / self.dist_to_sprite),
+                                D_HEIGHT if self.tp
+                                            not in {'h_door', 'v_door', 'h_nextdoor_first',
+                                                    'h_nextdoor_second'} else HEIGHT)
 
             sprite_width = int(self.p_height * self.scale[0])
             sprite_heigth = int(self.p_height * self.scale[1])
@@ -253,7 +158,7 @@ class AllSprites:
             h_s_height = sprite_heigth // 2
             shift = h_s_height * self.shift
 
-            if self.tp in {'h_door', 'v_door'}:
+            if self.tp in {'h_door', 'v_door', 'h_nextdoor_first', 'h_nextdoor_second'}:
                 if self.d_open_trigger:
                     self.d_open()
                 self.obj = self.show_sprite()
@@ -322,6 +227,14 @@ class AllSprites:
         return sprite_object
 
     def d_open(self):
+        if self.tp == 'h_nextdoor_first':
+            self.y -= 3
+            if abs(self.y - self.d_last_pos) > CELL:
+                self.cls = True
+        if self.tp == 'h_nextdoor_second':
+            self.y -= 3
+            if abs(self.y - self.d_last_pos) > CELL:
+                self.cls = True
         if self.tp == 'h_door':
             self.y -= 3
             if abs(self.y - self.d_last_pos) > CELL:
@@ -398,7 +311,6 @@ class Sosademon:
         self.tp = 'enemy'
         self.blocked = True
         self.obj_action = []
-
 
 class Pinky:
     def __init__(self):
@@ -507,5 +419,43 @@ class Door:
         self.dead_shift = 0
         self.dead_anim = []
         self.tp = 'h_door'
+        self.blocked = True
+        self.obj_action = []
+
+
+class NextDoorFirst:
+    def __init__(self):
+        self.way = [pygame.image.load(f'data/sprites/doors/h_door/{i}.png').convert_alpha()
+                    for i in range(16)]
+        self.viewing_angles = True
+        self.shift = -0.005
+        self.scale = (1.74, 1.5)
+        self.side = CELL
+        self.animation = []
+        self.animation_dist = 0
+        self.animation_speed = 0
+        self.dead = 'never'
+        self.dead_shift = 0
+        self.dead_anim = []
+        self.tp = 'h_nextdoor_first'
+        self.blocked = True
+        self.obj_action = []
+
+
+class NextDoorSecond:
+    def __init__(self):
+        self.way = [pygame.image.load(f'data/sprites/doors/h_door/{i}.png').convert_alpha()
+                    for i in range(16)]
+        self.viewing_angles = True
+        self.shift = -0.005
+        self.scale = (1.74, 1.5)
+        self.side = CELL
+        self.animation = []
+        self.animation_dist = 0
+        self.animation_speed = 0
+        self.dead = 'never'
+        self.dead_shift = 0
+        self.dead_anim = []
+        self.tp = 'h_nextdoor_second'
         self.blocked = True
         self.obj_action = []
