@@ -104,9 +104,13 @@ class Interaction:
             obj.y = obj.y + 1 if dy < 0 else obj.y - 1
 
     def clear(self):
-        all = self.sprites.list_of_sprites + self.sprites.list_of_sprites_2 + self.sprites.list_of_sprites_3
-        del_sprites = all[:]
-        [all.remove(obj) for obj in del_sprites if obj.cls]
+        del_sprites = self.sprites.list_of_sprites[:]
+        [self.sprites.list_of_sprites.remove(obj) for obj in del_sprites if obj.cls]
+        del_sprites_2 = self.sprites.list_of_sprites_2[:]
+        [self.sprites.list_of_sprites.remove(obj) for obj in del_sprites_2 if obj.cls]
+        del_sprites_3 = self.sprites.list_of_sprites_3[:]
+        [self.sprites.list_of_sprites.remove(obj) for obj in del_sprites_3 if obj.cls]
+
 
     def play_music(self):
         pygame.mixer.pre_init(44100, -16, 2, 2048)

@@ -29,28 +29,10 @@ def load_image(name, color_key=None):
 class Sprites:
     def __init__(self):
         self.list_of_sprites = [AllSprites(Barrel(), (9.1, 4)),  # карта №1
-                                AllSprites(Door(), (10.96, 2.55)),
-                                AllSprites(Door(), (2.6, 3.55)),
+                                AllSprites(DoorH(), (10.96, 2.55)),
                                 AllSprites(NextDoorFirst(), (22.8, 7.55)),
-                                AllSprites(Door(), (25.99, 1.55)),
-                                AllSprites(Door(), (38.01, 10.55)),
-                                AllSprites(Door(), (39.01, 1.55)),
                                 AllSprites(NextDoorSecond(), (46.27, 7.55)),
-                                AllSprites(Door(), (11.5, 6.55)),
-                                AllSprites(Door(), (7.25, 13.5)),
-                                AllSprites(Door(), (24.5, 5.43)),
-                                AllSprites(Door(), (30.85, 11.5)),
-                                AllSprites(Door(), (37.5, 14.5)),
-                                AllSprites(Door(), (44.5, 5.55)),
-                                AllSprites(Door(), (47.55, 9.5)),
-                                AllSprites(Door(), (51.5, 6.75)),
-                                AllSprites(Door(), (53.05, 2.5)),
-                                AllSprites(Door(), (63.75, 8.55)),
-                                AllSprites(Door(), (52.45, 14.5)),
-                                AllSprites(Door(), (14.5, 9.5)),
-                                AllSprites(Door(), (34.5, 5.5)),
-                                AllSprites(Door(), (1.5, 8.55)),
-                                AllSprites(Door(), (65.5, 1.55)),
+                                AllSprites(DoorV(), (1.5, 8.55)),
                                 AllSprites(Human1(), (7.1, 2.1)),
                                 AllSprites(Pinky(), (7.31, 5.88)),
                                 AllSprites(Sosademon(), (8.54, 14.45))]
@@ -117,8 +99,7 @@ class AllSprites:
         self.side = kind.side
         self.is_trigger = False
         self.d_open_trigger = False
-        self.d_last_pos = self.y if self.tp == 'h_door' \
-                                    or self.tp == 'h_nextdoor_first' or self.tp == 'h_nextdoor_second' else self.x
+        self.d_last_pos = self.y if self.tp == 'h_door' or self.tp == 'h_nextdoor_first' or self.tp == 'h_nextdoor_second' else self.x
         self.cls = False
         self.obj_action = kind.obj_action.copy()
 
@@ -422,7 +403,7 @@ class Human2:
         self.obj_action = []
 
 
-class Door:
+class DoorH:
     def __init__(self):
         self.way = [pygame.image.load(f'data/sprites/doors/h_door/{i}.png').convert_alpha() 
                     for i in range(16)]
@@ -437,6 +418,25 @@ class Door:
         self.dead_shift = 0
         self.dead_anim = []
         self.tp = 'h_door'
+        self.blocked = True
+        self.obj_action = []
+
+
+class DoorV:
+    def __init__(self):
+        self.way = [pygame.image.load(f'data/sprites/doors/h_door/{i}.png').convert_alpha()
+                    for i in range(16)]
+        self.viewing_angles = True
+        self.shift = -0.005
+        self.scale = (1.74, 1.5)
+        self.side = CELL
+        self.animation = []
+        self.animation_dist = 0
+        self.animation_speed = 0
+        self.dead = 'never'
+        self.dead_shift = 0
+        self.dead_anim = []
+        self.tp = 'v_door'
         self.blocked = True
         self.obj_action = []
 

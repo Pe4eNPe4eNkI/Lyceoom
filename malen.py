@@ -157,13 +157,6 @@ class Malen:
 
             self.monitor.blit(self.menu_picture, (0, 0))
             x += 1
-
-
-
-
-
-
-
         pygame.display.flip()
         self.timer.tick(15)
 
