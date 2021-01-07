@@ -44,10 +44,10 @@ class Interaction:
         self.gamer = gamer
         self.sprites = sprites
         self.malen = malen
-        self.pain_sound = pygame.mixer.Sound('sound/pain.ogg')
+        self.pain_sound = pygame.mixer.Sound('sound/pain2.ogg')
 
     def interaction_objects(self):
-        if self.gamer.shot and self.malen.shotgun_shot_animation_trigger:
+        if self.gamer.shot and self.malen.shotgun_animation_trigger:
             for obj in sorted(self.sprites.list_of_sprites, key=lambda obj: obj.dist_to_sprite):
                 if obj.is_on_fire[1]:
                     if obj.dead != 'never' and not obj.dead:
@@ -56,7 +56,7 @@ class Interaction:
                                 self.pain_sound.play()
                             obj.dead = True
                             obj.blocked = None
-                            self.malen.shotgun_shot_animation_trigger = False
+                            self.malen.shotgun_animation_trigger = False  # простел всех если добавить _shot_
                     if obj.tp in {'h_door', 'v_door'} and obj.dist_to_sprite < CELL:
                         obj.d_open_trigger = True
                         obj.blocked = None
@@ -85,7 +85,18 @@ class Interaction:
     def play_music(self):
         pygame.mixer.pre_init(44100, -16, 2, 2048)
         pygame.mixer.init()
-        pygame.mixer.music.load('sound/theme.ogg')
+        pygame.mixer.music.load('sound/thema1.mp3')
         pygame.mixer.music.play(10)
+
+    def wins(self):
+        if not len([obj for obj in self.sprites.list_of_sprites if obj.tp == 'enemy' and not obj.dead]):
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load('sound/win.mp3')
+            pygame.mixer.music.play()
+            while True:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        exit()
+                self.malen.win()
 
 

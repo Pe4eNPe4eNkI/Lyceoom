@@ -18,7 +18,7 @@ pygame.mouse.set_visible(False)
 timer = pygame.time.Clock()
 sprites = Sprites()
 gamer = Gamer(sprites)
-malen = Malen(monitor, mon_map, gamer)
+malen = Malen(monitor, mon_map, gamer, timer)
 interaction = Interaction(gamer, sprites, malen)
 
 interaction.play_music()
@@ -30,11 +30,13 @@ while True:
     malen.world(walls + [obj.object_locate(gamer, walls) for obj in sprites.list_of_sprites])
     malen.fps(timer)
     malen.mini_map()
+    malen.menu()
     malen.player_weapon_shotgun([wall_shot, sprites.sprite_shot])
 
     interaction.interaction_objects()
     interaction.npc_action()
     interaction.clear()
+    interaction.wins()
 
     pygame.display.flip()
     timer.tick(FPS)
