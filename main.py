@@ -41,6 +41,6 @@ while True:
     interaction.npc_action()
     interaction.clear()
     interaction.wins()
-
+    sprites.delete_dead_mobs()
     pygame.display.flip()
     timer.tick(FPS)

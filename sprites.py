@@ -76,6 +76,24 @@ class Sprites:
                     blocked_doors[(i, j)] = 0
         return blocked_doors
 
+    def delete_dead_mobs(self):
+        deleted_lst = self.list_of_sprites[:]
+        for obj in deleted_lst: 
+            if obj.tp == 'enemy' and obj.dead:
+                if pygame.time.get_ticks() - obj.time >= 3000:
+                    self.list_of_sprites.remove(obj)
+        deleted_lst = self.list_of_sprites_2[:]
+        for obj in deleted_lst: 
+            if obj.tp == 'enemy' and obj.dead:
+                if pygame.time.get_ticks() - obj.time >= 3000:
+                    self.list_of_sprites_2.remove(obj)
+        deleted_lst = self.list_of_sprites_3[:]
+        for obj in deleted_lst:
+            if obj.tp == 'enemy' and obj.dead:
+                if pygame.time.get_ticks() - obj.time >= 3000:
+                    self.list_of_sprites_3.remove(obj)
+
+
 
 class AllSprites:
     def __init__(self, kind, pos):
@@ -86,7 +104,7 @@ class AllSprites:
         self.animation = kind.animation.copy()
         self.animation_dist = kind.animation_dist
         self.animation_speed = kind.animation_speed
-
+        self.time = None
         self.dead_anim = kind.dead_anim.copy()
         self.dead = kind.dead
         self.dead_shift = kind.dead_shift

@@ -59,6 +59,7 @@ class Interaction:
                             obj.dead = True
                             obj.blocked = None
                             obj.status = False
+                            obj.time = pygame.time.get_ticks()
                             self.malen.shotgun_animation_trigger = False  # простел всех если добавить _shot_
                     if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:
                         key = 0
