@@ -112,15 +112,58 @@ class Malen:
             self.sfx.rotate(-1)
 
     def win(self):
+        x = 0
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
             Malen.terminate()
 
         rend = self.font_win.render("You're not dead, congratulations!", 1, (randrange(100, 255), 100, 220))
-        rect = pygame.Rect(0, 0, 650, 200)
+        rect = pygame.Rect(0, 0, 630, 250)
         rect.center = H_WIDTH, H_HEIGHT
+
         pygame.draw.rect(self.monitor, BLACK, rect, border_radius=50)
-        self.monitor.blit(rend, (rect.centerx - 290, rect.centery - 20))
+        self.monitor.blit(rend, (rect.centerx - 290, rect.centery - 80))
+        button_font = pygame.font.Font('data/font/font2.ttf', 35)
+
+        #restart = button_font.render('RESTART', 0, pygame.Color('gray'))
+        #button_restart = pygame.Rect(0, 0, 400, 100)
+        #button_restart.center = H_WIDTH, H_HEIGHT + 5
+        reexit = button_font.render('EXIT', 1, pygame.Color('gray'))
+        button_reexit = pygame.Rect(0, 0, 300, 100)
+        button_reexit.center = H_WIDTH, H_HEIGHT + 55
+        #pygame.draw.rect(self.monitor, BLUE, button_restart, border_radius=25, width=10)
+        #self.monitor.blit(restart, (button_restart.centerx - 155, button_restart.centery - 25))
+        pygame.draw.rect(self.monitor, BLUE, button_reexit, border_radius=25, width=10)
+        self.monitor.blit(reexit, (button_reexit.centerx - 75, button_reexit.centery - 15))
+
+        mouse_pos = pygame.mouse.get_pos()
+        mouse_click = pygame.mouse.get_pressed()
+
+        #if button_restart.collidepoint(mouse_pos):
+        #    pygame.draw.rect(self.monitor, BLUE, button_restart, border_radius=25)
+        #    self.monitor.blit(restart, (button_restart.centerx - 155, button_restart.centery - 25))
+        #    if mouse_click[0]:
+        #        self.menu_tr = False
+        if button_reexit.collidepoint(mouse_pos):
+            pygame.draw.rect(self.monitor, BLUE, button_reexit, border_radius=25)
+            self.monitor.blit(reexit, (button_reexit.centerx - 75, button_reexit.centery - 15))
+            if mouse_click[0]:
+                Malen.terminate()
+
+        while self.menu_tr:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    Malen.terminate()
+
+            self.monitor.blit(self.menu_picture, (0, 0))
+            x += 1
+
+
+
+
+
+
+
         pygame.display.flip()
         self.timer.tick(15)
 
@@ -140,8 +183,7 @@ class Malen:
         while self.menu_tr:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
+                    Malen.terminate()
 
             self.monitor.blit(self.menu_picture, (0, 0))
             x += 1
