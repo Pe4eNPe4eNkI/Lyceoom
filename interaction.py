@@ -54,8 +54,8 @@ class Interaction:
                 if obj.is_on_fire[1]:
                     if obj.dead != 'never' and not obj.dead:
                         if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
-                            if obj.tp == 'enemy':
-                                self.pain_sound.play()
+                            #if obj.tp == 'enemy':
+                            #    self.pain_sound.play()
                             obj.dead = True
                             obj.blocked = None
                             obj.status = False
@@ -127,6 +127,6 @@ class Interaction:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         exit()
-                self.malen.win()
+                Malen.win()
 
 
