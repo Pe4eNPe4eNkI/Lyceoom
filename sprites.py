@@ -264,7 +264,7 @@ class Fire:
         self.dead_anim = deque([pygame.image.load(f'data/sprites/fire/' + \
                                                   f'death/{i}.png').convert_alpha()
                                 for i in range(6)])
-        self.tp = 'object'
+        self.tp = 'fire'
         self.blocked = True
         self.obj_action = []
 
@@ -287,7 +287,7 @@ class Barrel:
         self.dead_anim = deque([pygame.image.load(f'data/sprites/barrel/' + \
                                                   f'death/{i}.png').convert_alpha()
                                 for i in range(4)])
-        self.tp = 'object'
+        self.tp = 'barrel'
         self.blocked = True
         self.obj_action = []
 
