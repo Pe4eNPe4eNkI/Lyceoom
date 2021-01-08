@@ -126,49 +126,49 @@ class Malen:
         self.monitor.blit(self.monitor_map, MAP_POS)
         self.camera.update()
 
-    def player_weapon_shotgun(self, shots):
-        if self.gamer.shot:
-            if not self.shotgun_length_count:
-                self.shotgun_sound.play()
-            self.shot_projection = int(min(shots)[1] // 2)
-            self.bullet_sfx()
-            shotgun_sprite = self.shotgun_animation[0]
-            self.monitor.blit(shotgun_sprite, self.shotgun_pos)
-            self.shotgun_animation_count += 1
-            if self.shotgun_animation_count == self.shotgun_animation_speed:
-                self.shotgun_animation.rotate(-1)
-                self.shotgun_animation_count = 0
-                self.shotgun_length_count += 1
-                self.shotgun_animation_trigger = False
-            if self.shotgun_length_count == self.shotgun_length:
-                self.gamer.shot = False
-                self.shotgun_length_count = 0
-                self.sfx_length_count = 0
-                self.shotgun_animation_trigger = True
-        else:
-            self.monitor.blit(self.shotgun_base_sprite, self.shotgun_pos)
-
-    def player_weapon_autorifle(self, shots):
-        if self.gamer.shot:
-            if not self.autorifle_length_count:
-                self.autorifle_sound.play()
-            self.shot_projection = int(min(shots)[1] // 2)
-            self.bullet_sfx()
-            autorifle_sprite = self.autorifle_animation[0]
-            self.monitor.blit(autorifle_sprite, self.autorifle_pos)
-            self.autorifle_animation_count += 1
-            if self.autorifle_animation_count == self.autorifle_animation_speed:
-                self.autorifle_animation.rotate(-1)
-                self.autorifle_animation_count = 0
-                self.autorifle_length_count += 1
-                self.autorifle_animation_trigger = False
-            if self.autorifle_length_count == self.autorifle_length:
-                self.gamer.shot = False
-                self.autorifle_length_count = 0
-                self.sfx_length_count = 0
-                self.shotgun_animation_trigger = True
-        else:
-            self.monitor.blit(self.autorifle_base_sprite, self.autorifle_pos)
+    def choice_weapon(self, shots, flag):
+        if flag == 'shotgun' or flag == '':
+            if self.gamer.shot:
+                if not self.shotgun_length_count:
+                    self.shotgun_sound.play()
+                self.shot_projection = int(min(shots)[1] // 2)
+                self.bullet_sfx()
+                shotgun_sprite = self.shotgun_animation[0]
+                self.monitor.blit(shotgun_sprite, self.shotgun_pos)
+                self.shotgun_animation_count += 1
+                if self.shotgun_animation_count == self.shotgun_animation_speed:
+                    self.shotgun_animation.rotate(-1)
+                    self.shotgun_animation_count = 0
+                    self.shotgun_length_count += 1
+                    self.shotgun_animation_trigger = False
+                if self.shotgun_length_count == self.shotgun_length:
+                    self.gamer.shot = False
+                    self.shotgun_length_count = 0
+                    self.sfx_length_count = 0
+                    self.shotgun_animation_trigger = True
+            else:
+                self.monitor.blit(self.shotgun_base_sprite, self.shotgun_pos)
+        elif flag == 'autorifle':
+            if self.gamer.shot:
+                if not self.autorifle_length_count:
+                    self.autorifle_sound.play()
+                self.shot_projection = int(min(shots)[1] // 2)
+                self.bullet_sfx()
+                autorifle_sprite = self.autorifle_animation[0]
+                self.monitor.blit(autorifle_sprite, self.autorifle_pos)
+                self.autorifle_animation_count += 1
+                if self.autorifle_animation_count == self.autorifle_animation_speed:
+                    self.autorifle_animation.rotate(-1)
+                    self.autorifle_animation_count = 0
+                    self.autorifle_length_count += 1
+                    self.autorifle_animation_trigger = False
+                if self.autorifle_length_count == self.autorifle_length:
+                    self.gamer.shot = False
+                    self.autorifle_length_count = 0
+                    self.sfx_length_count = 0
+                    self.shotgun_animation_trigger = True
+            else:
+                self.monitor.blit(self.autorifle_base_sprite, self.autorifle_pos)
 
     def bullet_sfx(self):
         if self.sfx_length_count < self.sfx_length:

@@ -4,6 +4,7 @@ import math
 from parameters import *
 from sprites import *
 from map import collision_walls
+from malen import *
 
 
 def terminate():
@@ -17,6 +18,7 @@ class Gamer:
         self.angle = gamer_angle
         self.sensitivity = 0.002
         self.sprites = sprites
+        self.flag = ''
         self.hp = 100
         # Параметры игрока для того, чтобы не ходить сквозь стены
         self.side = 50
@@ -94,6 +96,10 @@ class Gamer:
             self.angle -= 0.02
         if keys[pygame.K_RIGHT]:
             self.angle += 0.02
+        if keys[pygame.K_1]:
+            self.flag = 'shotgun'
+        if keys[pygame.K_2]:
+            self.flag = 'autorifle'
         for event in pygame.event.get():
             if pygame.event == pygame.QUIT:
                 terminate()
@@ -107,6 +113,9 @@ class Gamer:
         self.rect.center = self.x, self.y
         self.minirect.center = self.x // MAP_SCALE, self.y // MAP_SCALE
         self.angle %= ZWEI_PI
+
+    def return_flag(self):
+        return self.flag
 
     def mouse_verific(self):
         if pygame.mouse.get_focused():

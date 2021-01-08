@@ -28,6 +28,7 @@ while True:
     pygame.mouse.set_visible(False)
     gamer.movement()
     malen.bg(gamer.angle)
+    flag = gamer.return_flag()
     walls, wall_shot = walls_with_ray_cast(gamer, malen.texture)
     malen.world(walls + [obj.object_locate(gamer, walls) for obj in sprites.list_of_sprites] + \
                         [obj.object_locate(gamer, walls) for obj in sprites.list_of_sprites_2] + \
@@ -36,7 +37,7 @@ while True:
     malen.hp(gamer.hp)
     malen.mini_map()
     malen.menu()
-    malen.player_weapon_autorifle([wall_shot, sprites.sprite_shot])
+    malen.choice_weapon([wall_shot, sprites.sprite_shot], flag)
 
     interaction.interaction_objects()
     interaction.npc_action()
