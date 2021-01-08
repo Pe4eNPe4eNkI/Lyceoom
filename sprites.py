@@ -41,9 +41,11 @@ class Sprites:
                                 AllSprites(Sosademon(), (8.54, 14.45))]
         self.list_of_sprites_2 = [AllSprites(Human1(), (36.61, 5.37)),
                                   AllSprites(Pinky(), (25.76, 4.74)),
+                                  AllSprites(MedKit(), (32.02, 7.1)),
                                   AllSprites(Sosademon(), (25.74, 6.25))]
         self.list_of_sprites_3 = [AllSprites(Human2(), (47.41, 1.37)),
                                   AllSprites(Pinky(), (58.8, 2.45)),
+                                  AllSprites(MedKit(), (56.8, 13.6)),
                                   AllSprites(Sosademon(), (49.24, 8.96))]
 
     @property

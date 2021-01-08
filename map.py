@@ -107,6 +107,14 @@ for j, row in enumerate(new_maps):
                 txt_map[(i * CELL, j * CELL)] = 3
             elif char == 4:
                 txt_map[(i * CELL, j * CELL)] = 4
+            elif char == 5:
+                txt_map[(i * CELL, j * CELL)] = 5
+            elif char == 6:
+                txt_map[(i * CELL, j * CELL)] = 6
+            elif char == 7:
+                txt_map[(i * CELL, j * CELL)] = 7
+            elif char == 8:
+                txt_map[(i * CELL, j * CELL)] = 8
 
 
 class Camera:
