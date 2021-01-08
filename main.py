@@ -33,6 +33,7 @@ while True:
                 + [obj.object_locate(gamer, walls)
                    for obj in sprites.list_of_sprites_3])
     malen.fps(timer)
+    malen.hp(gamer.hp)
     malen.mini_map()
     malen.menu()
     malen.player_weapon_shotgun([wall_shot, sprites.sprite_shot])

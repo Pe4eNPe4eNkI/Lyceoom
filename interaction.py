@@ -1,9 +1,10 @@
-from parameters import *
+import random
 from map import txt_map
 from r_c import mapping
 import math
 import pygame
 from numba import njit
+from parameters import *
 
 
 @njit(fastmath=True, cache=True)
@@ -54,8 +55,8 @@ class Interaction:
                 if obj.is_on_fire[1]:
                     if obj.dead != 'never' and not obj.dead:
                         if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
-                            #if obj.tp == 'enemy':
-                            #    self.pain_sound.play()
+                            if obj.tp == 'enemy' or obj.tp == 'enemy_shooter':
+                                self.pain_sound.play()
                             obj.dead = True
                             obj.blocked = None
                             obj.status = False
@@ -89,10 +90,14 @@ class Interaction:
 
     def npc_action(self):
         for obj in self.sprites.list_of_sprites + self.sprites.list_of_sprites_2 + self.sprites.list_of_sprites_3:
-            if obj.tp == 'enemy' and not obj.dead:
+            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and not obj.dead:
                 if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
                     obj.is_trigger = True
                     self.npc_move(obj)
+                    if obj.tp == 'enemy_shooter':
+                        hit = random.randrange(0, 2)
+                        if hit != 0:
+                            self.gamer.hp -= 5
                 else:
                     obj.is_trigger = False
 
@@ -119,7 +124,8 @@ class Interaction:
         pygame.mixer.music.play(10)
 
     def wins(self):
-        if not len([obj for obj in self.sprites.list_of_sprites_3 if obj.tp == 'enemy' and not obj.dead]):
+        if not len([obj for obj in self.sprites.list_of_sprites_3 if (obj.tp == 'enemy'
+                                                                      or obj.tp == 'enemy_shooter') and not obj.dead]):
             pygame.mixer.music.stop()
             pygame.mixer.music.load('sound/win.mp3')
             pygame.mixer.music.play()

@@ -17,6 +17,7 @@ class Gamer:
         self.angle = gamer_angle
         self.sensitivity = 0.002
         self.sprites = sprites
+        self.hp = 100
         # Параметры игрока для того, чтобы не ходить сквозь стены
         self.side = 50
         self.rect = pygame.Rect(*gamer_pos, self.side, self.side)

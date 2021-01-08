@@ -62,6 +62,11 @@ class Malen:
         render = self.font.render(fps_clock, 0, RED)
         self.monitor.blit(render, FPS_POS)
 
+    def hp(self, hp):
+        hp = str(int(hp))
+        render = self.font.render(hp, 0, RED)
+        self.monitor.blit(render, HP_POS)
+
     def terminate(self):
         pygame.quit()
         sys.exit()
@@ -166,10 +171,10 @@ class Malen:
         pygame.mixer.music.play()
         button_font = pygame.font.Font('data/font/font2.ttf', 40)
         label_font = pygame.font.Font('data/font/font1.ttf', 280)
-        start = button_font.render('START', 0, pygame.Color(50,50,50))
+        start = button_font.render('START', 0, pygame.Color('gray'))
         button_start = pygame.Rect(0, 0, 300, 100)
         button_start.center = 170, H_HEIGHT - 50
-        exit = button_font.render('EXIT', 1, pygame.Color(50,50,50))
+        exit = button_font.render('EXIT', 1, pygame.Color('gray'))
         button_exit = pygame.Rect(0, 0, 300, 100)
         button_exit.center = 170, H_HEIGHT + 100
 
@@ -187,7 +192,7 @@ class Malen:
             pygame.draw.rect(self.monitor, BLACK, button_exit, border_radius=25, width=10)
             self.monitor.blit(exit, (button_exit.centerx - 90, button_exit.centery - 25))
 
-            color = randrange(60)
+            color = randrange(40)
             label = label_font.render('Lyceoom', 1, (color, color, color))
             self.monitor.blit(label, (30, 45))
 

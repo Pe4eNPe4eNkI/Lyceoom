@@ -1,3 +1,5 @@
+import random
+
 from parameters import *
 import pygame
 import os
@@ -61,17 +63,17 @@ class Sprites:
     def delete_dead_mobs(self):
         deleted_lst = self.list_of_sprites[:]
         for obj in deleted_lst: 
-            if obj.tp == 'enemy' and obj.dead:
+            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and obj.dead:
                 if pygame.time.get_ticks() - obj.time >= 3000:
                     self.list_of_sprites.remove(obj)
         deleted_lst = self.list_of_sprites_2[:]
         for obj in deleted_lst: 
-            if obj.tp == 'enemy' and obj.dead:
+            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and obj.dead:
                 if pygame.time.get_ticks() - obj.time >= 3000:
                     self.list_of_sprites_2.remove(obj)
         deleted_lst = self.list_of_sprites_3[:]
         for obj in deleted_lst:
-            if obj.tp == 'enemy' and obj.dead:
+            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and obj.dead:
                 if pygame.time.get_ticks() - obj.time >= 3000:
                     self.list_of_sprites_3.remove(obj)
 
@@ -99,7 +101,8 @@ class AllSprites:
         self.side = kind.side
         self.is_trigger = False
         self.d_open_trigger = False
-        self.d_last_pos = self.y if self.tp == 'h_door' or self.tp == 'h_nextdoor_first' or self.tp == 'h_nextdoor_second' else self.x
+        self.d_last_pos = self.y if self.tp == 'h_door' \
+                                    or self.tp == 'h_nextdoor_first' or self.tp == 'h_nextdoor_second' else self.x
         self.cls = False
         self.obj_action = kind.obj_action.copy()
 
@@ -375,7 +378,7 @@ class Human1:
         self.dead_anim = deque([pygame.image.load(f'data/sprites/human1/' + \
                                                   f'death/{i}.png').convert_alpha()
                                 for i in range(5)])
-        self.tp = 'enemy'
+        self.tp = 'enemy_shooter'
         self.blocked = True
         self.obj_action = []
 
