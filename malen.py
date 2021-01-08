@@ -120,7 +120,7 @@ class Malen:
         x = 0
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
-            Malen.terminate()
+            self.terminate()
 
         rend = self.font_win.render("You're not dead, congratulations!", 1, (randrange(100, 255), 100, 220))
         rect = pygame.Rect(0, 0, 630, 250)
@@ -153,13 +153,13 @@ class Malen:
             pygame.draw.rect(self.monitor, BLUE, button_reexit, border_radius=25)
             self.monitor.blit(reexit, (button_reexit.centerx - 75, button_reexit.centery - 15))
             if mouse_click[0]:
-                Malen.terminate()
+                self.terminate()
 
         while self.menu_tr:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    Malen.terminate()
-
+                    self.terminate()
+            pygame.mouse.set_visible(True)
             self.monitor.blit(self.menu_picture, (0, 0))
             x += 1
         pygame.display.flip()
@@ -181,8 +181,8 @@ class Malen:
         while self.menu_tr:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    Malen.terminate()
-
+                    self.terminate()
+            pygame.mouse.set_visible(True)
             self.monitor.blit(self.menu_picture, (0, 0))
             x += 1
 
