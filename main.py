@@ -43,6 +43,8 @@ while True:
     interaction.npc_action()
     interaction.clear()
     interaction.wins()
+    gamer.is_dead()
+    malen.dead_menu()
     sprites.delete_dead_mobs()
     pygame.display.flip()
     timer.tick(FPS)

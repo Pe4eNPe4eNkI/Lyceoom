@@ -155,13 +155,15 @@ class Interaction:
         pygame.mixer.music.play(10)
 
     def wins(self):
-        if not len([obj for obj in self.sprites.list_of_sprites_3 if (obj.tp == 'enemy'
-                                                                      or obj.tp == 'enemy_shooter') and not obj.dead]):
-            pygame.mixer.music.stop()
-            pygame.mixer.music.load('sound/win.mp3')
-            pygame.mixer.music.play()
-            while True:
-                for event in pygame.event.get():
-                    if event.type == pygame.QUIT:
-                        exit()
-                self.malen.win()
+        if self.gamer.alive:
+            if not len([obj for obj in self.sprites.list_of_sprites_3 if (obj.tp == 'enemy'
+                                                                        or obj.tp == 'enemy_shooter') and not obj.dead]):
+                pygame.mixer.music.stop()
+                pygame.mixer.music.load('sound/win.mp3')
+                pygame.mixer.music.play()
+                while True:
+                    for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                            pygame.quit()
+                            sys.exit()
+                    self.malen.win()

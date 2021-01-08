@@ -211,3 +211,6 @@ class Malen:
 
             pygame.display.flip()
             self.timer.tick(20)
+
+    def dead_menu(self):
+        pass
