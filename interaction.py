@@ -71,8 +71,8 @@ class Interaction:
                                     if obj_2.tp != 'fire':
                                         difference_x = obj.x - obj_2.x
                                         difference_y = obj.y - obj_2.y
-                                        if math.fabs(difference_x) <= CELL \
-                                                or math.fabs(difference_y) <= CELL:
+                                        if math.fabs(difference_x) <= CELL // 2\
+                                                or math.fabs(difference_y) <= CELL // 2:
                                             obj_2.dead = True
                                             obj_2.blocked = None
                                             obj_2.status = False
