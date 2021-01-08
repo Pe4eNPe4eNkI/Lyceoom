@@ -97,7 +97,7 @@ class Interaction:
                     if obj.tp == 'enemy_shooter':
                         hit = random.randrange(0, 2)
                         if hit != 0:
-                            self.gamer.hp -= 5
+                            self.gamer.hp -= 0.15
                 else:
                     obj.is_trigger = False
 
