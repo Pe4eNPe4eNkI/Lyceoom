@@ -21,12 +21,16 @@ class Malen:
                         3: pygame.image.load('data/img/lvl1/wall9.png').convert(),
                         4: pygame.image.load('data/img/lvl1/wall10.png').convert(),
                         'S': pygame.image.load('data/img/lvl1/sk1.jpeg').convert(),
-                        'F': pygame.image.load('data/text/down/down.png').convert()
+                        'F': pygame.image.load('data/text/down/down.png').convert(),
+                        5: pygame.image.load('data/img/lvl2/wall8.png').convert(),
+                        6: pygame.image.load('data/img/lvl2/wall13.png').convert(),
+                        7: pygame.image.load('data/img/lvl2/wall9.png').convert(),
+                        8: pygame.image.load('data/img/lvl2/wall11.png').convert()
                         }
         self.menu_tr = True
         self.menu_picture = pygame.image.load('data/text/bg/bg2.jpg').convert()
         self.dead_picture = pygame.image.load('data/text/bg/bg_dead.jpg').convert()
-        # Пушки
+        # shot_gun
         self.shotgun_base_sprite = pygame.image.load('data/sprites/weapons/shot-gun/' + \
                                                      'base/1.png').convert_alpha()
         self.shotgun_animation = deque([pygame.image.load(f'data/sprites/weapons/shot-gun/' + \
@@ -40,7 +44,23 @@ class Malen:
         self.shotgun_animation_speed = 5
         self.shotgun_animation_count = 0
         self.shotgun_animation_trigger = True
-        self.shotgun_sound = pygame.mixer.Sound('sound/boom3.ogg')
+        self.shotgun_sound = pygame.mixer.Sound('sound/boom3.wav')
+
+        # autorifle
+        self.autorifle_base_sprite = pygame.image.load('data/sprites/weapons/autorifle/0.png').convert_alpha()
+        self.autorifle_animation = deque([pygame.image.load(f'data/sprites/weapons/autorifle/' + \
+                                                          f'{i}.png').convert_alpha()
+                                        for i in range(4)])
+        self.autorifle_rect = self.autorifle_base_sprite.get_rect()
+        self.autorifle_pos = (H_WIDTH - self.autorifle_rect.width // 2,
+                            HEIGHT - self.autorifle_rect.height)
+        self.autorifle_length = len(self.autorifle_animation)
+        self.autorifle_length_count = 0
+        self.autorifle_animation_speed = 2
+        self.autorifle_animation_count = 0
+        self.autorifle_animation_trigger = True
+        self.autorifle_sound = pygame.mixer.Sound('sound/shotrifle.wav')
+
         # sfx
         self.sfx = deque([pygame.image.load(f'data/sprites/'
                                             f'shoot_sfx/action/{i}.png').convert_alpha()
@@ -125,6 +145,28 @@ class Malen:
         else:
             self.monitor.blit(self.shotgun_base_sprite, self.shotgun_pos)
 
+    def player_weapon_autorifle(self, shots):
+        if self.gamer.shot:
+            if not self.autorifle_length_count:
+                self.autorifle_sound.play()
+            self.shot_projection = int(min(shots)[1] // 2)
+            self.bullet_sfx()
+            autorifle_sprite = self.autorifle_animation[0]
+            self.monitor.blit(autorifle_sprite, self.autorifle_pos)
+            self.autorifle_animation_count += 1
+            if self.autorifle_animation_count == self.autorifle_animation_speed:
+                self.autorifle_animation.rotate(-1)
+                self.autorifle_animation_count = 0
+                self.autorifle_length_count += 1
+                self.autorifle_animation_trigger = False
+            if self.autorifle_length_count == self.autorifle_length:
+                self.gamer.shot = False
+                self.autorifle_length_count = 0
+                self.sfx_length_count = 0
+                self.shotgun_animation_trigger = True
+        else:
+            self.monitor.blit(self.autorifle_base_sprite, self.autorifle_pos)
+
     def bullet_sfx(self):
         if self.sfx_length_count < self.sfx_length:
             sfx = pygame.transform.scale(self.sfx[0], (self.shot_projection, self.shot_projection))
@@ -178,8 +220,8 @@ class Malen:
 
     def menu(self):
         x = 0
-        pygame.mixer.music.load('sound/win.mp3')
-        pygame.mixer.music.play()
+        #pygame.mixer.music.load('sound/win.mp3')
+        #pygame.mixer.music.play()
 
         button_font = pygame.font.Font('data/font/font2.ttf', 40)
         label_font = pygame.font.Font('data/font/font1.ttf', 280)
