@@ -108,7 +108,15 @@ class Interaction:
 
     def npc_action(self):
         for obj in self.sprites.list_of_sprites + self.sprites.list_of_sprites_2 + self.sprites.list_of_sprites_3:
-            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'fire') and not obj.dead:
+            if obj.tp == 'fire':
+                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
+                    obj.is_trigger = True
+                    if obj.tp == 'fire':
+                        if obj.dist_to_sprite <= CELL * 3:
+                            hit = random.randrange(0, 2)
+                            if hit != 0:
+                                self.gamer.hp -= 0.15
+            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and not obj.dead:
                 if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
                     obj.is_trigger = True
                     self.npc_move(obj)
@@ -117,11 +125,6 @@ class Interaction:
                         hit = random.randrange(0, 2)
                         if hit != 0:
                             self.gamer.hp -= 0.15
-                    if obj.tp == 'fire':
-                        if obj.dist_to_sprite <= CELL * 3:
-                            hit = random.randrange(0, 2)
-                            if hit != 0:
-                                self.gamer.hp -= 0.15
                     if obj.tp == 'enemy':
                         if obj.dist_to_sprite <= CELL:
                             hit = random.randrange(0, 2)
