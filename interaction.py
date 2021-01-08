@@ -47,7 +47,7 @@ class Interaction:
         self.sprites = sprites
         self.malen = malen
         self.pain_sound = pygame.mixer.Sound('sound/pain2.wav')
-        self.heal_sound = pygame.mixer.Sound('sound/hill.wav')
+        self.heal_sound = pygame.mixer.Sound('sound/met.wav')
 
     def terminate(self):
         pygame.quit()
@@ -178,7 +178,7 @@ class Interaction:
         pygame.mixer.pre_init(44100, -16, 2, 2048)
         pygame.mixer.init()
         pygame.mixer.music.load('sound/thema1.wav')
-        pygame.mixer.music.set_volume(0.01)
+        pygame.mixer.music.set_volume(0.03)
         pygame.mixer.music.play(10)
 
     def wins(self):
