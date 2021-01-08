@@ -488,7 +488,7 @@ class MedKit:
     def __init__(self):
         self.way = [pygame.image.load('data/sprites/MedKit/base/0.png').convert_alpha()]
         self.viewing_angles = False
-        self.shift = 2
+        self.shift = 0.2
         self.scale = (0.1, 0.1)
         self.side = 30
         self.animation = []
