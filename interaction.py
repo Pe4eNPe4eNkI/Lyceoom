@@ -63,12 +63,12 @@ class Interaction:
                                     if hit != 0:
                                         self.gamer.hp -= 50
                                 all_1 = self.sprites.list_of_sprites \
-                                      + self.sprites.list_of_sprites_2 \
-                                      + self.sprites.list_of_sprites_3
+                                        + self.sprites.list_of_sprites_2 \
+                                        + self.sprites.list_of_sprites_3
                                 for obj_2 in all_1:
                                     difference_x = obj.x - obj_2.x
                                     difference_y = obj.y - obj_2.y
-                                    if math.fabs(difference_x) <= CELL * 3 or math.fabs(difference_y) <= CELL * 3:
+                                    if math.fabs(difference_x) <= CELL // 2 or math.fabs(difference_y) <= CELL // 2:
                                         obj_2.dead = True
                                         obj_2.blocked = None
                                         obj_2.status = False
