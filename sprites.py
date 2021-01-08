@@ -37,6 +37,7 @@ class Sprites:
                                 AllSprites(DoorV(), (1.5, 8.55)),
                                 AllSprites(Human1(), (7.1, 2.1)),
                                 AllSprites(Pinky(), (7.31, 5.88)),
+                                AllSprites(Fire(), (8.31, 7.88)),
                                 AllSprites(Sosademon(), (8.54, 14.45))]
         self.list_of_sprites_2 = [AllSprites(Human1(), (36.61, 5.37)),
                                   AllSprites(Pinky(), (25.76, 4.74)),
@@ -256,16 +257,14 @@ class Fire:
         self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/fire/' + \
                                                   f'action/{i}.png').convert_alpha()
-                                for i in range(1, 16)])
+                                for i in range(16)])
         self.animation_dist = 1800
         self.animation_speed = 10
         self.dead = 'never'
         self.dead_shift = 1.8
-        self.dead_anim = deque([pygame.image.load(f'data/sprites/fire/' + \
-                                                  f'death/{i}.png').convert_alpha()
-                                for i in range(6)])
+        self.dead_anim = []
         self.tp = 'fire'
-        self.blocked = True
+        self.blocked = False
         self.obj_action = []
 
 
