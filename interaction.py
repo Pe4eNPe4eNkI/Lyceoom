@@ -101,7 +101,7 @@ class Interaction:
                     elif obj.tp == 'enemy' and obj.dist_to_sprite <= CELL:
                         hit = random.randrange(0, 2)
                         if hit != 0:
-                            self.gamer.hp -= 0.15
+                            self.gamer.hp -= 0.3
                 else:
                     obj.is_trigger = False
 
