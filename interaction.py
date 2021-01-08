@@ -112,7 +112,7 @@ class Interaction:
                 if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
                     obj.is_trigger = True
                     if obj.tp == 'fire':
-                        if obj.dist_to_sprite <= CELL * 3:
+                        if obj.dist_to_sprite <= CELL:
                             hit = random.randrange(0, 2)
                             if hit != 0:
                                 self.gamer.hp -= 0.15

@@ -12,7 +12,7 @@ P_HEIGHT = 5 * HEIGHT
 CELL = 100
 FPS = 90
 FPS_POS = (WIDTH - 65, 5)
-HP_POS = (WIDTH - 65, 650)
+HP_POS = (WIDTH - 100, 650)
 
 # настройки игрока
 gamer_pos = (124, 753)
