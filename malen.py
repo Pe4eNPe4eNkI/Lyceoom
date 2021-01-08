@@ -234,6 +234,9 @@ class Malen:
         mouse_click = pygame.mouse.get_pressed()
 
         if button_reexit.collidepoint(mouse_pos):
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load('sound/hit.mp3')
+            pygame.mixer.music.play()
             pygame.draw.rect(self.monitor, RED, button_reexit, border_radius=25)
             self.monitor.blit(reexit, (button_reexit.centerx - 75, button_reexit.centery - 15))
             if mouse_click[0]:
