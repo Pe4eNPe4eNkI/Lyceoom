@@ -1,3 +1,4 @@
+# Основной файл
 import sys
 from gamer import Gamer
 from sprites import *
