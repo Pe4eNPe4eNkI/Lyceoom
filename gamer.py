@@ -2,8 +2,8 @@ import pygame
 import sys
 import math
 from parameters import *
-from map import collision_walls
 from sprites import *
+from map import collision_walls
 
 
 def terminate():
@@ -35,9 +35,12 @@ class Gamer:
     @property
     def collision_list(self):
         return collision_walls \
-               + [pygame.Rect(*obj.pos, obj.side, obj.side) for obj in self.sprites.list_of_sprites if obj.blocked] \
-               + [pygame.Rect(*obj.pos, obj.side, obj.side) for obj in self.sprites.list_of_sprites_2 if obj.blocked] \
-               + [pygame.Rect(*obj.pos, obj.side, obj.side) for obj in self.sprites.list_of_sprites_3 if obj.blocked]
+               + [pygame.Rect(*obj.pos, obj.side, obj.side) 
+                  for obj in self.sprites.list_of_sprites if obj.blocked] \
+               + [pygame.Rect(*obj.pos, obj.side, obj.side) 
+                  for obj in self.sprites.list_of_sprites_2 if obj.blocked] \
+               + [pygame.Rect(*obj.pos, obj.side, obj.side) 
+                  for obj in self.sprites.list_of_sprites_3 if obj.blocked]
 
     def detect_collision(self, dx, dy):
         next_rect = self.rect.copy()

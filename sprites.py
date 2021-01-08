@@ -1,9 +1,8 @@
 import random
-
-from parameters import *
-import pygame
 import os
 import math
+import pygame
+from parameters import *
 from collections import deque
 from r_c import mapping
 from numba.core import types
@@ -56,7 +55,8 @@ class Sprites:
     def b_doors(self):
         blocked_doors = Dict.empty(key_type=types.UniTuple(int32, 2), value_type=int32)
         for obj in self.list_of_sprites:
-            if obj.tp == 'h_door' or obj.tp == 'h_nextdoor_first' or obj.tp == 'h_nextdoor_second' and obj.blocked:
+            if obj.tp == 'h_door' or obj.tp == 'h_nextdoor_first' or \
+                obj.tp == 'h_nextdoor_second' and obj.blocked:
                     i, j = mapping(obj.x, obj.y)
                     blocked_doors[(i, j)] = 0
         return blocked_doors
@@ -103,7 +103,8 @@ class AllSprites:
         self.is_trigger = False
         self.d_open_trigger = False
         self.d_last_pos = self.y if self.tp == 'h_door' \
-                                    or self.tp == 'h_nextdoor_first' or self.tp == 'h_nextdoor_second' else self.x
+                                    or self.tp == 'h_nextdoor_first' or \
+                                        self.tp == 'h_nextdoor_second' else self.x
         self.cls = False
         self.obj_action = kind.obj_action.copy()
 
@@ -115,7 +116,6 @@ class AllSprites:
                 self.sprite_angles = [frozenset(range(348, 361)) | frozenset(range(0, 11))] + \
                                      [frozenset(range(i, i + 23)) for i in range(11, 348, 23)]
             self.sprite_positions = {angle: pos for angle, pos in zip(self.sprite_angles, self.obj)}
-            #  print(self.sprite_angles)
 
     @property
     def is_on_fire(self):
@@ -277,7 +277,8 @@ class Barrel:
         self.scale = (0.4, 0.4)
         self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/'
-                                                  f'barrel/anim/{i}.png').convert_alpha() for i in range(12)])
+                                                  f'barrel/anim/{i}.png').convert_alpha() 
+                                for i in range(12)])
         self.animation_dist = 150
         self.animation_speed = 5
         self.animation_dist = 1800

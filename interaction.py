@@ -1,9 +1,9 @@
 import random
-from map import txt_map
-from r_c import mapping
 import math
 import pygame
 import sys
+from map import txt_map
+from r_c import mapping
 from numba import njit
 from parameters import *
 
@@ -55,7 +55,8 @@ class Interaction:
                               + self.sprites.list_of_sprites_3, key=lambda obj: obj.dist_to_sprite):
                 if obj.is_on_fire[1]:
                     if obj.dead != 'never' and not obj.dead:
-                        if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
+                        if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, 
+                                                  txt_map, self.gamer.pos):
                             if obj.tp == 'enemy' or obj.tp == 'enemy_shooter':
                                 self.pain_sound.play()
                             elif obj.tp == 'barrel':
@@ -80,7 +81,7 @@ class Interaction:
                             obj.blocked = None
                             obj.status = False
                             obj.time = pygame.time.get_ticks()
-                            self.malen.shotgun_animation_trigger = False  # простел всех если добавить _shot_
+                            self.malen.shotgun_animation_trigger = False 
                     if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:
                         key = 0
                         for elem in self.sprites.list_of_sprites:
@@ -108,9 +109,11 @@ class Interaction:
                     break
 
     def npc_action(self):
-        for obj in self.sprites.list_of_sprites + self.sprites.list_of_sprites_2 + self.sprites.list_of_sprites_3:
+        for obj in (self.sprites.list_of_sprites + self.sprites.list_of_sprites_2 + \
+                    self.sprites.list_of_sprites_3):
             if obj.tp == 'fire':
-                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
+                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, 
+                                          txt_map, self.gamer.pos):
                     obj.is_trigger = True
                     if obj.tp == 'fire':
                         if abs(obj.dist_to_sprite) <= CELL:
@@ -118,7 +121,8 @@ class Interaction:
                             if hit != 0:
                                 self.gamer.hp -= 0.05
             if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and not obj.dead:
-                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
+                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, 
+                                          txt_map, self.gamer.pos):
                     obj.is_trigger = True
                     self.npc_move(obj)
                     # Атака мобов
@@ -157,8 +161,8 @@ class Interaction:
 
     def wins(self):
         if self.gamer.alive:
-            if not len([obj for obj in self.sprites.list_of_sprites_3 if (obj.tp == 'enemy'
-                                                                        or obj.tp == 'enemy_shooter') and not obj.dead]):
+            if not len([obj for obj in self.sprites.list_of_sprites_3 
+                        if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and not obj.dead]):
                 pygame.mixer.music.stop()
                 pygame.mixer.music.load('sound/win.mp3')
                 pygame.mixer.music.play()

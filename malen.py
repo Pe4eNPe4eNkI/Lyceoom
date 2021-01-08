@@ -1,10 +1,10 @@
 import pygame
-from parameters import *
 import sys
+from collections import deque
+from random import randrange
+from parameters import *
 from r_c import ray_casting
 from map import mini_map, Camera
-from random import randrange
-from collections import deque
 
 
 class Malen:
@@ -26,11 +26,14 @@ class Malen:
         self.menu_tr = True
         self.menu_picture = pygame.image.load('data/text/bg/bg2.jpg').convert()
         # Пушки
-        self.shotgun_base_sprite = pygame.image.load('data/sprites/weapons/shot-gun/base/1.png').convert_alpha()
-        self.shotgun_animation = deque([pygame.image.load(f'data/sprites/weapons/shot-gun/'
-                                                               f'shot1/{i}.png').convert_alpha() for i in range(14)])
+        self.shotgun_base_sprite = pygame.image.load('data/sprites/weapons/shot-gun/' + \
+                                                     'base/1.png').convert_alpha()
+        self.shotgun_animation = deque([pygame.image.load(f'data/sprites/weapons/shot-gun/' + \
+                                                          f'shot1/{i}.png').convert_alpha() 
+                                        for i in range(14)])
         self.shotgun_rect = self.shotgun_base_sprite.get_rect()
-        self.shotgun_pos = (H_WIDTH - self.shotgun_rect.width // 2, HEIGHT - self.shotgun_rect.height)
+        self.shotgun_pos = (H_WIDTH - self.shotgun_rect.width // 2, 
+                            HEIGHT - self.shotgun_rect.height)
         self.shotgun_length = len(self.shotgun_animation)
         self.shotgun_length_count = 0
         self.shotgun_animation_speed = 5
@@ -39,7 +42,8 @@ class Malen:
         self.shotgun_sound = pygame.mixer.Sound('sound/boom3.ogg')
         # sfx
         self.sfx = deque([pygame.image.load(f'data/sprites/'
-                                            f'shoot_sfx/action/{i}.png').convert_alpha() for i in range(9)])
+                                            f'shoot_sfx/action/{i}.png').convert_alpha() 
+                          for i in range(9)])
         self.sfx_length_count = 0
         self.sfx_length = len(self.sfx)
 
@@ -122,7 +126,8 @@ class Malen:
         if keys[pygame.K_ESCAPE]:
             self.terminate()
 
-        rend = self.font_win.render("You're not dead, congratulations!", 1, (randrange(100, 255), 100, 220))
+        rend = self.font_win.render("You're not dead, congratulations!", 1, 
+                                    (randrange(100, 255), 100, 220))
         rect = pygame.Rect(0, 0, 630, 250)
         rect.center = H_WIDTH, H_HEIGHT
 
@@ -207,10 +212,11 @@ class Malen:
                 pygame.draw.rect(self.monitor, BLACK, button_exit, border_radius=25)
                 self.monitor.blit(exit, (button_exit.centerx - 90, button_exit.centery - 25))
                 if mouse_click[0]:
-                    Malen.terminate()
+                    self.terminate()
 
             pygame.display.flip()
             self.timer.tick(20)
 
     def dead_menu(self):
-        pass
+        if not self.gamer.alive:
+            pass

@@ -28,11 +28,9 @@ while True:
     gamer.movement()
     malen.bg(gamer.angle)
     walls, wall_shot = walls_with_ray_cast(gamer, malen.texture)
-    malen.world(walls + [obj.object_locate(gamer, walls)
-                         for obj in sprites.list_of_sprites] + [obj.object_locate(gamer, walls)
-                                                                for obj in sprites.list_of_sprites_2]
-                + [obj.object_locate(gamer, walls)
-                   for obj in sprites.list_of_sprites_3])
+    malen.world(walls + [obj.object_locate(gamer, walls) for obj in sprites.list_of_sprites] + \
+                        [obj.object_locate(gamer, walls) for obj in sprites.list_of_sprites_2] + \
+                        [obj.object_locate(gamer, walls) for obj in sprites.list_of_sprites_3])
     malen.fps(timer)
     malen.hp(gamer.hp)
     malen.mini_map()
