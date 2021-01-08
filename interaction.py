@@ -47,6 +47,7 @@ class Interaction:
         self.sprites = sprites
         self.malen = malen
         self.pain_sound = pygame.mixer.Sound('sound/pain2.wav')
+        self.heal_sound = pygame.mixer.Sound('sound/hill.wav')
 
     def terminate(self):
         pygame.quit()
@@ -115,8 +116,18 @@ class Interaction:
                           + self.sprites.list_of_sprites_2
                           + self.sprites.list_of_sprites_3, key=lambda obj: obj.dist_to_sprite):
             if obj.tp == 'medkit':
-                if obj.dist_to_sprite == 0:
-                    self.gamer.hp = self.gamer.hp + 30 if self.gamer.hp + 30 >= 100 else 100
+                if abs(obj.dist_to_sprite) <= 50:
+                    if self.gamer.hp + 30 <= 100:
+                        self.gamer.hp += 30
+                    else:
+                        self.gamer.hp = 100
+                    self.heal_sound.play()
+                    if obj in self.sprites.list_of_sprites:
+                        self.sprites.list_of_sprites.remove(obj)
+                    elif obj in self.sprites.list_of_sprites_2:
+                        self.sprites.list_of_sprites_2.remove(obj)
+                    elif obj in self.sprites.list_of_sprites_3:
+                        self.sprites.list_of_sprites_3.remove(obj)
 
     def npc_action(self):
         for obj in (self.sprites.list_of_sprites + self.sprites.list_of_sprites_2 + \
@@ -167,6 +178,7 @@ class Interaction:
         pygame.mixer.pre_init(44100, -16, 2, 2048)
         pygame.mixer.init()
         pygame.mixer.music.load('sound/thema1.wav')
+        pygame.mixer.music.set_volume(0.01)
         pygame.mixer.music.play(10)
 
     def wins(self):
