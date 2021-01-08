@@ -22,8 +22,8 @@ class Malen:
                         4: pygame.image.load('data/img/lvl1/wall10.png').convert(),
                         'S': pygame.image.load('data/img/lvl1/sk1.jpeg').convert(),
                         'F': pygame.image.load('data/text/down/down.png').convert(),
-                        5: pygame.image.load('data/img/lvl2/wall8.png').convert(),
-                        6: pygame.image.load('data/img/lvl2/wall13.png').convert(),
+                        5: pygame.image.load('data/img/lvl2/wall13.png').convert(),
+                        6: pygame.image.load('data/img/lvl2/wall8.png').convert(),
                         7: pygame.image.load('data/img/lvl2/wall9.png').convert(),
                         8: pygame.image.load('data/img/lvl2/wall11.png').convert()
                         }
