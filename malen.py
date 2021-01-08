@@ -212,11 +212,17 @@ class Malen:
             mouse_pos = pygame.mouse.get_pos()
             mouse_click = pygame.mouse.get_pressed()
             if button_start.collidepoint(mouse_pos):
+                #pygame.mixer.music.stop()
+                #pygame.mixer.music.load('sound/hit_menu1.mp3')
+                #pygame.mixer.music.play()
                 pygame.draw.rect(self.monitor, BLACK, button_start, border_radius=25)
                 self.monitor.blit(start, (button_start.centerx - 110, button_start.centery - 25))
                 if mouse_click[0]:
                     self.menu_tr = False
             elif button_exit.collidepoint(mouse_pos):
+                #pygame.mixer.music.stop()
+                #pygame.mixer.music.load('sound/hit_menu1.mp3')
+                #pygame.mixer.music.play()
                 pygame.draw.rect(self.monitor, BLACK, button_exit, border_radius=25)
                 self.monitor.blit(exit, (button_exit.centerx - 90, button_exit.centery - 25))
                 if mouse_click[0]:
@@ -246,9 +252,9 @@ class Malen:
         mouse_click = pygame.mouse.get_pressed()
 
         if button_reexit.collidepoint(mouse_pos):
-            pygame.mixer.music.stop()
-            pygame.mixer.music.load('sound/hit.mp3')
-            pygame.mixer.music.play()
+            #pygame.mixer.music.stop()
+            #pygame.mixer.music.load('sound/hit_menu4.mp3')
+            #pygame.mixer.music.play()
             pygame.draw.rect(self.monitor, RED, button_reexit, border_radius=25)
             self.monitor.blit(reexit, (button_reexit.centerx - 75, button_reexit.centery - 15))
             if mouse_click[0]:
