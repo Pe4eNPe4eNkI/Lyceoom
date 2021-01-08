@@ -69,7 +69,19 @@ class Malen:
 
     def hp(self, hp):
         hp = str(int(hp))
-        render = self.font.render(hp, 0, RED)
+        pygame.draw.rect(self.monitor, BLACK, (*STATUSBAR_POS, 100, 30), 2)
+        if 0 <= self.gamer.hp <= 33.3:
+            render = self.font.render(hp, 0, RED)
+            pygame.draw.rect(self.monitor, RED, (*[i + 1 for i in STATUSBAR_POS], 
+                                                 self.gamer.hp * 0.99, 28), 0)
+        if 33.3 < self.gamer.hp <= 66.6:
+            render = self.font.render(hp, 0, YELLOW)
+            pygame.draw.rect(self.monitor, YELLOW, (*[i + 1 for i in STATUSBAR_POS], 
+                                                    self.gamer.hp * 0.99, 28), 0)
+        if 66.6 < self.gamer.hp <= 100:
+            render = self.font.render(hp, 0, SPRINGGREEN)
+            pygame.draw.rect(self.monitor, GREEN, (*[i + 1 for i in STATUSBAR_POS], 
+                                                    self.gamer.hp * 0.99, 28), 0)
         self.monitor.blit(render, HP_POS)
 
     def terminate(self):
