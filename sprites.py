@@ -37,6 +37,7 @@ class Sprites:
                                 AllSprites(Human1(), (7.1, 2.1)),
                                 AllSprites(Pinky(), (7.31, 5.88)),
                                 AllSprites(Fire(), (8.31, 7.88)),
+                                AllSprites(MedKit(), (4.53, 9.1)),
                                 AllSprites(Sosademon(), (8.54, 14.45))]
         self.list_of_sprites_2 = [AllSprites(Human1(), (36.61, 5.37)),
                                   AllSprites(Pinky(), (25.76, 4.74)),
@@ -480,4 +481,22 @@ class NextDoorSecond:
         self.dead_anim = []
         self.tp = 'h_nextdoor_second'
         self.blocked = True
+        self.obj_action = []
+
+
+class MedKit:
+    def __init__(self):
+        self.way = [pygame.image.load('data/sprites/MedKit/base/0.png').convert_alpha()]
+        self.viewing_angles = False
+        self.shift = 2
+        self.scale = (0.1, 0.1)
+        self.side = 30
+        self.animation = []
+        self.animation_dist = 0
+        self.animation_speed = 0
+        self.dead = None
+        self.dead_shift = 0
+        self.tp = 'medkit'
+        self.dead_anim = []
+        self.blocked = False
         self.obj_action = []

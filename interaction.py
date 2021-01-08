@@ -48,6 +48,10 @@ class Interaction:
         self.malen = malen
         self.pain_sound = pygame.mixer.Sound('sound/pain2.wav')
 
+    def terminate(self):
+        pygame.quit()
+        sys.exit()
+
     def interaction_objects(self):
         if self.gamer.shot and self.malen.shotgun_animation_trigger:
             for obj in sorted(self.sprites.list_of_sprites
@@ -55,7 +59,7 @@ class Interaction:
                               + self.sprites.list_of_sprites_3, key=lambda obj: obj.dist_to_sprite):
                 if obj.is_on_fire[1]:
                     if obj.dead != 'never' and not obj.dead:
-                        if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, 
+                        if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
                                                   txt_map, self.gamer.pos):
                             if obj.tp == 'enemy' or obj.tp == 'enemy_shooter':
                                 self.pain_sound.play()
@@ -71,7 +75,7 @@ class Interaction:
                                     if obj_2.tp != 'fire':
                                         difference_x = obj.x - obj_2.x
                                         difference_y = obj.y - obj_2.y
-                                        if math.fabs(difference_x) <= CELL // 2\
+                                        if math.fabs(difference_x) <= CELL // 2 \
                                                 or math.fabs(difference_y) <= CELL // 2:
                                             obj_2.dead = True
                                             obj_2.blocked = None
@@ -81,7 +85,7 @@ class Interaction:
                             obj.blocked = None
                             obj.status = False
                             obj.time = pygame.time.get_ticks()
-                            self.malen.shotgun_animation_trigger = False 
+                            self.malen.shotgun_animation_trigger = False
                     if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:
                         key = 0
                         for elem in self.sprites.list_of_sprites:
@@ -107,12 +111,18 @@ class Interaction:
                         obj.d_open_trigger = True
                         obj.blocked = None
                     break
+        for obj in sorted(self.sprites.list_of_sprites
+                          + self.sprites.list_of_sprites_2
+                          + self.sprites.list_of_sprites_3, key=lambda obj: obj.dist_to_sprite):
+            if obj.tp == 'medkit':
+                if obj.dist_to_sprite == 0:
+                    self.gamer.hp = self.gamer.hp + 30 if self.gamer.hp + 30 >= 100 else 100
 
     def npc_action(self):
         for obj in (self.sprites.list_of_sprites + self.sprites.list_of_sprites_2 + \
                     self.sprites.list_of_sprites_3):
             if obj.tp == 'fire':
-                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, 
+                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
                                           txt_map, self.gamer.pos):
                     obj.is_trigger = True
                     if obj.tp == 'fire':
@@ -121,7 +131,7 @@ class Interaction:
                             if hit != 0:
                                 self.gamer.hp -= 0.05
             if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and not obj.dead:
-                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, 
+                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
                                           txt_map, self.gamer.pos):
                     obj.is_trigger = True
                     self.npc_move(obj)
@@ -161,7 +171,7 @@ class Interaction:
 
     def wins(self):
         if self.gamer.alive:
-            if not len([obj for obj in self.sprites.list_of_sprites_3 
+            if not len([obj for obj in self.sprites.list_of_sprites_3
                         if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and not obj.dead]):
                 pygame.mixer.music.stop()
                 pygame.mixer.music.load('sound/win.wav')
@@ -169,8 +179,7 @@ class Interaction:
                 while True:
                     for event in pygame.event.get():
                         if event.type == pygame.QUIT:
-                            pygame.quit()
-                            sys.exit()
+                            self.terminate()
                     self.malen.win()
 
     def deads(self):
@@ -178,6 +187,8 @@ class Interaction:
             while True:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
-                        pygame.quit()
-                        sys.exit()
+                        self.terminate()
                 self.malen.dead_menu()
+
+    def metket(self):
+        pass
