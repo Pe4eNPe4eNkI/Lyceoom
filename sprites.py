@@ -145,8 +145,9 @@ class AllSprites:
         self.current_ray = C_RAY + d_rays
 
         if self.tp not in {'h_door', 'v_door', 'h_nextdoor_first', 'h_nextdoor_second'}:
-            self.dist_to_sprite *= math.cos(H_FOV - self.current_ray * DELTA_ANGLE)
-
+            if abs(math.cos(H_FOV - self.current_ray * DELTA_ANGLE)) >= 0.5:
+                self.dist_to_sprite *= math.cos(H_FOV - self.current_ray * DELTA_ANGLE)
+            
         fake_ray = self.current_ray + 100
         if 0 <= fake_ray <= N_RAYS - 1 + 2 * 100 and self.dist_to_sprite > 30:
             self.p_height = min(int(PROJ_C

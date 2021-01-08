@@ -24,6 +24,7 @@ interaction = Interaction(gamer, sprites, malen)
 interaction.play_music()
 
 while True:
+    pygame.mouse.set_visible(False)
     gamer.movement()
     malen.bg(gamer.angle)
     walls, wall_shot = walls_with_ray_cast(gamer, malen.texture)

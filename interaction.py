@@ -112,10 +112,10 @@ class Interaction:
                 if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
                     obj.is_trigger = True
                     if obj.tp == 'fire':
-                        if obj.dist_to_sprite <= CELL:
+                        if abs(obj.dist_to_sprite) <= CELL:
                             hit = random.randrange(0, 2)
                             if hit != 0:
-                                self.gamer.hp -= 0.15
+                                self.gamer.hp -= 0.05
             if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and not obj.dead:
                 if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors, txt_map, self.gamer.pos):
                     obj.is_trigger = True
@@ -126,7 +126,7 @@ class Interaction:
                         if hit != 0:
                             self.gamer.hp -= 0.15
                     if obj.tp == 'enemy':
-                        if obj.dist_to_sprite <= CELL:
+                        if abs(obj.dist_to_sprite) <= CELL:
                             hit = random.randrange(0, 2)
                             if hit != 0:
                                 self.gamer.hp -= 0.3
