@@ -36,7 +36,7 @@ while True:
     malen.hp(gamer.hp)
     malen.mini_map()
     malen.menu()
-    malen.player_weapon_shotgun([wall_shot, sprites.sprite_shot])
+    malen.player_weapon_autorifle([wall_shot, sprites.sprite_shot])
 
     interaction.interaction_objects()
     interaction.npc_action()
