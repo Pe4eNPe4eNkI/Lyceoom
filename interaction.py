@@ -3,6 +3,7 @@ from map import txt_map
 from r_c import mapping
 import math
 import pygame
+import sys
 from numba import njit
 from parameters import *
 
