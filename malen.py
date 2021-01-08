@@ -25,14 +25,15 @@ class Malen:
                         }
         self.menu_tr = True
         self.menu_picture = pygame.image.load('data/text/bg/bg2.jpg').convert()
+        self.dead_picture = pygame.image.load('data/text/bg/bg_dead.jpg').convert()
         # Пушки
         self.shotgun_base_sprite = pygame.image.load('data/sprites/weapons/shot-gun/' + \
                                                      'base/1.png').convert_alpha()
         self.shotgun_animation = deque([pygame.image.load(f'data/sprites/weapons/shot-gun/' + \
-                                                          f'shot1/{i}.png').convert_alpha() 
+                                                          f'shot1/{i}.png').convert_alpha()
                                         for i in range(14)])
         self.shotgun_rect = self.shotgun_base_sprite.get_rect()
-        self.shotgun_pos = (H_WIDTH - self.shotgun_rect.width // 2, 
+        self.shotgun_pos = (H_WIDTH - self.shotgun_rect.width // 2,
                             HEIGHT - self.shotgun_rect.height)
         self.shotgun_length = len(self.shotgun_animation)
         self.shotgun_length_count = 0
@@ -42,7 +43,7 @@ class Malen:
         self.shotgun_sound = pygame.mixer.Sound('sound/boom3.ogg')
         # sfx
         self.sfx = deque([pygame.image.load(f'data/sprites/'
-                                            f'shoot_sfx/action/{i}.png').convert_alpha() 
+                                            f'shoot_sfx/action/{i}.png').convert_alpha()
                           for i in range(9)])
         self.sfx_length_count = 0
         self.sfx_length = len(self.sfx)
@@ -126,7 +127,7 @@ class Malen:
         if keys[pygame.K_ESCAPE]:
             self.terminate()
 
-        rend = self.font_win.render("You're not dead, congratulations!", 1, 
+        rend = self.font_win.render("You're not dead, congratulations!", 1,
                                     (randrange(100, 255), 100, 220))
         rect = pygame.Rect(0, 0, 630, 250)
         rect.center = H_WIDTH, H_HEIGHT
@@ -135,21 +136,21 @@ class Malen:
         self.monitor.blit(rend, (rect.centerx - 290, rect.centery - 80))
         button_font = pygame.font.Font('data/font/font2.ttf', 35)
 
-        #restart = button_font.render('RESTART', 0, pygame.Color('gray'))
-        #button_restart = pygame.Rect(0, 0, 400, 100)
-        #button_restart.center = H_WIDTH, H_HEIGHT + 5
+        # restart = button_font.render('RESTART', 0, pygame.Color('gray'))
+        # button_restart = pygame.Rect(0, 0, 400, 100)
+        # button_restart.center = H_WIDTH, H_HEIGHT + 5
         reexit = button_font.render('EXIT', 1, pygame.Color('gray'))
         button_reexit = pygame.Rect(0, 0, 300, 100)
         button_reexit.center = H_WIDTH, H_HEIGHT + 55
-        #pygame.draw.rect(self.monitor, BLUE, button_restart, border_radius=25, width=10)
-        #self.monitor.blit(restart, (button_restart.centerx - 155, button_restart.centery - 25))
+        # pygame.draw.rect(self.monitor, BLUE, button_restart, border_radius=25, width=10)
+        # self.monitor.blit(restart, (button_restart.centerx - 155, button_restart.centery - 25))
         pygame.draw.rect(self.monitor, BLUE, button_reexit, border_radius=25, width=10)
         self.monitor.blit(reexit, (button_reexit.centerx - 75, button_reexit.centery - 15))
 
         mouse_pos = pygame.mouse.get_pos()
         mouse_click = pygame.mouse.get_pressed()
 
-        #if button_restart.collidepoint(mouse_pos):
+        # if button_restart.collidepoint(mouse_pos):
         #    pygame.draw.rect(self.monitor, BLUE, button_restart, border_radius=25)
         #    self.monitor.blit(restart, (button_restart.centerx - 155, button_restart.centery - 25))
         #    if mouse_click[0]:
@@ -160,13 +161,6 @@ class Malen:
             if mouse_click[0]:
                 self.terminate()
 
-        while self.menu_tr:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    self.terminate()
-            pygame.mouse.set_visible(True)
-            self.monitor.blit(self.menu_picture, (0, 0))
-            x += 1
         pygame.display.flip()
         self.timer.tick(15)
 
@@ -174,12 +168,14 @@ class Malen:
         x = 0
         pygame.mixer.music.load('sound/win.mp3')
         pygame.mixer.music.play()
+
         button_font = pygame.font.Font('data/font/font2.ttf', 40)
         label_font = pygame.font.Font('data/font/font1.ttf', 280)
-        start = button_font.render('START', 0, pygame.Color('gray'))
+
+        start = button_font.render('START', 0, pygame.Color(50, 50, 50))
         button_start = pygame.Rect(0, 0, 300, 100)
         button_start.center = 170, H_HEIGHT - 50
-        exit = button_font.render('EXIT', 1, pygame.Color('gray'))
+        exit = button_font.render('EXIT', 1, pygame.Color(50, 50, 50))
         button_exit = pygame.Rect(0, 0, 300, 100)
         button_exit.center = 170, H_HEIGHT + 100
 
@@ -218,5 +214,29 @@ class Malen:
             self.timer.tick(20)
 
     def dead_menu(self):
-        if not self.gamer.alive:
-            pass
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_ESCAPE]:
+            self.terminate()
+
+        button_font = pygame.font.Font('data/font/font2.ttf', 35)
+
+        rend_dead = self.font_win.render("Antonio was killed, try again", 1,
+                                         (randrange(20, 180), 100, 220))
+
+        self.monitor.blit(self.dead_picture, (H_WIDTH - 400, H_HEIGHT - 300))
+        self.monitor.blit(rend_dead, (H_WIDTH - 240, 130))
+        reexit = button_font.render('EXIT', 1, pygame.Color('gray'))
+        button_reexit = pygame.Rect(0, 0, 300, 70)
+        button_reexit.center = H_WIDTH, H_HEIGHT + 185
+        pygame.draw.rect(self.monitor, RED, button_reexit, border_radius=25, width=10)
+        self.monitor.blit(reexit, (button_reexit.centerx - 75, button_reexit.centery - 15))
+        mouse_pos = pygame.mouse.get_pos()
+        mouse_click = pygame.mouse.get_pressed()
+
+        if button_reexit.collidepoint(mouse_pos):
+            pygame.draw.rect(self.monitor, RED, button_reexit, border_radius=25)
+            self.monitor.blit(reexit, (button_reexit.centerx - 75, button_reexit.centery - 15))
+            if mouse_click[0]:
+                self.terminate()
+        pygame.display.flip()
+        self.timer.tick(20)

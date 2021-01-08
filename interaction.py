@@ -172,3 +172,12 @@ class Interaction:
                             pygame.quit()
                             sys.exit()
                     self.malen.win()
+
+    def deads(self):
+        if not self.gamer.alive:
+            while True:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        sys.exit()
+                self.malen.dead_menu()

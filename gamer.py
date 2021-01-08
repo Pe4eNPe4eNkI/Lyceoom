@@ -115,6 +115,6 @@ class Gamer:
             self.angle += diff * self.sensitivity
 
     def is_dead(self):
-        if self.hp < 0:
+        if self.hp <= 0:
             self.alive = False
-            terminate() 
+            #terminate()
