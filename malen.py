@@ -246,7 +246,7 @@ class Malen:
 
     def menu(self):
         x = 0
-        pygame.mixer.music.load('data/sound/win.mp3')
+        pygame.mixer.music.load('data/sound/win.wav')
         pygame.mixer.music.play()
 
         button_font = pygame.font.Font('data/font/font2.ttf', 40)

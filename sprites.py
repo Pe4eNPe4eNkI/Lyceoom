@@ -116,8 +116,14 @@ class Sprites:
                 blocked_doors[(i, j)] = 0
         return blocked_doors
 
-    def delete_dead_mobs(self):
-        deleted_lst = self.list_of_sprites[:]
+    def delete_objects(self):
+        deleted_lst = self.list_of_sprites[:] + self.list_of_sprites_doors[:]
+        # удаление открытых дверей
+        for obj in deleted_lst:
+            if obj.tp in {'h_door', 'v_door', 'h_nextdoor_first', 'h_nextdoor_second'} and obj.cls:
+                if pygame.time.get_ticks() - obj.time >= 1000:
+                    self.list_of_sprites_doors.remove(obj)
+        # удаление трупов мобов
         for obj in deleted_lst:
             if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and obj.dead:
                 if pygame.time.get_ticks() - obj.time >= 3000:

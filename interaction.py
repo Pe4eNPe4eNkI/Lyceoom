@@ -99,6 +99,7 @@ class Interaction:
                             self.malen.autorifle_animation_trigger = False
                     if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:
                         key = 0
+                        obj.time = pygame.time.get_ticks()
                         for elem in self.sprites.list_of_sprites:
                             if elem.tp in ('barrel', 'fire', 'medkit'):
                                 pass
@@ -112,6 +113,7 @@ class Interaction:
                         print(key)
                     if obj.tp == 'h_nextdoor_second' and obj.dist_to_sprite < CELL:
                         key = 0
+                        obj.time = pygame.time.get_ticks()
                         for elem in self.sprites.list_of_sprites_2:
                             if elem.tp in ('barrel', 'fire', 'medkit'):
                                 pass
@@ -125,6 +127,7 @@ class Interaction:
                     if obj.tp in {'h_door', 'v_door'} and obj.dist_to_sprite < CELL:
                         obj.d_open_trigger = True
                         obj.blocked = None
+                        obj.time = pygame.time.get_ticks()
                     break
         for obj in sorted(self.sprites.list_of_sprites
                           + self.sprites.list_of_sprites_2
@@ -180,14 +183,6 @@ class Interaction:
             dy = obj.y - self.gamer.pos[1]
             obj.x = obj.x + 2 if dx < 0 else obj.x - 2
             obj.y = obj.y + 2 if dy < 0 else obj.y - 2
-
-    def clear(self):
-        del_sprites = self.sprites.list_of_sprites[:]
-        [self.sprites.list_of_sprites.remove(obj) for obj in del_sprites if obj.cls]
-        del_sprites_2 = self.sprites.list_of_sprites_2[:]
-        [self.sprites.list_of_sprites.remove(obj) for obj in del_sprites_2 if obj.cls]
-        del_sprites_3 = self.sprites.list_of_sprites_3[:]
-        [self.sprites.list_of_sprites.remove(obj) for obj in del_sprites_3 if obj.cls]
 
     def play_music(self):
         pygame.mixer.pre_init(44100, -16, 2, 2048)

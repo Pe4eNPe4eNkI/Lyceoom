@@ -42,10 +42,9 @@ while True:
 
     interaction.interaction_objects()
     interaction.npc_action()
-    interaction.clear()
     interaction.wins()
     interaction.deads()
     gamer.is_dead()
-    sprites.delete_dead_mobs()
+    sprites.delete_objects()
     pygame.display.flip()
     timer.tick(FPS)
