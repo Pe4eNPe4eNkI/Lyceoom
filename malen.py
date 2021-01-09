@@ -55,7 +55,6 @@ class Malen:
         self.shotgun_sound = pygame.mixer.Sound('data/sound/boom3.wav')
         self.shotgun_damage = 3
 
-
         # autorifle
         self.autorifle_base_sprite = pygame.image.load(
             'data/sprites/weapons/autorifle/0.png').convert_alpha()
@@ -205,7 +204,7 @@ class Malen:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
             self.terminate()
-        
+
         rend = self.font_win.render("You're not dead, congratulations!", 1,
                                     (randrange(100, 255), 100, 220))
         rect = pygame.Rect(0, 0, 630, 250)
@@ -243,6 +242,11 @@ class Malen:
 
         pygame.display.flip()
         self.timer.tick(15)
+
+    def dead_music(self):
+        pygame.mixer.init()
+        pygame.mixer.music.load('sound/dead_mus.wav')
+        pygame.mixer.music.play()
 
     def menu(self):
         x = 0
@@ -303,7 +307,8 @@ class Malen:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
             self.terminate()
-        
+
+        self.dead_music()
         button_font = pygame.font.Font('data/font/font2.ttf', 35)
 
         rend_dead = self.font_win.render("Antonio was killed, try again", 1,

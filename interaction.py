@@ -217,4 +217,3 @@ class Interaction:
                     if event.type == pygame.QUIT:
                         self.terminate()
                 self.malen.dead_menu()
-                self.malen.dead_menu()
