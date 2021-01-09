@@ -16,16 +16,25 @@ class Malen:
         self.camera = Camera(self.monitor_map, self.gamer)
         self.font_win = pygame.font.Font('data/font/font1.ttf', 65)
         self.font = pygame.font.Font('data/font/font1.ttf', 55, bold=True)
-        self.texture = {1: pygame.image.load('data/img/lvl1/wall11.png').convert(),
-                        2: pygame.image.load('data/img/lvl1/wall8.png').convert(),
-                        3: pygame.image.load('data/img/lvl1/wall9.png').convert(),
-                        4: pygame.image.load('data/img/lvl1/wall10.png').convert(),
-                        'S': pygame.image.load('data/img/lvl1/sk1.jpeg').convert(),
-                        'F': pygame.image.load('data/text/down/down.png').convert(),
-                        5: pygame.image.load('data/img/lvl2/wall13.png').convert(),
-                        6: pygame.image.load('data/img/lvl2/wall8.png').convert(),
-                        7: pygame.image.load('data/img/lvl2/wall9.png').convert(),
-                        8: pygame.image.load('data/img/lvl2/wall11.png').convert()
+        self.texture = {1: pygame.image.load('data/text/wall/wall11.png').convert(),
+                        2: pygame.image.load('data/text/wall/wall8.png').convert(),
+                        3: pygame.image.load('data/text/wall/wall9.png').convert(),
+                        4: pygame.image.load('data/text/wall/wall10.png').convert(),
+                        'S1': pygame.image.load('data/text/sky/sk1.jpeg').convert(),
+                        'S2': pygame.image.load('data/text/sky/sky5.png').convert(),
+                        'S3': pygame.image.load('data/text/sky/sky8.png').convert(),
+                        # 'F': pygame.image.load('data/text/down/down.png').convert(),
+                        5: pygame.image.load('data/text/wall/wall13.png').convert(),
+                        6: pygame.image.load('data/text/wall/wall17.png').convert(),
+                        7: pygame.image.load('data/text/wall/wall15.png').convert(),
+                        8: pygame.image.load('data/text/wall/wall16.png').convert(),
+                        9: pygame.image.load('data/text/wall/wall3.png').convert(),
+                        10: pygame.image.load('data/text/wall/wall12.png').convert(),
+                        11: pygame.image.load('data/text/wall/wall18.png').convert(),
+                        12: pygame.image.load('data/text/wall/wall19.png').convert(),
+                        13: pygame.image.load('data/text/wall/wall5.png').convert(),
+                        14: pygame.image.load('data/text/wall/wall6.png').convert(),
+
                         }
         self.menu_tr = True
         self.menu_picture = pygame.image.load('data/text/bg/bg2.jpg').convert()
@@ -44,7 +53,7 @@ class Malen:
         self.shotgun_animation_speed = 5
         self.shotgun_animation_count = 0
         self.shotgun_animation_trigger = True
-        self.shotgun_sound = pygame.mixer.Sound('sound/boom3.wav')
+        self.shotgun_sound = pygame.mixer.Sound('data/sound/boom3.wav')
         self.shotgun_damage = 3
 
         # autorifle
@@ -61,7 +70,7 @@ class Malen:
         self.autorifle_animation_speed = 1
         self.autorifle_animation_count = 0
         self.autorifle_animation_trigger = True
-        self.autorifle_sound = pygame.mixer.Sound('sound/shotrifle.wav')
+        self.autorifle_sound = pygame.mixer.Sound('data/sound/shotrifle.wav')
         self.autorifle_damage = 1
 
         # sfx
@@ -73,9 +82,18 @@ class Malen:
 
     def bg(self, angle):
         sky_offset = -5 * math.degrees(angle) % WIDTH
-        self.monitor.blit(self.texture['S'], (sky_offset, 0))
-        self.monitor.blit(self.texture['S'], (sky_offset - WIDTH, 0))
-        self.monitor.blit(self.texture['S'], (sky_offset + WIDTH, 0))
+        if self.gamer.x < 2306:
+            self.monitor.blit(self.texture['S1'], (sky_offset, 0))
+            self.monitor.blit(self.texture['S1'], (sky_offset - WIDTH, 0))
+            self.monitor.blit(self.texture['S1'], (sky_offset + WIDTH, 0))
+        elif self.gamer.x < 4556 and self.gamer.x > 2306:
+            self.monitor.blit(self.texture['S2'], (sky_offset, 0))
+            self.monitor.blit(self.texture['S2'], (sky_offset - WIDTH, 0))
+            self.monitor.blit(self.texture['S2'], (sky_offset + WIDTH, 0))
+        elif self.gamer.x > 4556:
+            self.monitor.blit(self.texture['S3'], (sky_offset, 0))
+            self.monitor.blit(self.texture['S3'], (sky_offset - WIDTH, 0))
+            self.monitor.blit(self.texture['S3'], (sky_offset + WIDTH, 0))
 
         pygame.draw.rect(self.monitor, DARKGREY, (0, H_HEIGHT, WIDTH, H_HEIGHT))
 
@@ -228,8 +246,8 @@ class Malen:
 
     def menu(self):
         x = 0
-        # pygame.mixer.music.load('sound/win.mp3')
-        # pygame.mixer.music.play()
+        pygame.mixer.music.load('data/sound/win.mp3')
+        pygame.mixer.music.play()
 
         button_font = pygame.font.Font('data/font/font2.ttf', 40)
         label_font = pygame.font.Font('data/font/font1.ttf', 280)
@@ -262,17 +280,17 @@ class Malen:
             mouse_pos = pygame.mouse.get_pos()
             mouse_click = pygame.mouse.get_pressed()
             if button_start.collidepoint(mouse_pos):
-                #pygame.mixer.music.stop()
-                #pygame.mixer.music.load('sound/hit_menu1.mp3')
-                #pygame.mixer.music.play()
+                # pygame.mixer.music.stop()
+                # pygame.mixer.music.load('data/sound/hit_menu1.mp3')
+                # pygame.mixer.music.play()
                 pygame.draw.rect(self.monitor, BLACK, button_start, border_radius=25)
                 self.monitor.blit(start, (button_start.centerx - 110, button_start.centery - 25))
                 if mouse_click[0]:
                     self.menu_tr = False
             elif button_exit.collidepoint(mouse_pos):
-                #pygame.mixer.music.stop()
-                #pygame.mixer.music.load('sound/hit_menu1.mp3')
-                #pygame.mixer.music.play()
+                # pygame.mixer.music.stop()
+                # pygame.mixer.music.load('data/sound/hit_menu1.mp3')
+                # pygame.mixer.music.play()
                 pygame.draw.rect(self.monitor, BLACK, button_exit, border_radius=25)
                 self.monitor.blit(exit, (button_exit.centerx - 90, button_exit.centery - 25))
                 if mouse_click[0]:
@@ -302,9 +320,9 @@ class Malen:
         mouse_click = pygame.mouse.get_pressed()
 
         if button_reexit.collidepoint(mouse_pos):
-            #pygame.mixer.music.stop()
-            #pygame.mixer.music.load('sound/hit_menu4.mp3')
-            #pygame.mixer.music.play()
+            # pygame.mixer.music.stop()
+            # pygame.mixer.music.load('sound/hit_menu4.mp3')
+            # pygame.mixer.music.play()
             pygame.mouse.set_visible(True)
             pygame.draw.rect(self.monitor, RED, button_reexit, border_radius=25)
             self.monitor.blit(reexit, (button_reexit.centerx - 75, button_reexit.centery - 15))

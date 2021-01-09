@@ -35,7 +35,7 @@ class Gamer:
 
     @property
     def pos(self):
-        #print(self.x, self.y)
+        # print(self.x, self.y)
         return (self.x, self.y)
 
     @property
@@ -104,11 +104,11 @@ class Gamer:
             self.angle += 0.02
         if keys[pygame.K_1]:
             if self.flag == 'autorifle':
-                pygame.mixer.Sound('sound/reload.wav').play()
+                pygame.mixer.Sound('data/sound/reload.wav').play()
             self.flag = 'shotgun'
         if keys[pygame.K_2]:
             if self.flag == 'shotgun':
-                pygame.mixer.Sound('sound/reload.wav').play()
+                pygame.mixer.Sound('data/sound/reload.wav').play()
             self.flag = 'autorifle'
         for event in pygame.event.get():
             if pygame.event == pygame.QUIT:
@@ -121,7 +121,7 @@ class Gamer:
                         self.flag = 'autorifle'
                     else:
                         self.flag = 'shotgun'
-                    pygame.mixer.Sound('sound/reload.wav').play()
+                    pygame.mixer.Sound('data/sound/reload.wav').play()
 
     def movement(self):
         self.keys_check()

@@ -46,8 +46,8 @@ class Interaction:
         self.gamer = gamer
         self.sprites = sprites
         self.malen = malen
-        self.pain_sound = pygame.mixer.Sound('sound/pain2.wav')
-        self.heal_sound = pygame.mixer.Sound('sound/heal.wav')
+        self.pain_sound = pygame.mixer.Sound('data/sound/pain2.wav')
+        self.heal_sound = pygame.mixer.Sound('data/sound/heal.wav')
 
     def terminate(self):
         pygame.quit()
@@ -193,7 +193,7 @@ class Interaction:
     def play_music(self):
         pygame.mixer.pre_init(44100, -16, 2, 2048)
         pygame.mixer.init()
-        pygame.mixer.music.load('sound/thema1.wav')
+        pygame.mixer.music.load('data/sound/thema1.wav')
         pygame.mixer.music.set_volume(0.1)
         pygame.mixer.music.play(10)
 
@@ -202,7 +202,7 @@ class Interaction:
             if not len([obj for obj in self.sprites.list_of_sprites_3
                         if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and not obj.dead]):
                 pygame.mixer.music.stop()
-                pygame.mixer.music.load('sound/win.wav')
+                pygame.mixer.music.load('data/sound/win.wav')
                 pygame.mixer.music.play()
                 while True:
                     for event in pygame.event.get():
@@ -216,4 +216,5 @@ class Interaction:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         self.terminate()
+                self.malen.dead_menu()
                 self.malen.dead_menu()
