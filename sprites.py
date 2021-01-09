@@ -119,20 +119,19 @@ class Sprites:
     def b_doors(self):
         blocked_doors = Dict.empty(key_type=types.UniTuple(int32, 2), value_type=int32)
         for obj in self.list_of_sprites_doors:
-            if obj.tp == 'h_door' or obj.tp == 'h_nextdoor_first' or \
-                obj.tp == 'h_nextdoor_second' and obj.blocked:
-                    i, j = mapping(obj.x, obj.y)
-                    blocked_doors[(i, j)] = 0
+            if obj.tp == 'h_door' or obj.tp == 'h_nextdoor_first' or obj.tp == 'h_nextdoor_second' and obj.blocked:
+                i, j = mapping(obj.x, obj.y)
+                blocked_doors[(i, j)] = 0
         return blocked_doors
 
     def delete_dead_mobs(self):
         deleted_lst = self.list_of_sprites[:]
-        for obj in deleted_lst: 
+        for obj in deleted_lst:
             if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and obj.dead:
                 if pygame.time.get_ticks() - obj.time >= 3000:
                     self.list_of_sprites.remove(obj)
         deleted_lst = self.list_of_sprites_2[:]
-        for obj in deleted_lst: 
+        for obj in deleted_lst:
             if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and obj.dead:
                 if pygame.time.get_ticks() - obj.time >= 3000:
                     self.list_of_sprites_2.remove(obj)
@@ -141,7 +140,6 @@ class Sprites:
             if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and obj.dead:
                 if pygame.time.get_ticks() - obj.time >= 3000:
                     self.list_of_sprites_3.remove(obj)
-
 
 
 class AllSprites:
@@ -169,7 +167,7 @@ class AllSprites:
         self.d_open_trigger = False
         self.d_last_pos = self.y if self.tp == 'h_door' \
                                     or self.tp == 'h_nextdoor_first' or \
-                                        self.tp == 'h_nextdoor_second' else self.x
+                                    self.tp == 'h_nextdoor_second' else self.x
         self.cls = False
         self.obj_action = kind.obj_action.copy()
 
@@ -212,7 +210,7 @@ class AllSprites:
         if self.tp not in {'h_door', 'v_door', 'h_nextdoor_first', 'h_nextdoor_second'}:
             if abs(math.cos(H_FOV - self.current_ray * DELTA_ANGLE)) >= 0.5:
                 self.dist_to_sprite *= math.cos(H_FOV - self.current_ray * DELTA_ANGLE)
-            
+
         fake_ray = self.current_ray + 100
         if 0 <= fake_ray <= N_RAYS - 1 + 2 * 100 and self.dist_to_sprite > 30:
             self.p_height = min(int(PROJ_C
@@ -343,7 +341,7 @@ class Barrel:
         self.scale = (0.4, 0.4)
         self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/'
-                                                  f'barrel/anim/{i}.png').convert_alpha() 
+                                                  f'barrel/anim/{i}.png').convert_alpha()
                                 for i in range(12)])
         self.animation_dist = 150
         self.animation_speed = 5
@@ -382,6 +380,7 @@ class Sosademon:
         self.blocked = True
         self.npc_hp = 4
         self.obj_action = []
+
 
 class Pinky:
     def __init__(self):

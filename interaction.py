@@ -1,5 +1,4 @@
 import random
-import math
 import pygame
 import sys
 from map import txt_map

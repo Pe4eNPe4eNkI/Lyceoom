@@ -2,9 +2,7 @@ from parameters import *
 from numba.core import types
 from numba.typed import Dict
 from numba import int32
-from numba import njit
 import pygame
-from random import choice
 
 # тут создается карта и всё связанное с ней
 _ = False
@@ -66,22 +64,6 @@ map_y = [
     ]
 ]
 
-'''  координаты стен
- x = len(map_y)
-
- z_map = []
-
- for i in range(x):
-    while len(z_map) != x:
-        world_map = choice(map_y)
-        if world_map not in z_map:
-            z_map.append(world_map)
- a_map = z_map[0]
-
- for i in range(1, x):
-    for j in range(len(a_map)):
-        a_map[j] += z_map[i][j]
-'''
 new_maps = map_y[0]
 x = len(map_y)
 for i in range(1, x):
