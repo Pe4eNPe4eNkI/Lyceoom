@@ -45,6 +45,7 @@ class Interaction:
         self.gamer = gamer
         self.sprites = sprites
         self.malen = malen
+        self.speed = 0
         self.pain_sound = pygame.mixer.Sound('data/sound/pain2.wav')
         self.heal_sound = pygame.mixer.Sound('data/sound/heal.wav')
 
@@ -124,6 +125,7 @@ class Interaction:
                         if key == 0:
                             obj.d_open_trigger = True
                             obj.blocked = None
+                            self.speed = 3
                     if obj.tp in {'h_door', 'v_door'} and obj.dist_to_sprite < CELL:
                         obj.d_open_trigger = True
                         obj.blocked = None
@@ -147,8 +149,8 @@ class Interaction:
                         self.sprites.list_of_sprites_3.remove(obj)
 
     def npc_action(self):
-        for obj in (self.sprites.list_of_sprites + \
-                    self.sprites.list_of_sprites_2 + \
+        for obj in (self.sprites.list_of_sprites +
+                    self.sprites.list_of_sprites_2 +
                     self.sprites.list_of_sprites_3):
             if obj.tp == 'fire':
                 if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
@@ -181,8 +183,8 @@ class Interaction:
         if abs(obj.dist_to_sprite) > CELL:
             dx = obj.x - self.gamer.pos[0]
             dy = obj.y - self.gamer.pos[1]
-            obj.x = obj.x + 2 if dx < 0 else obj.x - 2
-            obj.y = obj.y + 2 if dy < 0 else obj.y - 2
+            obj.x = obj.x + 2 + self.speed if dx < 0 else obj.x - 2 - self.speed
+            obj.y = obj.y + 2 + self.speed if dy < 0 else obj.y - 2 - self.speed
 
     def play_music(self):
         pygame.mixer.pre_init(44100, -16, 2, 2048)

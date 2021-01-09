@@ -1,6 +1,4 @@
-import random
 import os
-import math
 import pygame
 from parameters import *
 from collections import deque
@@ -164,8 +162,8 @@ class AllSprites:
         self.is_trigger = False
         self.d_open_trigger = False
         self.d_last_pos = self.y if self.tp == 'h_door' \
-                                    or self.tp == 'h_nextdoor_first' or \
-                                    self.tp == 'h_nextdoor_second' else self.x
+                                    or self.tp == 'h_nextdoor_first' \
+                                    or self.tp == 'h_nextdoor_second' else self.x
         self.cls = False
         self.obj_action = kind.obj_action.copy()
 
@@ -317,8 +315,7 @@ class Fire:
         self.shift = 0.7
         self.scale = (0.6, 0.6)
         self.side = 30
-        self.animation = deque([pygame.image.load(f'data/sprites/fire/' + \
-                                                  f'action/{i}.png').convert_alpha()
+        self.animation = deque([pygame.image.load(f'data/sprites/fire/action/{i}.png').convert_alpha()
                                 for i in range(16)])
         self.animation_dist = 1800
         self.animation_speed = 10
@@ -338,8 +335,7 @@ class Barrel:
         self.shift = 1.8
         self.scale = (0.4, 0.4)
         self.side = 30
-        self.animation = deque([pygame.image.load(f'data/sprites/'
-                                                  f'barrel/anim/{i}.png').convert_alpha()
+        self.animation = deque([pygame.image.load(f'data/sprites/barrel/anim/{i}.png').convert_alpha()
                                 for i in range(12)])
         self.animation_dist = 150
         self.animation_speed = 5
@@ -347,8 +343,7 @@ class Barrel:
         self.animation_speed = 10
         self.dead = None
         self.dead_shift = 2.6
-        self.dead_anim = deque([pygame.image.load(f'data/sprites/barrel/' + \
-                                                  f'death/{i}.png').convert_alpha()
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/barrel/death/{i}.png').convert_alpha()
                                 for i in range(4)])
         self.tp = 'barrel'
         self.blocked = True
@@ -376,7 +371,7 @@ class Sosademon:
                                 for i in range(6)])
         self.tp = 'enemy'
         self.blocked = True
-        self.npc_hp = 4
+        self.npc_hp = 30
         self.obj_action = []
 
 
@@ -388,15 +383,13 @@ class Pinky:
         self.shift = 0.2
         self.scale = (0.8, 0.9)
         self.side = 120
-        self.animation = deque([pygame.image.load(f'data/sprites/pinky/' + \
-                                                  f'action/{i}.png').convert_alpha()
+        self.animation = deque([pygame.image.load(f'data/sprites/pinky/action/{i}.png').convert_alpha()
                                 for i in range(4)])
         self.animation_dist = 800
         self.animation_speed = 12
         self.dead = None
         self.dead_shift = 0.8
-        self.dead_anim = deque([pygame.image.load(f'data/sprites/pinky/' + \
-                                                  f'death/{i}.png').convert_alpha()
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/pinky/death/{i}.png').convert_alpha()
                                 for i in range(1, 6)])
         self.tp = 'enemy'
         self.blocked = True
@@ -412,15 +405,13 @@ class Obama:
         self.shift = 0.2
         self.scale = (0.8, 0.9)
         self.side = 90
-        self.animation = deque([pygame.image.load(f'data/sprites/obama/' + \
-                                                  f'action/{i}.png').convert_alpha()
+        self.animation = deque([pygame.image.load(f'data/sprites/obama/action/{i}.png').convert_alpha()
                                 for i in range(4)])
         self.animation_dist = 800
         self.animation_speed = 10
         self.dead = None
         self.dead_shift = 0.8
-        self.dead_anim = deque([pygame.image.load(f'data/sprites/obama/' + \
-                                                  f'death/{i}.png').convert_alpha()
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/obama/death/{i}.png').convert_alpha()
                                 for i in range(6)])
         self.tp = 'enemy'
         self.blocked = True
@@ -436,15 +427,13 @@ class Human1:
         self.shift = 0.5
         self.scale = (0.5, 0.8)
         self.side = 50
-        self.animation = deque([pygame.image.load(f'data/sprites/human1/' + \
-                                                  f'action/{i}.png').convert_alpha()
+        self.animation = deque([pygame.image.load(f'data/sprites/human1/action/{i}.png').convert_alpha()
                                 for i in range(4)])
         self.animation_dist = 800
         self.animation_speed = 7
         self.dead = None
         self.dead_shift = 1
-        self.dead_anim = deque([pygame.image.load(f'data/sprites/human1/' + \
-                                                  f'death/{i}.png').convert_alpha()
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/human1/death/{i}.png').convert_alpha()
                                 for i in range(5)])
         self.tp = 'enemy_shooter'
         self.blocked = True
@@ -460,15 +449,13 @@ class Human2:
         self.shift = 0.5
         self.scale = (0.6, 0.8)
         self.side = 50
-        self.animation = deque([pygame.image.load(f'data/sprites/stas/' + \
-                                                  f'action/{i}.png').convert_alpha()
+        self.animation = deque([pygame.image.load(f'data/sprites/stas/action/{i}.png').convert_alpha()
                                 for i in range(4)])
         self.animation_dist = 800
         self.animation_speed = 10
         self.dead = None
         self.dead_shift = 1
-        self.dead_anim = deque([pygame.image.load(f'data/sprites/stas/' + \
-                                                  f'death/{i}.png').convert_alpha()
+        self.dead_anim = deque([pygame.image.load(f'data/sprites/stas/death/{i}.png').convert_alpha()
                                 for i in range(5)])
         self.tp = 'enemy'
         self.blocked = True

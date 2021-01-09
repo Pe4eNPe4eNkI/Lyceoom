@@ -3,7 +3,6 @@ import sys
 from collections import deque
 from random import randrange
 from parameters import *
-from r_c import ray_casting
 from map import mini_map, Camera
 
 
