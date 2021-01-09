@@ -112,6 +112,12 @@ class Gamer:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1 and not self.shot:
                     self.shot = True
+                if event.button == 4 or event.button == 5 and not self.shot:
+                    if self.flag == 'shotgun':
+                        self.flag = 'autorifle'
+                    else:
+                        self.flag = 'shotgun'
+
 
     def movement(self):
         self.keys_check()
