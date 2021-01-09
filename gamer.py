@@ -20,6 +20,7 @@ class Gamer:
         self.sprites = sprites
         self.flag = ''
         self.hp = 100
+        self.weapon_now = 'shotgun'
         # Параметры игрока для того, чтобы не ходить сквозь стены
         self.side = 50
         self.rect = pygame.Rect(*gamer_pos, self.side, self.side)

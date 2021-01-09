@@ -97,6 +97,7 @@ class AllSprites:
         self.dead = kind.dead
         self.dead_shift = kind.dead_shift
         self.dead_anim_count = 0
+        self.npc_hp = kind.npc_hp
 
         self.x, self.y = pos[0] * CELL, pos[1] * CELL
         self.tp = kind.tp
@@ -269,6 +270,7 @@ class Fire:
         self.dead_anim = []
         self.tp = 'fire'
         self.blocked = False
+        self.npc_hp = None
         self.obj_action = []
 
 
@@ -293,6 +295,7 @@ class Barrel:
                                 for i in range(4)])
         self.tp = 'barrel'
         self.blocked = True
+        self.npc_hp = None
         self.obj_action = []
 
 
@@ -316,6 +319,7 @@ class Sosademon:
                                 for i in range(6)])
         self.tp = 'enemy'
         self.blocked = True
+        self.npc_hp = 4
         self.obj_action = []
 
 class Pinky:
@@ -338,6 +342,7 @@ class Pinky:
                                 for i in range(1, 6)])
         self.tp = 'enemy'
         self.blocked = True
+        self.npc_hp = 5
         self.obj_action = []
 
 
@@ -361,6 +366,7 @@ class Obama:
                                 for i in range(6)])
         self.tp = 'enemy'
         self.blocked = True
+        self.npc_hp = 3
         self.obj_action = []
 
 
@@ -384,6 +390,7 @@ class Human1:
                                 for i in range(5)])
         self.tp = 'enemy_shooter'
         self.blocked = True
+        self.npc_hp = None
         self.obj_action = []
 
 
@@ -407,6 +414,7 @@ class Human2:
                                 for i in range(5)])
         self.tp = 'enemy'
         self.blocked = True
+        self.npc_hp = None
         self.obj_action = []
 
 
@@ -426,6 +434,7 @@ class DoorH:
         self.dead_anim = []
         self.tp = 'h_door'
         self.blocked = True
+        self.npc_hp = None
         self.obj_action = []
 
 
@@ -445,6 +454,7 @@ class DoorV:
         self.dead_anim = []
         self.tp = 'v_door'
         self.blocked = True
+        self.npc_hp = None
         self.obj_action = []
 
 
@@ -464,6 +474,7 @@ class NextDoorFirst:
         self.dead_anim = []
         self.tp = 'h_nextdoor_first'
         self.blocked = True
+        self.npc_hp = None
         self.obj_action = []
 
 
@@ -483,6 +494,7 @@ class NextDoorSecond:
         self.dead_anim = []
         self.tp = 'h_nextdoor_second'
         self.blocked = True
+        self.npc_hp = None
         self.obj_action = []
 
 
@@ -502,3 +514,4 @@ class MedKit:
         self.dead_anim = []
         self.blocked = False
         self.obj_action = []
+        self.npc_hp = None

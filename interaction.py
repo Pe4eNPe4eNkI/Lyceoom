@@ -63,7 +63,18 @@ class Interaction:
                         if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
                                                   txt_map, self.gamer.pos):
                             if obj.tp == 'enemy' or obj.tp == 'enemy_shooter':
-                                self.pain_sound.play()
+                                if self.gamer.weapon_now == 'shotgun':
+                                    damage = 3
+                                elif self.gamer.weapon_now == 'autorifle':
+                                    damage = 1
+                                if obj.npc_hp is None or obj.npc_hp - damage <= 0:
+                                    self.pain_sound.play()
+                                    obj.dead = True
+                                    obj.blocked = None
+                                    obj.status = False
+                                    obj.time = pygame.time.get_ticks()
+                                else:
+                                    obj.npc_hp -= damage
                             elif obj.tp == 'barrel':
                                 if obj.dist_to_sprite <= CELL * 3:
                                     hit = random.randrange(0, 2)
@@ -82,11 +93,9 @@ class Interaction:
                                             obj_2.blocked = None
                                             obj_2.status = False
                                             obj_2.time = pygame.time.get_ticks()
-                            obj.dead = True
-                            obj.blocked = None
-                            obj.status = False
-                            obj.time = pygame.time.get_ticks()
+
                             self.malen.shotgun_animation_trigger = False
+                            self.malen.autorifle_animation_trigger = False
                     if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:
                         key = 0
                         for elem in self.sprites.list_of_sprites:
@@ -130,8 +139,7 @@ class Interaction:
                         self.sprites.list_of_sprites_3.remove(obj)
 
     def npc_action(self):
-        for obj in (self.sprites.list_of_sprites + self.sprites.list_of_sprites_2 + \
-                    self.sprites.list_of_sprites_3):
+        for obj in (self.sprites.list_of_sprites + self.sprites.list_of_sprites_2 + self.sprites.list_of_sprites_3):
             if obj.tp == 'fire':
                 if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
                                           txt_map, self.gamer.pos):

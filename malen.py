@@ -45,6 +45,7 @@ class Malen:
         self.shotgun_animation_count = 0
         self.shotgun_animation_trigger = True
         self.shotgun_sound = pygame.mixer.Sound('sound/boom3.wav')
+        self.shotgun_damage = 3
 
         # autorifle
         self.autorifle_base_sprite = pygame.image.load(
@@ -61,6 +62,7 @@ class Malen:
         self.autorifle_animation_count = 0
         self.autorifle_animation_trigger = True
         self.autorifle_sound = pygame.mixer.Sound('sound/shotrifle.wav')
+        self.autorifle_damage = 1
 
         # sfx
         self.sfx = deque([pygame.image.load(f'data/sprites/'
@@ -148,6 +150,7 @@ class Malen:
                     self.shotgun_animation_trigger = True
             else:
                 self.monitor.blit(self.shotgun_base_sprite, self.shotgun_pos)
+                self.gamer.weapon_now = 'shotgun'
         elif flag == 'autorifle':
             if self.gamer.shot:
                 if not self.autorifle_length_count:
@@ -169,6 +172,7 @@ class Malen:
                     self.shotgun_animation_trigger = True
             else:
                 self.monitor.blit(self.autorifle_base_sprite, self.autorifle_pos)
+                self.gamer.weapon_now = 'autorifle'
 
     def bullet_sfx(self):
         if self.sfx_length_count < self.sfx_length:
