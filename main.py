@@ -48,3 +48,4 @@ while True:
     sprites.delete_objects()
     pygame.display.flip()
     timer.tick(FPS)
+    print(sprites.list_of_sprites_2)

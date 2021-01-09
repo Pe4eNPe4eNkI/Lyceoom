@@ -36,21 +36,14 @@ class Sprites:
                                       AllSprites(DoorH(), (25.99, 1.55)),
                                       AllSprites(DoorH(), (38.01, 10.55)),
                                       AllSprites(DoorH(), (39.01, 1.55)),
-                                      AllSprites(DoorH(), (46.27, 7.55)),
                                       AllSprites(DoorV(), (11.5, 6.55)),
                                       AllSprites(DoorH(), (7.25, 13.5)),
                                       AllSprites(DoorV(), (24.5, 5.43)),
                                       AllSprites(DoorH(), (30.85, 11.5)),
                                       AllSprites(DoorH(), (37.5, 14.5)),
                                       AllSprites(DoorV(), (44.5, 5.55)),
-                                      AllSprites(DoorV(), (47.55, 9.5)),
-                                      AllSprites(DoorV(), (51.5, 6.75)),
-                                      AllSprites(DoorH(), (53.05, 2.5)),
-                                      AllSprites(DoorH(), (63.75, 8.55)),
-                                      AllSprites(DoorH(), (52.45, 14.5)),
                                       AllSprites(DoorH(), (14.5, 9.5)),
-                                      AllSprites(DoorV(), (34.5, 5.5)),
-                                      AllSprites(DoorH(), (65.5, 1.55)),
+                                      AllSprites(DoorV(), (34.5, 5.5))
                                       ]
         self.list_of_sprites = [AllSprites(Barrel(), (9.1, 4)),  # карта №1
                                 AllSprites(Human1(), (7.1, 2.1)),
@@ -75,7 +68,7 @@ class Sprites:
                                   AllSprites(Human2(), (25.43, 1.45)),
                                   AllSprites(Pinky(), (25.59, 14.65)),
                                   AllSprites(MedKit(), (24.54, 13.7)),
-                                  AllSprites(Human1(), (31.43, 146.18)),
+                                  AllSprites(Human1(), (31.43, 6.18)),
                                   AllSprites(Pinky(), (30.48, 6.49)),
                                   AllSprites(MedKit(), (24.62, 14.21)),
                                   AllSprites(Obama(), (32.98, 3.72)),
@@ -83,8 +76,7 @@ class Sprites:
                                   AllSprites(Pinky(), (32.56, 14.59)),
                                   AllSprites(Human1(), (37.35, 12.08)),
                                   AllSprites(Human2(), (42.71, 13.74)),
-                                  AllSprites(Pinky(), (44.56, 10.91)),
-                                  AllSprites(Sosademon(), (44.44, 1.69)),
+                                  AllSprites(Pinky(), (42.56, 10.91)),
                                   AllSprites(Obama(), (37.37, 6.75)),
                                   AllSprites(Fire(), (32.52, 12.57)),
                                   AllSprites(Fire(), (41.55, 5.59)),
@@ -123,17 +115,17 @@ class Sprites:
                     self.list_of_sprites_doors.remove(obj)
         # удаление трупов мобов
         for obj in deleted_lst:
-            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and obj.dead:
+            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and obj.dead:
                 if pygame.time.get_ticks() - obj.time >= 3000:
                     self.list_of_sprites.remove(obj)
         deleted_lst = self.list_of_sprites_2[:]
         for obj in deleted_lst:
-            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and obj.dead:
+            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and obj.dead:
                 if pygame.time.get_ticks() - obj.time >= 3000:
                     self.list_of_sprites_2.remove(obj)
         deleted_lst = self.list_of_sprites_3[:]
         for obj in deleted_lst:
-            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and obj.dead:
+            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and obj.dead:
                 if pygame.time.get_ticks() - obj.time >= 3000:
                     self.list_of_sprites_3.remove(obj)
 
@@ -369,7 +361,7 @@ class Sosademon:
         self.dead_anim = deque([pygame.image.load(f'data/sprites/sosademon/' + \
                                                   f'death/{i}.png').convert_alpha()
                                 for i in range(6)])
-        self.tp = 'enemy'
+        self.tp = 'boss'
         self.blocked = True
         self.npc_hp = 30
         self.obj_action = []

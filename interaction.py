@@ -64,7 +64,7 @@ class Interaction:
                     if obj.dead != 'never' and not obj.dead:
                         if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
                                                   txt_map, self.gamer.pos):
-                            if obj.tp == 'enemy' or obj.tp == 'enemy_shooter':
+                            if obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss':
                                 if self.gamer.weapon_now == 'shotgun':
                                     damage = 3
                                 elif self.gamer.weapon_now == 'autorifle':
@@ -161,7 +161,7 @@ class Interaction:
                             hit = random.randrange(0, 2)
                             if hit != 0:
                                 self.gamer.hp -= 0.05
-            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and not obj.dead:
+            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and not obj.dead:
                 if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
                                           txt_map, self.gamer.pos):
                     obj.is_trigger = True
@@ -176,6 +176,11 @@ class Interaction:
                             hit = random.randrange(0, 2)
                             if hit != 0:
                                 self.gamer.hp -= 0.3
+                    if obj.tp == 'boss':
+                        if abs(obj.dist_to_sprite) <= CELL:
+                            hit = random.randrange(0, 2)
+                            if hit != 0:
+                                self.gamer.hp -= 1000
                 else:
                     obj.is_trigger = False
 
@@ -196,7 +201,7 @@ class Interaction:
     def wins(self):
         if self.gamer.alive:
             if not len([obj for obj in self.sprites.list_of_sprites_3
-                        if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter') and not obj.dead]):
+                        if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and not obj.dead]):
                 pygame.mixer.music.stop()
                 pygame.mixer.music.load('data/sound/win.wav')
                 pygame.mixer.music.play()
