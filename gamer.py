@@ -103,8 +103,10 @@ class Gamer:
         if keys[pygame.K_RIGHT]:
             self.angle += 0.02
         if keys[pygame.K_1]:
+            pygame.mixer.Sound('sound/reload.wav').play()
             self.flag = 'shotgun'
         if keys[pygame.K_2]:
+            pygame.mixer.Sound('sound/reload.wav').play()
             self.flag = 'autorifle'
         for event in pygame.event.get():
             if pygame.event == pygame.QUIT:
@@ -117,7 +119,7 @@ class Gamer:
                         self.flag = 'autorifle'
                     else:
                         self.flag = 'shotgun'
-
+                    pygame.mixer.Sound('sound/reload.wav').play()
 
     def movement(self):
         self.keys_check()

@@ -47,7 +47,7 @@ class Interaction:
         self.sprites = sprites
         self.malen = malen
         self.pain_sound = pygame.mixer.Sound('sound/pain2.wav')
-        self.heal_sound = pygame.mixer.Sound('sound/met.wav')
+        self.heal_sound = pygame.mixer.Sound('sound/heal.wav')
 
     def terminate(self):
         pygame.quit()
