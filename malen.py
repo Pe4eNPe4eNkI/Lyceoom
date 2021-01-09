@@ -187,7 +187,7 @@ class Malen:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
             self.terminate()
-
+        
         rend = self.font_win.render("You're not dead, congratulations!", 1,
                                     (randrange(100, 255), 100, 220))
         rect = pygame.Rect(0, 0, 630, 250)
@@ -217,6 +217,7 @@ class Malen:
         #    if mouse_click[0]:
         #        self.menu_tr = False
         if button_reexit.collidepoint(mouse_pos):
+            pygame.mouse.set_visible(True)
             pygame.draw.rect(self.monitor, BLUE, button_reexit, border_radius=25)
             self.monitor.blit(reexit, (button_reexit.centerx - 75, button_reexit.centery - 15))
             if mouse_click[0]:
@@ -284,7 +285,7 @@ class Malen:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
             self.terminate()
-
+        
         button_font = pygame.font.Font('data/font/font2.ttf', 35)
 
         rend_dead = self.font_win.render("Antonio was killed, try again", 1,
@@ -304,6 +305,7 @@ class Malen:
             #pygame.mixer.music.stop()
             #pygame.mixer.music.load('sound/hit_menu4.mp3')
             #pygame.mixer.music.play()
+            pygame.mouse.set_visible(True)
             pygame.draw.rect(self.monitor, RED, button_reexit, border_radius=25)
             self.monitor.blit(reexit, (button_reexit.centerx - 75, button_reexit.centery - 15))
             if mouse_click[0]:
