@@ -46,7 +46,7 @@ class Interaction:
         self.sprites = sprites
         self.malen = malen
         self.speed = 0
-        self.pain_sound = pygame.mixer.Sound('data/sound/pain2.wav')
+        self.pain_sound = pygame.mixer.Sound('data/sound/deadmon.wav')
         self.heal_sound = pygame.mixer.Sound('data/sound/heal.wav')
 
     def terminate(self):
