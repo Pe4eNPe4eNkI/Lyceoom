@@ -35,10 +35,19 @@ class Sprites:
                                       AllSprites(DoorV(), (1.5, 8.55))]
         self.list_of_sprites = [AllSprites(Barrel(), (9.1, 4)),  # карта №1
                                 AllSprites(Human1(), (7.1, 2.1)),
-                                AllSprites(Pinky(), (7.31, 5.88)),
                                 AllSprites(Fire(), (8.31, 7.88)),
-                                AllSprites(MedKit(), (4.53, 9.1)),
-                                AllSprites(Sosademon(), (8.54, 14.45))]
+                                AllSprites(Obama(), (2.27, 1.39)),
+                                AllSprites(Sosademon(), (8.54, 14.45)),
+                                AllSprites(Pinky(), (2.9, 14.66)),
+                                AllSprites(Sosademon(), (12.4, 7.63)),
+                                AllSprites(Obama(), (11.87, 14.05)),
+                                AllSprites(Human2(), (16.19, 12.57)),
+                                AllSprites(Pinky(), (21.22, 14.21)),
+                                AllSprites(Obama(), (15.55, 10.48)),
+                                AllSprites(Human1(), (14.05, 2.61)),
+                                AllSprites(Obama(), (13.8, 4.62)),
+                                AllSprites(Pinky(), (18.93, 4.56)),
+                                AllSprites(Human1(), (16.76, 2.02))]
         self.list_of_sprites_2 = [AllSprites(Human1(), (36.61, 5.37)),
                                   AllSprites(Pinky(), (25.76, 4.74)),
                                   AllSprites(MedKit(), (32.02, 7.1)),
