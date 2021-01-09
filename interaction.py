@@ -58,7 +58,8 @@ class Interaction:
             for obj in sorted(self.sprites.list_of_sprites
                               + self.sprites.list_of_sprites_2
                               + self.sprites.list_of_sprites_3
-                              + self.sprites.list_of_sprites_doors, key=lambda obj: obj.dist_to_sprite):
+                              + self.sprites.list_of_sprites_doors, 
+                              key=lambda obj: obj.dist_to_sprite):
                 if obj.is_on_fire[1]:
                     if obj.dead != 'never' and not obj.dead:
                         if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
@@ -100,7 +101,7 @@ class Interaction:
                     if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:
                         key = 0
                         for elem in self.sprites.list_of_sprites_doors:
-                            if elem.tp == 'barrel' or elem.tp == 'fire':
+                            if elem.tp in ('barrel', 'fire', 'medkit'):
                                 pass
                             elif elem.dead == 'never':
                                 pass
@@ -113,7 +114,11 @@ class Interaction:
                     if obj.tp == 'h_nextdoor_second' and obj.dist_to_sprite < CELL:
                         key = 0
                         for elem in self.sprites.list_of_sprites_2:
-                            if elem.dead != True:
+                            if elem.tp in ('barrel', 'fire', 'medkit'):
+                                pass
+                            elif elem.dead == 'never':
+                                pass
+                            elif elem.dead != True:
                                 key += 1
                         if key == 0:
                             obj.d_open_trigger = True
@@ -140,7 +145,9 @@ class Interaction:
                         self.sprites.list_of_sprites_3.remove(obj)
 
     def npc_action(self):
-        for obj in (self.sprites.list_of_sprites + self.sprites.list_of_sprites_2 + self.sprites.list_of_sprites_3):
+        for obj in (self.sprites.list_of_sprites + \
+                    self.sprites.list_of_sprites_2 + \
+                    self.sprites.list_of_sprites_3):
             if obj.tp == 'fire':
                 if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
                                           txt_map, self.gamer.pos):
@@ -210,6 +217,3 @@ class Interaction:
                     if event.type == pygame.QUIT:
                         self.terminate()
                 self.malen.dead_menu()
-
-    def metket(self):
-        pass
