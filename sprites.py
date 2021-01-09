@@ -32,9 +32,32 @@ class Sprites:
         self.list_of_sprites_doors = [AllSprites(DoorH(), (10.96, 2.55)),  # Двери
                                       AllSprites(NextDoorFirst(), (22.8, 7.55)),
                                       AllSprites(NextDoorSecond(), (46.27, 7.55)),
-                                      AllSprites(DoorV(), (1.5, 8.55))]
+                                      AllSprites(DoorV(), (1.5, 8.55)),
+                                      AllSprites(DoorH(), (2.6, 3.55)),
+                                      AllSprites(DoorH(), (22.8, 7.55)),
+                                      AllSprites(DoorH(), (25.99, 1.55)),
+                                      AllSprites(DoorH(), (38.01, 10.55)),
+                                      AllSprites(DoorH(), (39.01, 1.55)),
+                                      AllSprites(DoorH(), (46.27, 7.55)),
+                                      AllSprites(DoorV(), (11.5, 6.55)),
+                                      AllSprites(DoorH(), (7.25, 13.5)),
+                                      AllSprites(DoorV(), (24.5, 5.43)),
+                                      AllSprites(DoorH(), (30.85, 11.5)),
+                                      AllSprites(DoorH(), (37.5, 14.5)),
+                                      AllSprites(DoorV(), (44.5, 5.55)),
+                                      AllSprites(DoorV(), (47.55, 9.5)),
+                                      AllSprites(DoorV(), (51.5, 6.75)),
+                                      AllSprites(DoorH(), (53.05, 2.5)),
+                                      AllSprites(DoorH(), (63.75, 8.55)),
+                                      AllSprites(DoorH(), (52.45, 14.5)),
+                                      AllSprites(DoorH(), (14.5, 9.5)),
+                                      AllSprites(DoorV(), (34.5, 5.5)),
+                                      AllSprites(DoorH(), (65.5, 1.55)),
+                                      ]
         self.list_of_sprites = [AllSprites(Barrel(), (9.1, 4)),  # карта №1
                                 AllSprites(Human1(), (7.1, 2.1)),
+                                AllSprites(MedKit(), (21.63, 11.69)),
+                                AllSprites(MedKit(), (2.21, 14.58)),
                                 AllSprites(Fire(), (8.31, 7.88)),
                                 AllSprites(Obama(), (2.27, 1.39)),
                                 AllSprites(Sosademon(), (8.54, 14.45)),
@@ -44,17 +67,45 @@ class Sprites:
                                 AllSprites(Human2(), (16.19, 12.57)),
                                 AllSprites(Pinky(), (21.22, 14.21)),
                                 AllSprites(Obama(), (15.55, 10.48)),
-                                AllSprites(Human1(), (14.05, 2.61)),
+                                AllSprites(Human1(), (12.03, 1.54)),
                                 AllSprites(Obama(), (13.8, 4.62)),
                                 AllSprites(Pinky(), (18.93, 4.56)),
                                 AllSprites(Human1(), (16.76, 2.02))]
         self.list_of_sprites_2 = [AllSprites(Human1(), (36.61, 5.37)),
-                                  AllSprites(Pinky(), (25.76, 4.74)),
+                                  AllSprites(Pinky(), (27.56, 5.47)),
                                   AllSprites(MedKit(), (32.02, 7.1)),
+                                  AllSprites(MedKit(), (24.45, 13.85)),
+                                  AllSprites(Sosademon(), (43.01, 1.41)),
+                                  AllSprites(Pinky(), (44.67, 4.06)),
+                                  AllSprites(Human1(), (36.61, 5.37)),
+                                  AllSprites(Human1(), (41.64, 3.33)),
+                                  AllSprites(Human1(), (34.74, 5.25)),
+                                  AllSprites(Sosademon(), (25.74, 6.25)),
+                                  AllSprites(Sosademon(), (42.58, 4.05)),
+                                  AllSprites(Sosademon(), (33.26, 14.76)),
+                                  AllSprites(Sosademon(), (25.68, 1.24)),
+                                  AllSprites(Sosademon(), (36.44, 3.44)),
+                                  AllSprites(Pinky(), (44.76, 14.76)),
+                                  AllSprites(Pinky(), (30.29, 13.33)),
+                                  AllSprites(Pinky(), (24.24, 11.75)),
+                                  AllSprites(Pinky(), (33.47, 1.53)),
+                                  AllSprites(Obama(), (35.39, 2.33)),
                                   AllSprites(Sosademon(), (25.74, 6.25))]
         self.list_of_sprites_3 = [AllSprites(Human2(), (47.41, 1.37)),
+                                  AllSprites(Human2(), (58.65, 2.56)),
+                                  AllSprites(Human2(), (57.56, 5.86)),
+                                  AllSprites(Obama(), (47.24, 3.47)),
+                                  AllSprites(Obama(), (54.57, 3.34)),
+                                  AllSprites(Obama(), (51.5, 6.35)),
+                                  AllSprites(Obama(), (53.83, 5.94)),
+                                  AllSprites(Obama(), (62.76, 9.74)),
                                   AllSprites(Pinky(), (58.8, 2.45)),
+                                  AllSprites(Pinky(), (50.73, 5.74)),
+                                  AllSprites(Pinky(), (56.74, 3.25)),
+                                  AllSprites(Pinky(), (49.88, 4.2)),
+                                  AllSprites(Pinky(), (63.4, 11.82)),
                                   AllSprites(MedKit(), (56.8, 13.6)),
+                                  AllSprites(MedKit(), (67.14, 1.51)),
                                   AllSprites(Sosademon(), (49.24, 8.96))]
 
     @property
@@ -430,7 +481,7 @@ class Human2:
 
 class DoorH:
     def __init__(self):
-        self.way = [pygame.image.load(f'data/sprites/doors/h_door/{i}.png').convert_alpha() 
+        self.way = [pygame.image.load(f'data/sprites/doors/h_door/{i}.png').convert_alpha()
                     for i in range(16)]
         self.viewing_angles = True
         self.shift = -0.005
