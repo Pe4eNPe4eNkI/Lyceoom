@@ -111,7 +111,7 @@ class Sprites:
         # удаление открытых дверей
         for obj in deleted_lst:
             if obj.tp in {'h_door', 'v_door', 'h_nextdoor_first', 'h_nextdoor_second'} and obj.cls:
-                if pygame.time.get_ticks() - obj.time >= 1000:
+                if pygame.time.get_ticks() - obj.time >= 7000:
                     self.list_of_sprites_doors.remove(obj)
         # удаление трупов мобов
         for obj in deleted_lst:
@@ -304,7 +304,7 @@ class Fire:
     def __init__(self):
         self.way = [pygame.image.load('data/sprites/fire/base/3.png').convert_alpha()]
         self.viewing_angles = False
-        self.shift = 0.7
+        self.shift = 0.5
         self.scale = (0.6, 0.6)
         self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/fire/action/{i}.png').convert_alpha()
@@ -324,7 +324,7 @@ class Barrel:
     def __init__(self):
         self.way = [pygame.image.load('data/sprites/barrel/base/0.png').convert_alpha()]
         self.viewing_angles = False
-        self.shift = 1.8
+        self.shift = 1.5
         self.scale = (0.4, 0.4)
         self.side = 30
         self.animation = deque([pygame.image.load(f'data/sprites/barrel/anim/{i}.png').convert_alpha()

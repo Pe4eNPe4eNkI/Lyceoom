@@ -68,7 +68,7 @@ class Interaction:
                                 if self.gamer.weapon_now == 'shotgun':
                                     damage = 3
                                 elif self.gamer.weapon_now == 'autorifle':
-                                    damage = 0.25
+                                    damage = 0.35
                                 if obj.npc_hp is None or obj.npc_hp - damage <= 0:
                                     self.pain_sound.play()
                                     obj.dead = True
