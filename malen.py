@@ -58,7 +58,7 @@ class Malen:
                               HEIGHT - self.autorifle_rect.height)
         self.autorifle_length = len(self.autorifle_animation)
         self.autorifle_length_count = 0
-        self.autorifle_animation_speed = 3
+        self.autorifle_animation_speed = 1
         self.autorifle_animation_count = 0
         self.autorifle_animation_trigger = True
         self.autorifle_sound = pygame.mixer.Sound('sound/shotrifle.wav')

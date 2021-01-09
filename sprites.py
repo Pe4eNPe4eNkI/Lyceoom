@@ -29,11 +29,11 @@ def load_image(name, color_key=None):
 
 class Sprites:
     def __init__(self):
+        self.list_of_sprites_doors = [AllSprites(DoorH(), (10.96, 2.55)),  # Двери
+                                      AllSprites(NextDoorFirst(), (22.8, 7.55)),
+                                      AllSprites(NextDoorSecond(), (46.27, 7.55)),
+                                      AllSprites(DoorV(), (1.5, 8.55))]
         self.list_of_sprites = [AllSprites(Barrel(), (9.1, 4)),  # карта №1
-                                AllSprites(DoorH(), (10.96, 2.55)),
-                                AllSprites(NextDoorFirst(), (22.8, 7.55)),
-                                AllSprites(NextDoorSecond(), (46.27, 7.55)),
-                                AllSprites(DoorV(), (1.5, 8.55)),
                                 AllSprites(Human1(), (7.1, 2.1)),
                                 AllSprites(Pinky(), (7.31, 5.88)),
                                 AllSprites(Fire(), (8.31, 7.88)),
@@ -52,12 +52,13 @@ class Sprites:
     def sprite_shot(self):
         return min([obj.is_on_fire for obj in self.list_of_sprites
                     + self.list_of_sprites_2
-                    + self.list_of_sprites_3], default=(float('inf'), 0))
+                    + self.list_of_sprites_3
+                    + self.list_of_sprites_doors], default=(float('inf'), 0))
 
     @property
     def b_doors(self):
         blocked_doors = Dict.empty(key_type=types.UniTuple(int32, 2), value_type=int32)
-        for obj in self.list_of_sprites:
+        for obj in self.list_of_sprites_doors:
             if obj.tp == 'h_door' or obj.tp == 'h_nextdoor_first' or \
                 obj.tp == 'h_nextdoor_second' and obj.blocked:
                     i, j = mapping(obj.x, obj.y)

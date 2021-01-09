@@ -57,7 +57,8 @@ class Interaction:
         if self.gamer.shot and self.malen.shotgun_animation_trigger:
             for obj in sorted(self.sprites.list_of_sprites
                               + self.sprites.list_of_sprites_2
-                              + self.sprites.list_of_sprites_3, key=lambda obj: obj.dist_to_sprite):
+                              + self.sprites.list_of_sprites_3
+                              + self.sprites.list_of_sprites_doors, key=lambda obj: obj.dist_to_sprite):
                 if obj.is_on_fire[1]:
                     if obj.dead != 'never' and not obj.dead:
                         if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
@@ -98,7 +99,7 @@ class Interaction:
                             self.malen.autorifle_animation_trigger = False
                     if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:
                         key = 0
-                        for elem in self.sprites.list_of_sprites:
+                        for elem in self.sprites.list_of_sprites_doors:
                             if elem.tp == 'barrel' or elem.tp == 'fire':
                                 pass
                             elif elem.dead == 'never':

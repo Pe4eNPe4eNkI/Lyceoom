@@ -32,7 +32,8 @@ while True:
     walls, wall_shot = walls_with_ray_cast(gamer, malen.texture)
     malen.world(walls + [obj.object_locate(gamer, walls) for obj in sprites.list_of_sprites] + \
                         [obj.object_locate(gamer, walls) for obj in sprites.list_of_sprites_2] + \
-                        [obj.object_locate(gamer, walls) for obj in sprites.list_of_sprites_3])
+                        [obj.object_locate(gamer, walls) for obj in sprites.list_of_sprites_3] +
+                        [obj.object_locate(gamer, walls) for obj in sprites.list_of_sprites_doors])
     malen.fps(timer)
     malen.hp(gamer.hp)
     malen.mini_map()

@@ -18,6 +18,9 @@ class Gamer:
         self.angle = gamer_angle
         self.sensitivity = 0.002
         self.sprites = sprites
+        self.first_room = True
+        self.second_room = False
+        self.third_room = False
         self.flag = ''
         self.hp = 100
         self.weapon_now = 'shotgun'
@@ -43,7 +46,9 @@ class Gamer:
                + [pygame.Rect(*obj.pos, obj.side, obj.side) 
                   for obj in self.sprites.list_of_sprites_2 if obj.blocked] \
                + [pygame.Rect(*obj.pos, obj.side, obj.side) 
-                  for obj in self.sprites.list_of_sprites_3 if obj.blocked]
+                  for obj in self.sprites.list_of_sprites_3 if obj.blocked] \
+               + [pygame.Rect(*obj.pos, obj.side, obj.side)
+                  for obj in self.sprites.list_of_sprites_doors if obj.blocked]
 
     def detect_collision(self, dx, dy):
         next_rect = self.rect.copy()
