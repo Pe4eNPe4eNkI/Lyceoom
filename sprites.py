@@ -307,7 +307,7 @@ class Sosademon:
         self.viewing_angles = True
         self.shift = 0
         self.scale = (1, 1)
-        self.side = 70
+        self.side = 100
         self.animation = deque([pygame.image.load(f'data/sprites/sosademon/' + \
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(6)])
@@ -330,7 +330,7 @@ class Pinky:
         self.viewing_angles = True
         self.shift = 0.2
         self.scale = (0.8, 0.9)
-        self.side = 90
+        self.side = 120
         self.animation = deque([pygame.image.load(f'data/sprites/pinky/' + \
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(4)])
@@ -378,7 +378,7 @@ class Human1:
         self.viewing_angles = True
         self.shift = 0.5
         self.scale = (0.5, 0.8)
-        self.side = 30
+        self.side = 50
         self.animation = deque([pygame.image.load(f'data/sprites/human1/' + \
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(4)])
@@ -402,7 +402,7 @@ class Human2:
         self.viewing_angles = True
         self.shift = 0.5
         self.scale = (0.6, 0.8)
-        self.side = 30
+        self.side = 50
         self.animation = deque([pygame.image.load(f'data/sprites/stas/' + \
                                                   f'action/{i}.png').convert_alpha()
                                 for i in range(4)])

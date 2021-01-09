@@ -132,7 +132,7 @@ class Malen:
         sys.exit()
 
     def mini_map(self):
-        self.monitor_map.fill(BLACK)
+        self.monitor_map.fill(GRAY)
         # позиции персонажа на миникарте
         xmap, ymap = self.gamer.x // MAP_SCALE, self.gamer.y // MAP_SCALE
         # короткий луч для определения направления

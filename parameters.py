@@ -62,5 +62,6 @@ SKY_BLUE = (0, 180, 255)
 YELLOW = (220, 220, 0)
 SANDY = (244, 164, 96)
 SPRINGGREEN = (0, 250, 154)
+GRAY = (26, 26, 26)
 
 # test
