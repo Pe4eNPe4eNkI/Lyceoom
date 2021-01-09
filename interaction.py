@@ -100,7 +100,7 @@ class Interaction:
                             self.malen.autorifle_animation_trigger = False
                     if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:
                         key = 0
-                        for elem in self.sprites.list_of_sprites_doors:
+                        for elem in self.sprites.list_of_sprites:
                             if elem.tp in ('barrel', 'fire', 'medkit'):
                                 pass
                             elif elem.dead == 'never':
