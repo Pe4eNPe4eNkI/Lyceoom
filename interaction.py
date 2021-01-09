@@ -111,7 +111,6 @@ class Interaction:
                         if key == 0:
                             obj.d_open_trigger = True
                             obj.blocked = None
-                        print(key)
                     if obj.tp == 'h_nextdoor_second' and obj.dist_to_sprite < CELL:
                         key = 0
                         obj.time = pygame.time.get_ticks()
