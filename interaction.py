@@ -179,8 +179,8 @@ class Interaction:
         if abs(obj.dist_to_sprite) > CELL:
             dx = obj.x - self.gamer.pos[0]
             dy = obj.y - self.gamer.pos[1]
-            obj.x = obj.x + 1 if dx < 0 else obj.x - 1
-            obj.y = obj.y + 1 if dy < 0 else obj.y - 1
+            obj.x = obj.x + 2 if dx < 0 else obj.x - 2
+            obj.y = obj.y + 2 if dy < 0 else obj.y - 2
 
     def clear(self):
         del_sprites = self.sprites.list_of_sprites[:]

@@ -391,7 +391,7 @@ class Human1:
                                 for i in range(5)])
         self.tp = 'enemy_shooter'
         self.blocked = True
-        self.npc_hp = None
+        self.npc_hp = 1
         self.obj_action = []
 
 
@@ -415,7 +415,7 @@ class Human2:
                                 for i in range(5)])
         self.tp = 'enemy'
         self.blocked = True
-        self.npc_hp = None
+        self.npc_hp = 10
         self.obj_action = []
 
 
