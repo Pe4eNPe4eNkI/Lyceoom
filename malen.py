@@ -245,7 +245,8 @@ class Malen:
 
     def dead_music(self):
         pygame.mixer.init()
-        pygame.mixer.music.load('sound/dead_mus.wav')
+        pygame.mixer.music.load('data/sound/dead_mus.wav')
+        pygame.mixer.music.set_volume(0.1)
         pygame.mixer.music.play()
 
     def menu(self):
@@ -308,7 +309,9 @@ class Malen:
         if keys[pygame.K_ESCAPE]:
             self.terminate()
 
-        self.dead_music()
+        pygame.mixer.music.stop()
+        pygame.mixer.music.set_volume(0.1)
+        pygame.mixer.music.play()
         button_font = pygame.font.Font('data/font/font2.ttf', 35)
 
         rend_dead = self.font_win.render("Antonio was killed, try again", 1,
