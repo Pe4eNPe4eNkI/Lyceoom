@@ -56,6 +56,7 @@ class Malen:
         self.shotgun_sound = pygame.mixer.Sound('data/sound/boom3.wav')
         self.shotgun_damage = 3
 
+
         # autorifle
         self.autorifle_base_sprite = pygame.image.load(
             'data/sprites/weapons/autorifle/0.png').convert_alpha()
@@ -323,6 +324,7 @@ class Malen:
             # pygame.mixer.music.stop()
             # pygame.mixer.music.load('sound/hit_menu4.mp3')
             # pygame.mixer.music.play()
+
             pygame.mouse.set_visible(True)
             pygame.draw.rect(self.monitor, RED, button_reexit, border_radius=25)
             self.monitor.blit(reexit, (button_reexit.centerx - 75, button_reexit.centery - 15))
