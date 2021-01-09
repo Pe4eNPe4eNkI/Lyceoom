@@ -1,8 +1,3 @@
-import pygame
-import sys
-import math
-from parameters import *
-from sprites import *
 from map import collision_walls
 from malen import *
 
@@ -27,25 +22,25 @@ class Gamer:
         # Параметры игрока для того, чтобы не ходить сквозь стены
         self.side = 50
         self.rect = pygame.Rect(*gamer_pos, self.side, self.side)
-        self.minirect = pygame.Rect(gamer_pos[0] // MAP_SCALE, gamer_pos[1] // MAP_SCALE, 
-                                    self.side // MAP_SCALE, 
+        self.minirect = pygame.Rect(gamer_pos[0] // MAP_SCALE, gamer_pos[1] // MAP_SCALE,
+                                    self.side // MAP_SCALE,
                                     self.side // MAP_SCALE)
         self.shot = False
         self.alive = True
 
     @property
     def pos(self):
-        #print(self.x, self.y)
+        # print(self.x, self.y)
         return (self.x, self.y)
 
     @property
     def collision_list(self):
         return collision_walls \
-               + [pygame.Rect(*obj.pos, obj.side, obj.side) 
+               + [pygame.Rect(*obj.pos, obj.side, obj.side)
                   for obj in self.sprites.list_of_sprites if obj.blocked] \
-               + [pygame.Rect(*obj.pos, obj.side, obj.side) 
+               + [pygame.Rect(*obj.pos, obj.side, obj.side)
                   for obj in self.sprites.list_of_sprites_2 if obj.blocked] \
-               + [pygame.Rect(*obj.pos, obj.side, obj.side) 
+               + [pygame.Rect(*obj.pos, obj.side, obj.side)
                   for obj in self.sprites.list_of_sprites_3 if obj.blocked] \
                + [pygame.Rect(*obj.pos, obj.side, obj.side)
                   for obj in self.sprites.list_of_sprites_doors if obj.blocked]
@@ -142,4 +137,4 @@ class Gamer:
     def is_dead(self):
         if self.hp <= 0:
             self.alive = False
-            #terminate()
+            # terminate()
