@@ -157,6 +157,7 @@ class AllSprites:
         self.dead_shift = kind.dead_shift  # сдвиг мертвой анимации
         self.dead_anim_count = 0
         self.npc_hp = kind.npc_hp  # здоровье каждого моба
+        self.d_sprite = []
 
         self.x, self.y = pos[0] * CELL, pos[1] * CELL  # позиция в координатах
         self.tp = kind.tp  # маркер
