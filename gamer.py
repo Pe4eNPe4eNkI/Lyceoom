@@ -24,7 +24,7 @@ class Gamer:
         self.second_room = False
         self.third_room = False
         self.flag = ''  
-        self.hp = 100  # здоровье
+        self.hp = 10000  # здоровье
         self.weapon_now = 'shotgun' 
         #  Параметры игрока для того, чтобы не ходить сквозь стены
         self.side = 50

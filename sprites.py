@@ -120,7 +120,7 @@ class Sprites:
         # удаление открытых дверей
         for obj in deleted_lst:
             if obj.tp in {'h_door', 'v_door', 'h_nextdoor_first', 'h_nextdoor_second'} and obj.cls:
-                if pygame.time.get_ticks() - obj.time >= 7000:
+                if pygame.time.get_ticks() - obj.time >= 700:
                     self.list_of_sprites_doors.remove(obj)
         # удаление трупов мобови на каждой карте через 4 секунды
         for obj in deleted_lst:
@@ -392,7 +392,7 @@ class Sosademon:
                                 for i in range(6)])
         self.tp = 'boss'
         self.blocked = True
-        self.npc_hp = 45
+        self.npc_hp = 30
         self.obj_action = []
 
 
