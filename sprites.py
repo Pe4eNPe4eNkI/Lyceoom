@@ -236,16 +236,18 @@ class AllSprites:
             # подготавливаем сам спрайт (картинку)
             try:
                 if type(sprite_object) == list:
-                    sprite = pygame.transform.scale(sprite_object[0], (self.p_height, self.p_height))
+                    sprite = pygame.transform.scale(sprite_object[0], 
+                                                    (self.p_height, self.p_height))
                 else:
-                    sprite = pygame.transform.scale(sprite_object, (sprite_width, sprite_heigth))
+                    sprite = pygame.transform.scale(sprite_object, 
+                                                    (sprite_width, sprite_heigth))
             except Exception:
                 return (False,)
             # возвращаем все нужные атрибуты
             return (self.dist_to_sprite, sprite, sprite_pos)
         else:
             return (False,)
-            
+
     def s_animation(self):  # Отображение анимация мира для игрока
         if self.animation and self.dist_to_sprite < self.animation_dist:
             sprite_object = self.animation[0]
