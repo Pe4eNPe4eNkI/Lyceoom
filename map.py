@@ -120,15 +120,17 @@ for j, row in enumerate(new_maps):  # добавляем текстуры сте
                 txt_map[(i * CELL, j * CELL)] = 14
 
 
-class Camera:  # Леша
+class Camera:  # Класс для движения фокуса миникарты за игроком
     def __init__(self, monitor_map, gamer):
         self.gamer = gamer
         self.monitor_map = monitor_map
         self.dx = 0
 
     def update(self):
+        # нам нужна только ось X
         self.dx = -(self.gamer.minirect.x + self.gamer.minirect.w // 2 - MAP_RES[0] // 10)
 
     def apply(self, x, y):
+        # корректируем положение объекта на миникарте и рисуем его
         x += self.dx
         pygame.draw.rect(self.monitor_map, DARKORANGE, (x, y, MAP_CELL, MAP_CELL), 2)
