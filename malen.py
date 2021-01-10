@@ -251,7 +251,7 @@ class Malen:
 
     def menu(self):
         x = 0
-        pygame.mixer.music.load('data/sound/win.wav')
+        pygame.mixer.music.load('data/sound/ledohod.wav')
         pygame.mixer.music.play()
 
         button_font = pygame.font.Font('data/font/font2.ttf', 40)
@@ -276,7 +276,7 @@ class Malen:
             self.monitor.blit(start, (button_start.centerx - 110, button_start.centery - 25))
 
             pygame.draw.rect(self.monitor, BLACK, button_exit, border_radius=25, width=10)
-            self.monitor.blit(exit, (button_exit.centerx - 90, button_exit.centery - 25))
+            self.monitor.blit(exit, (button_exit.centerx - 85, button_exit.centery - 20))
 
             color = randrange(40)
             label = label_font.render('Lyceoom', 1, (color, color, color))
@@ -289,7 +289,7 @@ class Malen:
                 # pygame.mixer.music.load('data/sound/hit_menu1.mp3')
                 # pygame.mixer.music.play()
                 pygame.draw.rect(self.monitor, BLACK, button_start, border_radius=25)
-                self.monitor.blit(start, (button_start.centerx - 110, button_start.centery - 25))
+                self.monitor.blit(start, (button_start.centerx - 85, button_start.centery - 20))
                 if mouse_click[0]:
                     self.menu_tr = False
             elif button_exit.collidepoint(mouse_pos):
@@ -308,10 +308,6 @@ class Malen:
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
             self.terminate()
-
-        pygame.mixer.music.stop()
-        pygame.mixer.music.set_volume(0.1)
-        pygame.mixer.music.play()
         button_font = pygame.font.Font('data/font/font2.ttf', 35)
 
         rend_dead = self.font_win.render("Antonio was killed, try again", 1,

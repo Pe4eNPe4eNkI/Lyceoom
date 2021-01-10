@@ -58,7 +58,7 @@ class Interaction:
             for obj in sorted(self.sprites.list_of_sprites
                               + self.sprites.list_of_sprites_2
                               + self.sprites.list_of_sprites_3
-                              + self.sprites.list_of_sprites_doors, 
+                              + self.sprites.list_of_sprites_doors,
                               key=lambda obj: obj.dist_to_sprite):
                 if obj.is_on_fire[1]:
                     if obj.dead != 'never' and not obj.dead:
@@ -190,30 +190,35 @@ class Interaction:
             obj.x = obj.x + 2 + self.speed if dx < 0 else obj.x - 2 - self.speed
             obj.y = obj.y + 2 + self.speed if dy < 0 else obj.y - 2 - self.speed
 
-    def play_music(self):
+    def play_music(self):  # загружаем музыку, которая играет во время игры
         pygame.mixer.pre_init(44100, -16, 2, 2048)
         pygame.mixer.init()
-        pygame.mixer.music.load('data/sound/thema1.wav')
+        pygame.mixer.music.load('data/sound/doom.wav')  # загрузка музыкальной темы игры
         pygame.mixer.music.set_volume(0.1)
-        pygame.mixer.music.play(10)
+        pygame.mixer.music.play(-1)
 
-    def wins(self):
-        if self.gamer.alive:
+    def wins(self):  # если мы выиграли (убили всех мобов), то вызывается эта функция, которая сообщает о победе
+        if self.gamer.alive:  # если персонаж жив
             if not len([obj for obj in self.sprites.list_of_sprites_3
                         if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and not obj.dead]):
+                # если все
                 pygame.mixer.music.stop()
-                pygame.mixer.music.load('data/sound/win.wav')
-                pygame.mixer.music.play()
+                pygame.mixer.music.load('data/sound/ledohod.wav')
+                pygame.mixer.music.play(-1)
                 while True:
                     for event in pygame.event.get():
                         if event.type == pygame.QUIT:
                             self.terminate()
-                    self.malen.win()
+                    self.malen.win()  # отрисовка менюшки победы
 
-    def deads(self):
+    def deads(self):  # если нас убили, то вызывается эта функция, которая сообщает о смерти персонажа
         if not self.gamer.alive:
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load('data/sound/dead_mus.wav')
+            pygame.mixer.music.set_volume(0.2)
+            pygame.mixer.music.play(-1)
             while True:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         self.terminate()
-                self.malen.dead_menu()
+                self.malen.dead_menu()  # отрисовка менюшки смерти

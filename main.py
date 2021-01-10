@@ -22,6 +22,7 @@ gamer = Gamer(sprites)
 malen = Malen(monitor, mon_map, gamer, timer)
 interaction = Interaction(gamer, sprites, malen)
 
+malen.menu()
 interaction.play_music()
 
 while True:
@@ -37,7 +38,7 @@ while True:
     malen.fps(timer)
     malen.hp(gamer.hp)
     malen.mini_map()
-    malen.menu()
+
     malen.choice_weapon([wall_shot, sprites.sprite_shot], flag)
 
     interaction.interaction_objects()
