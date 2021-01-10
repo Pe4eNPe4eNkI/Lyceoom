@@ -113,7 +113,6 @@ class Sprites:
                 blocked_doors[(i, j)] = 0
         return blocked_doors
 
-
     # в этой функции удаляются спрайты после кулдауна
     def delete_objects(self):
         # список-копия со всеми элементами
