@@ -159,7 +159,7 @@ class Malen:
         self.monitor.blit(self.monitor_map, MAP_POS)
         self.camera.update()
 
-    def choice_weapon(self, shots, flag):  # Валера
+    def choice_weapon(self, shots, flag):  # Функция позволяет выбрать оружие из инвентаря
         if flag == 'shotgun' or flag == '':
             if self.gamer.shot:
                 if not self.shotgun_length_count:
@@ -205,7 +205,7 @@ class Malen:
                 self.monitor.blit(self.autorifle_base_sprite, self.autorifle_pos)
                 self.gamer.weapon_now = 'autorifle'
 
-    def bullet_sfx(self):  # Даня
+    def bullet_sfx(self):  # Отрисовывает взрывы на стенах при стрельбе
         if self.sfx_length_count < self.sfx_length:
             sfx = pygame.transform.scale(self.sfx[0], (self.shot_projection, self.shot_projection))
             sfx_rect = sfx.get_rect()
