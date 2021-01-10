@@ -305,9 +305,9 @@ class Malen:
         button_optimize = pygame.Rect(0, 0, 200, 66.7)
         button_optimize.center = 1080, 54
 
-        dif_lvl_easy = button_font_corps.render('EASY', 1, pygame.Color(52, 80, 80))
-        dif_lvl_normal = button_font_corps.render('NORMAL', 1, pygame.Color(52, 50, 50))
-        dif_lvl_hard = button_font_corps.render('HARD', 1, pygame.Color(205, 184, 145))
+        dif_lvl_easy = button_font_corps.render('EASY', 1, pygame.Color(10, 143, 53))
+        dif_lvl_normal = button_font_corps.render('NORMAL', 1, pygame.Color(214, 174, 1))
+        dif_lvl_hard = button_font_corps.render('HARD', 1, pygame.Color(209, 50, 16))
         button_dif_lvl = pygame.Rect(0, 0, 200, 66.7)
         button_dif_lvl.center = 1080, 134
 
