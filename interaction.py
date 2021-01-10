@@ -190,7 +190,7 @@ class Interaction:
                         if abs(obj.dist_to_sprite) <= CELL:
                             hit = random.randrange(0, 2)
                             if hit != 0:
-                                self.gamer.hp -= 1000
+                                self.gamer.hp -= 50
                 else:
                     obj.is_trigger = False
 
