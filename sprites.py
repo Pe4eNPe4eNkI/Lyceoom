@@ -70,7 +70,6 @@ class Sprites:
                                   AllSprites(Fire(), (29.82, 4.49)),
                                   AllSprites(Fire(), (24.74, 11.3)),
                                   AllSprites(Barrel(), (28.44, 6.51)),
-                                  AllSprites(Barrel(), (27.55, 14.43)),
                                   AllSprites(Barrel(), (38.21, 6.76)),
                                   AllSprites(Barrel(), (41.47, 12.56)),
                                   AllSprites(MedKit(), (41.87, 1.55)),
@@ -86,7 +85,7 @@ class Sprites:
                     + self.list_of_sprites_doors], default=(float('inf'), 0))
 
     @property
-    def b_doors(self):  # словарь закрытых дверей
+    def b_doors(self):  # Функция запрещает видеть через закрытые двери
         blocked_doors = Dict.empty(key_type=types.UniTuple(int32, 2), value_type=int32)
         for obj in self.list_of_sprites_doors:
             if obj.tp == 'h_door' or obj.tp == 'h_nextdoor_first' or obj.tp == 'h_nextdoor_second' \
@@ -153,6 +152,7 @@ class AllSprites:
                                     or self.tp == 'h_nextdoor_first' \
                                     or self.tp == 'h_nextdoor_second' else self.x
         self.cls = False  # несуществование (нужно ли удалять)
+        self.obj_action = kind.obj_action.copy()  # движение
         # если спрайт не статичный (со всех сторон одинаковый)
         if self.viewing_angles:
             # делаем списки с замороженными множествами углов (нужны будут для ключей)
@@ -162,7 +162,7 @@ class AllSprites:
             else:
                 self.sprite_angles = [frozenset(range(348, 361)) | frozenset(range(0, 11))] + \
                                      [frozenset(range(i, i + 23)) for i in range(11, 348, 23)]
-            # создаем словарь для соотношения картинки и угла 
+            # создаем словарь для соотношения картинки и угла
             # поэтому нам и нужны замороженные множества, так они неизменямые и могут быть ключами
             self.sprite_positions = {angle: pos for angle, pos in zip(self.sprite_angles, self.obj)}
 
@@ -178,7 +178,7 @@ class AllSprites:
     def pos(self):
         return self.x - self.side // 2, self.y - self.side // 2
 
-    # функция для определения расстояния до спрайта 
+    # функция для определения расстояния до спрайта
     def object_locate(self, gamer, walls):
         fake_walls0 = [walls[0] for i in range(100)]
         fake_walls1 = [walls[-1] for i in range(100)]
@@ -243,7 +243,7 @@ class AllSprites:
         else:
             return (False,)
 
-    def s_animation(self):  # Отображение анимации атаки
+    def s_animation(self):  # Отображение анимация мира для игрока
         if self.animation and self.dist_to_sprite < self.animation_dist:
             sprite_object = self.animation[0]
             if self.animation_count < self.animation_speed:
@@ -277,7 +277,7 @@ class AllSprites:
                 self.dead_anim_count = 0
         return self.d_sprite
 
-    def s_action(self):  # отображение моба с разных углов
+    def s_action(self):  # Анимация мобов при действиях
         sprite_object = self.animation[0]
         if self.animation_count < self.animation_speed:
             self.animation_count += 1
@@ -325,6 +325,7 @@ class Fire:
         self.tp = 'fire'
         self.blocked = False
         self.npc_hp = None
+        self.obj_action = []
 
 
 class Barrel:
@@ -339,6 +340,8 @@ class Barrel:
                                 for i in range(12)])
         self.animation_dist = 150
         self.animation_speed = 5
+        self.animation_dist = 1800
+        self.animation_speed = 10
         self.dead = None
         self.dead_shift = 2.6
         self.dead_anim = deque([pygame.image.load(f'data/sprites/barrel/' + \
@@ -347,6 +350,7 @@ class Barrel:
         self.tp = 'barrel'
         self.blocked = True
         self.npc_hp = None
+        self.obj_action = []
 
 
 class Sosademon:
@@ -370,6 +374,7 @@ class Sosademon:
         self.tp = 'boss'
         self.blocked = True
         self.npc_hp = 30
+        self.obj_action = []
 
 
 class Pinky:
@@ -393,6 +398,7 @@ class Pinky:
         self.tp = 'enemy'
         self.blocked = True
         self.npc_hp = 5
+        self.obj_action = []
 
 
 class Obama:
@@ -416,6 +422,7 @@ class Obama:
         self.tp = 'enemy'
         self.blocked = True
         self.npc_hp = 3
+        self.obj_action = []
 
 
 class Human1:
@@ -439,6 +446,7 @@ class Human1:
         self.tp = 'enemy_shooter'
         self.blocked = True
         self.npc_hp = 1
+        self.obj_action = []
 
 
 class Human2:
@@ -462,6 +470,7 @@ class Human2:
         self.tp = 'enemy'
         self.blocked = True
         self.npc_hp = 10
+        self.obj_action = []
 
 
 class DoorH:
@@ -481,6 +490,7 @@ class DoorH:
         self.tp = 'h_door'
         self.blocked = True
         self.npc_hp = None
+        self.obj_action = []
 
 
 class DoorV:
@@ -500,6 +510,7 @@ class DoorV:
         self.tp = 'v_door'
         self.blocked = True
         self.npc_hp = None
+        self.obj_action = []
 
 
 class NextDoorFirst:
@@ -519,6 +530,7 @@ class NextDoorFirst:
         self.tp = 'h_nextdoor_first'
         self.blocked = True
         self.npc_hp = None
+        self.obj_action = []
 
 
 class NextDoorSecond:
@@ -538,6 +550,7 @@ class NextDoorSecond:
         self.tp = 'h_nextdoor_second'
         self.blocked = True
         self.npc_hp = None
+        self.obj_action = []
 
 
 class MedKit:
@@ -555,4 +568,5 @@ class MedKit:
         self.tp = 'medkit'
         self.dead_anim = []
         self.blocked = False
+        self.obj_action = []
         self.npc_hp = None
