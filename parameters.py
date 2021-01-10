@@ -19,6 +19,7 @@ STATUSBAR_POS = (WIDTH - 225, 655)
 gamer_pos = (124, 753)
 gamer_angle = 0
 gamer_speed = 4.5
+
 # настройки лучей
 FOV = math.pi / 3
 H_FOV = FOV / 2
