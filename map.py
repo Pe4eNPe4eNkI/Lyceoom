@@ -6,7 +6,7 @@ import pygame
 
 # тут создается карта и всё связанное с ней
 _ = False
-
+# map_y это карта нашей игры, которая состоил из трех комнат
 map_y = [
     [
         [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -64,24 +64,31 @@ map_y = [
     ]
 ]
 
-new_maps = map_y[0]
+new_maps = map_y[0]  # создаем одну огромную карту
 x = len(map_y)
 for i in range(1, x):
     for j in range(len(new_maps)):
         new_maps[j] += map_y[i][j]
 
+# ширина мира
 W_WORLD = len(new_maps[0]) * CELL
+
+# длина мира
 H_WORLD = len(new_maps) * CELL
+
+# множество во стенами
 mini_map = set()
 txt_map = Dict.empty(key_type=types.UniTuple(int32, 2), value_type=int32)
 collision_walls = []
 
-for j, row in enumerate(new_maps):
+for j, row in enumerate(new_maps):  # добавляем текстуры стен в словарь
     for i, char in enumerate(row):
+        # тк _ у является False, то мы может намного удобнее пробегаться по всей карте
         if char:
+            # добавляем в множество координаты стен, умноженные на размер кваррата карты
             mini_map.add((i * MAP_CELL, j * MAP_CELL))
             collision_walls.append(pygame.Rect(i * CELL, j * CELL, CELL, CELL))
-            if char == 1:
+            if char == 1:  # проверяем элемент списка (номер текстуры стены)
                 txt_map[(i * CELL, j * CELL)] = 1
             elif char == 2:
                 txt_map[(i * CELL, j * CELL)] = 2
@@ -112,15 +119,18 @@ for j, row in enumerate(new_maps):
             elif char == 14:
                 txt_map[(i * CELL, j * CELL)] = 14
 
-class Camera:
+
+class Camera:  # Класс для движения фокуса миникарты за игроком
     def __init__(self, monitor_map, gamer):
         self.gamer = gamer
         self.monitor_map = monitor_map
         self.dx = 0
 
     def update(self):
-        self.dx = -(self.gamer.minirect.x + self.gamer.minirect.w // 2  - MAP_RES[0] // 10) 
+        # нам нужна только ось X
+        self.dx = -(self.gamer.minirect.x + self.gamer.minirect.w // 2 - MAP_RES[0] // 10)
 
     def apply(self, x, y):
+        # корректируем положение объекта на миникарте и рисуем его
         x += self.dx
         pygame.draw.rect(self.monitor_map, DARKORANGE, (x, y, MAP_CELL, MAP_CELL), 2)
