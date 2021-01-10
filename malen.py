@@ -22,7 +22,6 @@ class Malen:
                         'S1': pygame.image.load('data/text/sky/sk1.jpeg').convert(),
                         'S2': pygame.image.load('data/text/sky/sky5.png').convert(),
                         'S3': pygame.image.load('data/text/sky/sky8.png').convert(),
-                        # 'F': pygame.image.load('data/text/down/down.png').convert(),
                         5: pygame.image.load('data/text/wall/wall13.png').convert(),
                         6: pygame.image.load('data/text/wall/wall17.png').convert(),
                         7: pygame.image.load('data/text/wall/wall15.png').convert(),
@@ -33,7 +32,6 @@ class Malen:
                         12: pygame.image.load('data/text/wall/wall19.png').convert(),
                         13: pygame.image.load('data/text/wall/wall5.png').convert(),
                         14: pygame.image.load('data/text/wall/wall6.png').convert(),
-
                         }
         self.menu_tr = True
         self.menu_picture = pygame.image.load('data/text/bg/bg2.jpg').convert()
@@ -53,6 +51,7 @@ class Malen:
         self.shotgun_animation_count = 0
         self.shotgun_animation_trigger = True
         self.shotgun_sound = pygame.mixer.Sound('data/sound/boom3.wav')
+        self.shotgun_sound.set_volume(0.4)
         self.shotgun_damage = 3
 
         # autorifle
@@ -70,6 +69,7 @@ class Malen:
         self.autorifle_animation_count = 0
         self.autorifle_animation_trigger = True
         self.autorifle_sound = pygame.mixer.Sound('data/sound/shotrifle.wav')
+        self.autorifle_sound.set_volume(0.7)
         self.autorifle_damage = 1
 
         # sfx
@@ -324,10 +324,6 @@ class Malen:
         mouse_click = pygame.mouse.get_pressed()
 
         if button_reexit.collidepoint(mouse_pos):
-            # pygame.mixer.music.stop()
-            # pygame.mixer.music.load('sound/hit_menu4.mp3')
-            # pygame.mixer.music.play()
-
             pygame.mouse.set_visible(True)
             pygame.draw.rect(self.monitor, RED, button_reexit, border_radius=25)
             self.monitor.blit(reexit, (button_reexit.centerx - 75, button_reexit.centery - 15))

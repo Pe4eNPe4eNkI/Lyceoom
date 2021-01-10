@@ -137,4 +137,3 @@ class Gamer:
     def is_dead(self):
         if self.hp <= 0:
             self.alive = False
-            # terminate()
