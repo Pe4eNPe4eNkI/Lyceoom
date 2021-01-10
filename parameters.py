@@ -47,7 +47,8 @@ T_SCALE = T_W // CELL
 
 # спрайты
 ZWEI_PI = math.pi * 2  # удвоенный пи для корректировки углов
-C_RAY = N_RAYS // 2 - 1  
+C_RAY = N_RAYS // 2 - 1
+SPEED_MONSTER = 2
 
 # цвета
 WHITE = (255, 255, 255)

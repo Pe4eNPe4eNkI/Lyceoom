@@ -57,7 +57,7 @@ class Interaction:
         sys.exit()
 
     # Функция определяет реакцию объектов на стрельбу игрока, в зависимости от их типа
-    def interaction_objects(self):  
+    def interaction_objects(self):
         if self.gamer.shot and self.malen.shotgun_animation_trigger:
             for obj in sorted(self.sprites.list_of_sprites
                               + self.sprites.list_of_sprites_2
@@ -69,7 +69,7 @@ class Interaction:
                         if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
                                                   txt_map, self.gamer.pos):
                             # Стрельба по мобам
-                            if obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss':  
+                            if obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss':
                                 if self.gamer.weapon_now == 'shotgun':
                                     damage = 3
                                 elif self.gamer.weapon_now == 'autorifle':
@@ -83,7 +83,7 @@ class Interaction:
                                 else:
                                     obj.npc_hp -= damage
                             # Уничтожение бочки вместе с нанесением урона мобам неподалеку
-                            elif obj.tp == 'barrel':  
+                            elif obj.tp == 'barrel':
                                 if obj.dist_to_sprite <= CELL * 3:
                                     hit = random.randrange(0, 2)
                                     if hit != 0:
@@ -101,12 +101,12 @@ class Interaction:
                                             obj_2.blocked = None
                                             obj_2.status = False
                                             # Исчезновение трупов
-                                            obj_2.time = pygame.time.get_ticks()  
+                                            obj_2.time = pygame.time.get_ticks()
 
                             self.malen.shotgun_animation_trigger = False
                             self.malen.autorifle_animation_trigger = False
                     # Открытие доступа ко второй комнате
-                    if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:  
+                    if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:
                         key = 0
                         obj.time = pygame.time.get_ticks()
                         for elem in self.sprites.list_of_sprites:
@@ -162,7 +162,7 @@ class Interaction:
                     self.sprites.list_of_sprites_3):
             if obj.tp == 'fire':
                 # Проверка на то, видят ли нпс игрока
-                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,  
+                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
                                           txt_map, self.gamer.pos):
                     obj.is_trigger = True
                     if obj.tp == 'fire':
@@ -171,7 +171,7 @@ class Interaction:
                             if hit != 0:
                                 self.gamer.hp -= 0.05
             if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') \
-                and not obj.dead:
+                    and not obj.dead:
                 if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
                                           txt_map, self.gamer.pos):
                     obj.is_trigger = True
@@ -198,8 +198,8 @@ class Interaction:
         if abs(obj.dist_to_sprite) > CELL:
             dx = obj.x - self.gamer.pos[0]
             dy = obj.y - self.gamer.pos[1]
-            obj.x = obj.x + 2 + self.speed if dx < 0 else obj.x - 2 - self.speed
-            obj.y = obj.y + 2 + self.speed if dy < 0 else obj.y - 2 - self.speed
+            obj.x = obj.x + SPEED_MONSTER + self.speed if dx < 0 else obj.x - SPEED_MONSTER - self.speed
+            obj.y = obj.y + SPEED_MONSTER + self.speed if dy < 0 else obj.y - SPEED_MONSTER - self.speed
 
     def play_music(self):  # загружаем музыку, которая играет во время игры
         pygame.mixer.pre_init(44100, -16, 2, 2048)
@@ -209,11 +209,11 @@ class Interaction:
         pygame.mixer.music.play(-1)
 
     #  если мы выиграли (убили всех мобов), то вызывается эта функция, которая сообщает о победе
-    def wins(self): 
+    def wins(self):
         if self.gamer.alive:  # если персонаж жив
             if not len([obj for obj in self.sprites.list_of_sprites_3
-                        if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') 
-                        and not obj.dead]):
+                        if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss')
+                           and not obj.dead]):
                 # если все
                 pygame.mixer.music.stop()
                 pygame.mixer.music.load('data/sound/ledohod.wav')
@@ -225,7 +225,7 @@ class Interaction:
                     self.malen.win()  # отрисовка менюшки победы
 
     # если нас убили, то вызывается эта функция, которая сообщает о смерти персонажа
-    def deads(self):  
+    def deads(self):
         if not self.gamer.alive:
             pygame.mixer.Sound('data/sound/pain2.wav').play()
             pygame.mixer.music.stop()
