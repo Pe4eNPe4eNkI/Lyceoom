@@ -394,12 +394,9 @@ class Malen:
                 if mouse_click[0]:
                     if self.diff_level == 'hard':
                         self.diff_level = 'normal'
-                        print(self.diff_level)
                     elif self.diff_level == 'normal':
-                        self.diff_level = 'easy'
                         print(self.diff_level)
                     elif self.diff_level == 'easy':
-                        self.diff_level = 'hard'
                         print(self.diff_level)
 
             pygame.display.flip()
