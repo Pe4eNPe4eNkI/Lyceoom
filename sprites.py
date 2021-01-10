@@ -8,7 +8,7 @@ from collections import deque  # итератор очереди для обра
 from r_c import mapping
 from numba.core import types  # берем типы данных из намбы
 from numba.typed import Dict  # берем намбовские словари для хранения карты
-from numba import int32  
+from numba import int32
 
 
 # класс, в котором хранится список со всеми спрайтами и вспомогательные штуки
@@ -49,7 +49,7 @@ class Sprites:
                                 AllSprites(Obama(), (13.8, 4.62)),
                                 AllSprites(Pinky(), (18.93, 4.56)),
                                 AllSprites(Human1(), (16.76, 2.02))]
-        self.list_of_sprites_2 = [AllSprites(Obama(), (35.39, 2.33)), # карта №2
+        self.list_of_sprites_2 = [AllSprites(Obama(), (35.39, 2.33)),  # карта №2
                                   AllSprites(Pinky(), (27.27, 5.5)),
                                   AllSprites(Obama(), (25.41, 4.31)),
                                   AllSprites(Human2(), (25.43, 1.45)),
@@ -86,7 +86,7 @@ class Sprites:
                     + self.list_of_sprites_doors], default=(float('inf'), 0))
 
     @property
-    def b_doors(self):  # Функция запрещает видеть через закрытые двери
+    def b_doors(self):  # словарь закрытых дверей
         blocked_doors = Dict.empty(key_type=types.UniTuple(int32, 2), value_type=int32)
         for obj in self.list_of_sprites_doors:
             if obj.tp == 'h_door' or obj.tp == 'h_nextdoor_first' or obj.tp == 'h_nextdoor_second' \
@@ -153,7 +153,6 @@ class AllSprites:
                                     or self.tp == 'h_nextdoor_first' \
                                     or self.tp == 'h_nextdoor_second' else self.x
         self.cls = False  # несуществование (нужно ли удалять)
-        self.obj_action = kind.obj_action.copy()  # движение
         # если спрайт не статичный (со всех сторон одинаковый)
         if self.viewing_angles:
             # делаем списки с замороженными множествами углов (нужны будут для ключей)
@@ -196,8 +195,8 @@ class AllSprites:
             gamma += ZWEI_PI
         # корректируем угол для реалистичности
         self.betta -= 1.4 * gamma
-        
-        d_rays = int(gamma / DELTA_ANGLE) # количество углов между лучами в гамме
+
+        d_rays = int(gamma / DELTA_ANGLE)  # количество углов между лучами в гамме
         self.current_ray = C_RAY + d_rays  # находим луч со спрайтом
         # для того, чтобы не было рыбьего глаза и спрайты двигались нормально корректируем дистанцию
         if self.tp not in {'h_door', 'v_door', 'h_nextdoor_first', 'h_nextdoor_second'}:
@@ -244,7 +243,7 @@ class AllSprites:
         else:
             return (False,)
 
-    def s_animation(self):  # Отображение анимация мира для игрока
+    def s_animation(self):  # Отображение анимации атаки
         if self.animation and self.dist_to_sprite < self.animation_dist:
             sprite_object = self.animation[0]
             if self.animation_count < self.animation_speed:
@@ -278,7 +277,7 @@ class AllSprites:
                 self.dead_anim_count = 0
         return self.d_sprite
 
-    def s_action(self):  # Анимация мобов при действиях
+    def s_action(self):  # отображение моба с разных углов
         sprite_object = self.animation[0]
         if self.animation_count < self.animation_speed:
             self.animation_count += 1
@@ -326,7 +325,6 @@ class Fire:
         self.tp = 'fire'
         self.blocked = False
         self.npc_hp = None
-        self.obj_action = []
 
 
 class Barrel:
@@ -341,8 +339,6 @@ class Barrel:
                                 for i in range(12)])
         self.animation_dist = 150
         self.animation_speed = 5
-        self.animation_dist = 1800
-        self.animation_speed = 10
         self.dead = None
         self.dead_shift = 2.6
         self.dead_anim = deque([pygame.image.load(f'data/sprites/barrel/' + \
@@ -351,7 +347,6 @@ class Barrel:
         self.tp = 'barrel'
         self.blocked = True
         self.npc_hp = None
-        self.obj_action = []
 
 
 class Sosademon:
@@ -375,7 +370,6 @@ class Sosademon:
         self.tp = 'boss'
         self.blocked = True
         self.npc_hp = 30
-        self.obj_action = []
 
 
 class Pinky:
@@ -399,7 +393,6 @@ class Pinky:
         self.tp = 'enemy'
         self.blocked = True
         self.npc_hp = 5
-        self.obj_action = []
 
 
 class Obama:
@@ -423,7 +416,6 @@ class Obama:
         self.tp = 'enemy'
         self.blocked = True
         self.npc_hp = 3
-        self.obj_action = []
 
 
 class Human1:
@@ -447,7 +439,6 @@ class Human1:
         self.tp = 'enemy_shooter'
         self.blocked = True
         self.npc_hp = 1
-        self.obj_action = []
 
 
 class Human2:
@@ -471,7 +462,6 @@ class Human2:
         self.tp = 'enemy'
         self.blocked = True
         self.npc_hp = 10
-        self.obj_action = []
 
 
 class DoorH:
@@ -491,7 +481,6 @@ class DoorH:
         self.tp = 'h_door'
         self.blocked = True
         self.npc_hp = None
-        self.obj_action = []
 
 
 class DoorV:
@@ -511,7 +500,6 @@ class DoorV:
         self.tp = 'v_door'
         self.blocked = True
         self.npc_hp = None
-        self.obj_action = []
 
 
 class NextDoorFirst:
@@ -531,7 +519,6 @@ class NextDoorFirst:
         self.tp = 'h_nextdoor_first'
         self.blocked = True
         self.npc_hp = None
-        self.obj_action = []
 
 
 class NextDoorSecond:
@@ -551,7 +538,6 @@ class NextDoorSecond:
         self.tp = 'h_nextdoor_second'
         self.blocked = True
         self.npc_hp = None
-        self.obj_action = []
 
 
 class MedKit:
@@ -569,5 +555,4 @@ class MedKit:
         self.tp = 'medkit'
         self.dead_anim = []
         self.blocked = False
-        self.obj_action = []
         self.npc_hp = None
