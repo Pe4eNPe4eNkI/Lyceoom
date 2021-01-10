@@ -97,14 +97,14 @@ class Sprites:
         self.list_of_sprites_3 = [AllSprites(Sosademon(), (65.21, 15.5))]
 
     @property
-    def sprite_shot(self):
+    def sprite_shot(self):  # По кому идет стрельба
         return min([obj.is_on_fire for obj in self.list_of_sprites
                     + self.list_of_sprites_2
                     + self.list_of_sprites_3
                     + self.list_of_sprites_doors], default=(float('inf'), 0))
 
     @property
-    def b_doors(self):
+    def b_doors(self):  # Функция запрещает видеть через закрытые двери
         blocked_doors = Dict.empty(key_type=types.UniTuple(int32, 2), value_type=int32)
         for obj in self.list_of_sprites_doors:
             if obj.tp == 'h_door' or obj.tp == 'h_nextdoor_first' or obj.tp == 'h_nextdoor_second' \
@@ -262,7 +262,7 @@ class AllSprites:
         else:
             return (False,)
 
-    def s_animation(self):
+    def s_animation(self):  # Отображение анимация мира для игрока
         if self.animation and self.dist_to_sprite < self.animation_dist:
             sprite_object = self.animation[0]
             if self.animation_count < self.animation_speed:
@@ -275,7 +275,7 @@ class AllSprites:
             return sprite_object
         return self.obj
 
-    def show_sprite(self):
+    def show_sprite(self):  # Отображение спрайтов для игрока
         if self.viewing_angles:
             if self.betta < 0:
                 self.betta += ZWEI_PI
@@ -286,7 +286,7 @@ class AllSprites:
                     return self.sprite_positions[angles]
         return self.obj
 
-    def dead_animation(self):
+    def dead_animation(self):  # Анимация смерти мобов и объектов
         if len(self.dead_anim):
             if self.dead_anim_count < self.animation_speed:
                 self.d_sprite = self.dead_anim[0]
@@ -296,7 +296,7 @@ class AllSprites:
                 self.dead_anim_count = 0
         return self.d_sprite
 
-    def s_action(self):
+    def s_action(self):  # Анимация мобов при действиях
         sprite_object = self.animation[0]
         if self.animation_count < self.animation_speed:
             self.animation_count += 1
@@ -305,7 +305,7 @@ class AllSprites:
             self.animation_count = 0
         return sprite_object
 
-    def d_open(self):
+    def d_open(self):  # Открытие дверей
         if self.tp == 'h_nextdoor_first':
             self.y -= 3
             if abs(self.y - self.d_last_pos) > CELL:
