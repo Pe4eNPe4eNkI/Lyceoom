@@ -289,7 +289,7 @@ class Malen:
                 # pygame.mixer.music.load('data/sound/hit_menu1.mp3')
                 # pygame.mixer.music.play()
                 pygame.draw.rect(self.monitor, BLACK, button_start, border_radius=25)
-                self.monitor.blit(start, (button_start.centerx - 85, button_start.centery - 20))
+                self.monitor.blit(start, (button_start.centerx - 110, button_start.centery - 25))
                 if mouse_click[0]:
                     self.menu_tr = False
             elif button_exit.collidepoint(mouse_pos):
@@ -297,7 +297,7 @@ class Malen:
                 # pygame.mixer.music.load('data/sound/hit_menu1.mp3')
                 # pygame.mixer.music.play()
                 pygame.draw.rect(self.monitor, BLACK, button_exit, border_radius=25)
-                self.monitor.blit(exit, (button_exit.centerx - 90, button_exit.centery - 25))
+                self.monitor.blit(exit, (button_exit.centerx - 85, button_exit.centery - 20))
                 if mouse_click[0]:
                     self.terminate()
 

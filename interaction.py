@@ -194,7 +194,7 @@ class Interaction:
         pygame.mixer.pre_init(44100, -16, 2, 2048)
         pygame.mixer.init()
         pygame.mixer.music.load('data/sound/doom.wav')  # загрузка музыкальной темы игры
-        pygame.mixer.music.set_volume(0.1)
+        pygame.mixer.music.set_volume(0.2)
         pygame.mixer.music.play(-1)
 
     def wins(self):  # если мы выиграли (убили всех мобов), то вызывается эта функция, которая сообщает о победе
