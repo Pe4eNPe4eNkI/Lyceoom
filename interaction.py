@@ -56,7 +56,8 @@ class Interaction:
         pygame.quit()
         sys.exit()
 
-    def interaction_objects(self):  # Функция определяет реакцию объектов на стрельбу игрока, в зависимости от их типа
+    # Функция определяет реакцию объектов на стрельбу игрока, в зависимости от их типа
+    def interaction_objects(self):  
         if self.gamer.shot and self.malen.shotgun_animation_trigger:
             for obj in sorted(self.sprites.list_of_sprites
                               + self.sprites.list_of_sprites_2
@@ -67,7 +68,8 @@ class Interaction:
                     if obj.dead != 'never' and not obj.dead:
                         if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
                                                   txt_map, self.gamer.pos):
-                            if obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss':  # Стрельба по мобам
+                            # Стрельба по мобам
+                            if obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss':  
                                 if self.gamer.weapon_now == 'shotgun':
                                     damage = 3
                                 elif self.gamer.weapon_now == 'autorifle':
@@ -80,7 +82,8 @@ class Interaction:
                                     obj.time = pygame.time.get_ticks()  # Исчезновение трупов
                                 else:
                                     obj.npc_hp -= damage
-                            elif obj.tp == 'barrel':  # Уничтожение бочки вместе с нанесением урона мобам неподалеку
+                            # Уничтожение бочки вместе с нанесением урона мобам неподалеку
+                            elif obj.tp == 'barrel':  
                                 if obj.dist_to_sprite <= CELL * 3:
                                     hit = random.randrange(0, 2)
                                     if hit != 0:
@@ -97,11 +100,13 @@ class Interaction:
                                             obj_2.dead = True
                                             obj_2.blocked = None
                                             obj_2.status = False
-                                            obj_2.time = pygame.time.get_ticks()  # Исчезновение трупов
+                                            # Исчезновение трупов
+                                            obj_2.time = pygame.time.get_ticks()  
 
                             self.malen.shotgun_animation_trigger = False
                             self.malen.autorifle_animation_trigger = False
-                    if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:  # Открытие доступа ко второй комнате
+                    # Открытие доступа ко второй комнате
+                    if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:  
                         key = 0
                         obj.time = pygame.time.get_ticks()
                         for elem in self.sprites.list_of_sprites:
@@ -128,7 +133,8 @@ class Interaction:
                             obj.d_open_trigger = True
                             obj.blocked = None
                             self.speed = 3  # Изменение скорости мобов при попадании к боссу
-                    if obj.tp in {'h_door', 'v_door'} and obj.dist_to_sprite < CELL:  # Открытие дверей
+                    # Открытие дверей
+                    if obj.tp in {'h_door', 'v_door'} and obj.dist_to_sprite < CELL:
                         obj.d_open_trigger = True
                         obj.blocked = None
                         obj.time = pygame.time.get_ticks()
@@ -155,7 +161,8 @@ class Interaction:
                     self.sprites.list_of_sprites_2 +
                     self.sprites.list_of_sprites_3):
             if obj.tp == 'fire':
-                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,  # Проверка на то, видят ли нпс игрока
+                # Проверка на то, видят ли нпс игрока
+                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,  
                                           txt_map, self.gamer.pos):
                     obj.is_trigger = True
                     if obj.tp == 'fire':

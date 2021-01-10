@@ -199,6 +199,9 @@ class AllSprites:
 
     # функция для определения расстояния до спрайта 
     def object_locate(self, gamer, walls):
+        fake_walls0 = [walls[0] for i in range(100)]
+        fake_walls1 = [walls[-1] for i in range(100)]
+        fake_walls = fake_walls0 + walls + fake_walls1
         dx, dy = self.x - gamer.x, self.y - gamer.y
         # формула расстояния между точками на плоскости
         self.dist_to_sprite = math.sqrt(dx ** 2 + dy ** 2)
@@ -224,7 +227,7 @@ class AllSprites:
             if self.tp not in {'h_door', 'v_door', 'h_nextdoor_first', 'h_nextdoor_second'}:
                 self.p_height = min(int(PROJ_C / self.dist_to_sprite), D_HEIGHT)
             else:
-                self.p_height = HEIGHT
+                self.p_height = min(int(PROJ_C / self.dist_to_sprite), HEIGHT)
             # размеры спрайта
             sprite_width = int(self.p_height * self.scale[0])
             sprite_heigth = int(self.p_height * self.scale[1])
