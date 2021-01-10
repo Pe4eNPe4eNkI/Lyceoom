@@ -1,3 +1,4 @@
+# Импорт необходимых элементов
 import random
 import pygame
 import sys
@@ -7,6 +8,7 @@ from numba import njit
 from parameters import *
 
 
+# Функция, проверяющая могут ли мобы видеть игрока
 @njit(fastmath=True, cache=True)
 def ray_casting_npc_player(npc_x, npc_y, blocked_doors, txt_map, pos_gamer):
     ox, oy = pos_gamer
@@ -50,11 +52,11 @@ class Interaction:
         self.pain_sound.set_volume(0.5)
         self.heal_sound = pygame.mixer.Sound('data/sound/heal.wav')
 
-    def terminate(self):
+    def terminate(self):  # Выход из игры
         pygame.quit()
         sys.exit()
 
-    def interaction_objects(self):
+    def interaction_objects(self):  # Функция определяет реакцию объектов на стрельбу игрока, в зависимости от их типа
         if self.gamer.shot and self.malen.shotgun_animation_trigger:
             for obj in sorted(self.sprites.list_of_sprites
                               + self.sprites.list_of_sprites_2
@@ -65,7 +67,7 @@ class Interaction:
                     if obj.dead != 'never' and not obj.dead:
                         if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
                                                   txt_map, self.gamer.pos):
-                            if obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss':
+                            if obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss':  # Стрельба по мобам
                                 if self.gamer.weapon_now == 'shotgun':
                                     damage = 3
                                 elif self.gamer.weapon_now == 'autorifle':
@@ -75,10 +77,10 @@ class Interaction:
                                     obj.dead = True
                                     obj.blocked = None
                                     obj.status = False
-                                    obj.time = pygame.time.get_ticks()
+                                    obj.time = pygame.time.get_ticks()  # Исчезновение трупов
                                 else:
                                     obj.npc_hp -= damage
-                            elif obj.tp == 'barrel':
+                            elif obj.tp == 'barrel':  # Уничтожение бочки вместе с нанесением урона мобам неподалеку
                                 if obj.dist_to_sprite <= CELL * 3:
                                     hit = random.randrange(0, 2)
                                     if hit != 0:
@@ -95,11 +97,11 @@ class Interaction:
                                             obj_2.dead = True
                                             obj_2.blocked = None
                                             obj_2.status = False
-                                            obj_2.time = pygame.time.get_ticks()
+                                            obj_2.time = pygame.time.get_ticks()  # Исчезновение трупов
 
                             self.malen.shotgun_animation_trigger = False
                             self.malen.autorifle_animation_trigger = False
-                    if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:
+                    if obj.tp == 'h_nextdoor_first' and obj.dist_to_sprite < CELL:  # Открытие доступа ко второй комнате
                         key = 0
                         obj.time = pygame.time.get_ticks()
                         for elem in self.sprites.list_of_sprites:
@@ -125,8 +127,8 @@ class Interaction:
                         if key == 0:
                             obj.d_open_trigger = True
                             obj.blocked = None
-                            self.speed = 3
-                    if obj.tp in {'h_door', 'v_door'} and obj.dist_to_sprite < CELL:
+                            self.speed = 3  # Изменение скорости мобов при попадании к боссу
+                    if obj.tp in {'h_door', 'v_door'} and obj.dist_to_sprite < CELL:  # Открытие дверей
                         obj.d_open_trigger = True
                         obj.blocked = None
                         obj.time = pygame.time.get_ticks()
@@ -134,7 +136,7 @@ class Interaction:
         for obj in sorted(self.sprites.list_of_sprites
                           + self.sprites.list_of_sprites_2
                           + self.sprites.list_of_sprites_3, key=lambda obj: obj.dist_to_sprite):
-            if obj.tp == 'medkit':
+            if obj.tp == 'medkit':  # Поглощение аптечки
                 if abs(obj.dist_to_sprite) <= 50:
                     if self.gamer.hp + 30 <= 100:
                         self.gamer.hp += 30
@@ -153,7 +155,7 @@ class Interaction:
                     self.sprites.list_of_sprites_2 +
                     self.sprites.list_of_sprites_3):
             if obj.tp == 'fire':
-                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,
+                if ray_casting_npc_player(obj.x, obj.y, self.sprites.b_doors,  # Проверка на то, видят ли нпс игрока
                                           txt_map, self.gamer.pos):
                     obj.is_trigger = True
                     if obj.tp == 'fire':
@@ -167,7 +169,7 @@ class Interaction:
                                           txt_map, self.gamer.pos):
                     obj.is_trigger = True
                     self.npc_move(obj)
-                    # Атака мобов
+                    # Атака мобов и их урон
                     if obj.tp == 'enemy_shooter':
                         hit = random.randrange(0, 2)
                         if hit != 0:
@@ -185,7 +187,7 @@ class Interaction:
                 else:
                     obj.is_trigger = False
 
-    def npc_move(self, obj):
+    def npc_move(self, obj):  # Движение нпс к игроку
         if abs(obj.dist_to_sprite) > CELL:
             dx = obj.x - self.gamer.pos[0]
             dy = obj.y - self.gamer.pos[1]

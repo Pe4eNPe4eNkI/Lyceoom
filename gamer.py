@@ -58,7 +58,6 @@ class Gamer:
         next_rect = self.rect.copy()
         next_rect.move_ip(dx, dy)
         hit_indexes = next_rect.collidelistall(self.collision_list)
-        # ДАНЯ ПОЯСНИ ТУТ АЛГОРИТМ КРАТКО
         if len(hit_indexes):
             delta_x, delta_y = 0, 0
             for hit_index in hit_indexes:
