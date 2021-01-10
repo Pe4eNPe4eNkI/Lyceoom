@@ -11,12 +11,14 @@ D_WIDTH = WIDTH * 2
 P_HEIGHT = 5 * HEIGHT
 CELL = 100
 FPS = 90
-FPS_POS = (WIDTH - 65, 5)
+FPS_POS = (WIDTH - 65, 25)
+HP_POS = (WIDTH - 100, 650)
+STATUSBAR_POS = (WIDTH - 225, 655)
 
 # настройки игрока
-gamer_pos = (H_WIDTH, H_HEIGHT)
+gamer_pos = (124, 753)
 gamer_angle = 0
-gamer_speed = 2.5
+gamer_speed = 4.5
 
 # настройки лучей
 FOV = math.pi / 3
@@ -34,7 +36,7 @@ MINIMAP_SCALE = 5
 MAP_RES = (WIDTH // MINIMAP_SCALE, HEIGHT // MINIMAP_SCALE)
 MAP_SCALE = 2 * MINIMAP_SCALE
 MAP_CELL = CELL // MAP_SCALE
-MAP_POS = (0, 0)
+MAP_POS = (15, 50)
 
 # текстуры
 T_W = 1200
@@ -44,7 +46,7 @@ T_SCALE = T_W // CELL
 
 # спрайты
 ZWEI_PI = math.pi * 2
-C_RAY = N_RAYS // 2 - 1  # аоаоаоаоа
+C_RAY = N_RAYS // 2 - 1  
 
 # цвета
 WHITE = (255, 255, 255)
@@ -59,5 +61,5 @@ PURPLE = (120, 0, 120)
 SKY_BLUE = (0, 180, 255)
 YELLOW = (220, 220, 0)
 SANDY = (244, 164, 96)
-
-# test
+SPRINGGREEN = (0, 250, 154)
+GRAY = (26, 26, 26)
