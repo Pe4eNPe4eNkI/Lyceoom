@@ -95,29 +95,30 @@ class Sprites:
         return blocked_doors
 
     # в этой функции удаляются спрайты после кулдауна
-    def delete_objects(self):
+    def delete_objects(self, corps_on):
         # список-копия со всеми элементами
         deleted_lst = self.list_of_sprites[:] + self.list_of_sprites_doors[:]
         # удаление открытых дверей
         for obj in deleted_lst:
             if obj.tp in {'h_door', 'v_door', 'h_nextdoor_first', 'h_nextdoor_second'} and obj.cls:
-                if pygame.time.get_ticks() - obj.time >= 700:
+                if pygame.time.get_ticks() - obj.time >= 500:
                     self.list_of_sprites_doors.remove(obj)
         # удаление трупов мобови на каждой карте через 4 секунды
-        for obj in deleted_lst:
-            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and obj.dead:
-                if pygame.time.get_ticks() - obj.time >= 4000:
-                    self.list_of_sprites.remove(obj)
-        deleted_lst = self.list_of_sprites_2[:]
-        for obj in deleted_lst:
-            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and obj.dead:
-                if pygame.time.get_ticks() - obj.time >= 4000:
-                    self.list_of_sprites_2.remove(obj)
-        deleted_lst = self.list_of_sprites_3[:]
-        for obj in deleted_lst:
-            if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and obj.dead:
-                if pygame.time.get_ticks() - obj.time >= 4000:
-                    self.list_of_sprites_3.remove(obj)
+        if not corps_on:
+            for obj in deleted_lst:
+                if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and obj.dead:
+                    if pygame.time.get_ticks() - obj.time >= 4000:
+                        self.list_of_sprites.remove(obj)
+            deleted_lst = self.list_of_sprites_2[:]
+            for obj in deleted_lst:
+                if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and obj.dead:
+                    if pygame.time.get_ticks() - obj.time >= 4000:
+                        self.list_of_sprites_2.remove(obj)
+            deleted_lst = self.list_of_sprites_3[:]
+            for obj in deleted_lst:
+                if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and obj.dead:
+                    if pygame.time.get_ticks() - obj.time >= 4000:
+                        self.list_of_sprites_3.remove(obj)
 
 
 #  определяющий класс для всех спрайтов

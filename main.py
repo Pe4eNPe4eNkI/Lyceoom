@@ -49,6 +49,6 @@ while True:
     interaction.wins()
     interaction.deads()
     gamer.is_dead()
-    sprites.delete_objects()
+    sprites.delete_objects(malen.corps_on)
     pygame.display.flip()
     timer.tick(FPS)

@@ -16,6 +16,7 @@ class Malen:
         self.gamer = gamer
         self.timer = timer
         self.camera = Camera(self.monitor_map, self.gamer)
+        self.corps_on = False  # остаются ли трупы после смерти
 
         # шрифты
         self.font_win = pygame.font.Font('data/font/font1.ttf', 65)
@@ -287,14 +288,22 @@ class Malen:
         pygame.mixer.music.play()
 
         button_font = pygame.font.Font('data/font/font2.ttf', 40)
+        button_font_corps = pygame.font.Font('data/font/font2.ttf', 26)
         label_font = pygame.font.Font('data/font/font1.ttf', 280)
 
         start = button_font.render('START', 0, pygame.Color(50, 50, 50))
         button_start = pygame.Rect(0, 0, 300, 100)
         button_start.center = 170, H_HEIGHT - 50
+
         exit = button_font.render('EXIT', 1, pygame.Color(50, 50, 50))
         button_exit = pygame.Rect(0, 0, 300, 100)
         button_exit.center = 170, H_HEIGHT + 100
+
+        optimize_off = button_font_corps.render('CORPSE', 1, pygame.Color(52, 50, 50))
+        optimize_on = button_font_corps.render('CORPSE', 1, pygame.Color(205, 184, 145))
+        button_optimize = pygame.Rect(0, 0, 200, 66.7)
+        button_optimize.center = 1080, 44
+
 
         while self.menu_tr:
             for event in pygame.event.get():
@@ -309,6 +318,10 @@ class Malen:
 
             pygame.draw.rect(self.monitor, BLACK, button_exit, border_radius=25, width=10)
             self.monitor.blit(exit, (button_exit.centerx - 85, button_exit.centery - 20))
+
+            pygame.draw.rect(self.monitor, BLACK, button_optimize, border_radius=25, width=10)
+            self.monitor.blit(optimize_on if self.corps_on else optimize_off,
+                              (button_optimize.centerx - 87, button_optimize.centery - 12))
 
             color = randrange(40)
             label = label_font.render('Lyceoom', 1, (color, color, color))
@@ -336,11 +349,25 @@ class Malen:
                 self.monitor.blit(exit, (button_exit.centerx - 85, button_exit.centery - 20))
                 if mouse_click[0]:
                     self.terminate()
+            elif button_optimize.collidepoint(mouse_pos):
+                '''
+                pygame.mixer.music.stop()
+                pygame.mixer.music.load('data/sound/hit_menu1.mp3')
+                pygame.mixer.music.play()
+                '''
+                if mouse_click[0]:
+                    if self.corps_on:
+                        self.corps_on = False
+                        print(self.corps_on)
+
+                    else:
+                        self.corps_on = True
+                        print(self.corps_on)
 
             pygame.display.flip()
             self.timer.tick(20)
 
-    def dead_menu(self): # тут тоже менюшка, ток уже смерти и тут не аниме девка, а череп
+    def dead_menu(self):  # тут тоже менюшка, ток уже смерти и тут не аниме девка, а череп
         keys = pygame.key.get_pressed()
         if keys[pygame.K_ESCAPE]:
             self.terminate()
