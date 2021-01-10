@@ -1,3 +1,6 @@
+# Это файл с классом, в котором происходит отрисовка всех штук 
+# "malen" (нем.) = "рисовать" (рус.)
+
 import pygame
 import sys
 from collections import deque
