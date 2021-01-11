@@ -15,7 +15,7 @@ def terminate():
 # Запуск и инициализация основных файлов игры
 pygame.init()
 monitor = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Luceoom')
+pygame.display.set_caption('Lyceoom')
 mon_map = pygame.Surface(MAP_RES)
 pygame.mouse.set_visible(False)
 timer = pygame.time.Clock()
