@@ -24,7 +24,8 @@ def ray_casting(pos_gamer, angle_gamer, txt_map):  # Функция выдает
         cos_a = math.cos(view_angle)
         cos_a = cos_a if cos_a else 0.000001
 
-        x, dx = (xm + CELL, 1) if cos_a >= 0 else (xm, -1)  # Проверка на пересечение луча с прямыми (вертикальные)
+        # Проверка на пересечение луча с прямыми (вертикальные)
+        x, dx = (xm + CELL, 1) if cos_a >= 0 else (xm, -1)  
         for i in range(0, W_WORLD, CELL):  # Пробегаемся по всем прямым
             depth_v = (x - ox) / cos_a  # Исправление эффекта рыбьего глаза
             yv = oy + depth_v * sin_a
@@ -34,7 +35,8 @@ def ray_casting(pos_gamer, angle_gamer, txt_map):  # Функция выдает
                 break
             x += dx * CELL
 
-        y, dy = (ym + CELL, 1) if sin_a >= 0 else (ym, -1)  # Проверка на пересечение луча с прямыми (горизонтальные)
+        # Проверка на пересечение луча с прямыми (горизонтальные)
+        y, dy = (ym + CELL, 1) if sin_a >= 0 else (ym, -1)  
         for i in range(0, H_WORLD, CELL):  # Пробегаемся по всем прямым
             depth_h = (y - oy) / sin_a  # Исправление эффекта рыбьего глаза
             xh = ox + depth_h * cos_a
@@ -44,7 +46,8 @@ def ray_casting(pos_gamer, angle_gamer, txt_map):  # Функция выдает
                 break
             y += dy * CELL
 
-        if depth_v < depth_h:  # Выбираем, какая из точе пересечения препятствием ближе и отрисовываем его
+        # Выбираем, какая из точе пересечения препятствием ближе и отрисовываем его
+        if depth_v < depth_h:  
             depth, offset, texture = (depth_v, yv, texture_v)
         else:
             depth, offset, texture = (depth_h, xh, texture_h)

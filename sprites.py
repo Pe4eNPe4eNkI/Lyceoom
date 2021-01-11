@@ -106,17 +106,20 @@ class Sprites:
         # удаление трупов мобови на каждой карте через 4 секунды
         if not corps_on:
             for obj in deleted_lst:
-                if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and obj.dead:
+                if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' 
+                    or obj.tp == 'boss') and obj.dead:
                     if pygame.time.get_ticks() - obj.time >= 4000:
                         self.list_of_sprites.remove(obj)
             deleted_lst = self.list_of_sprites_2[:]
             for obj in deleted_lst:
-                if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and obj.dead:
+                if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' 
+                    or obj.tp == 'boss') and obj.dead:
                     if pygame.time.get_ticks() - obj.time >= 4000:
                         self.list_of_sprites_2.remove(obj)
             deleted_lst = self.list_of_sprites_3[:]
             for obj in deleted_lst:
-                if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' or obj.tp == 'boss') and obj.dead:
+                if (obj.tp == 'enemy' or obj.tp == 'enemy_shooter' 
+                    or obj.tp == 'boss') and obj.dead:
                     if pygame.time.get_ticks() - obj.time >= 4000:
                         self.list_of_sprites_3.remove(obj)
 

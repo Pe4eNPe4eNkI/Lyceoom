@@ -16,6 +16,8 @@ def terminate():
 pygame.init()
 monitor = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Lyceoom')
+icon = pygame.image.load('data/icon/icon.png')
+pygame.display.set_icon(icon)
 mon_map = pygame.Surface(MAP_RES)
 pygame.mouse.set_visible(False)
 timer = pygame.time.Clock()
