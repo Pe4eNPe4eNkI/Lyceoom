@@ -395,9 +395,9 @@ class Malen:
                     if self.diff_level == 'hard':
                         self.diff_level = 'normal'
                     elif self.diff_level == 'normal':
-                        print(self.diff_level)
+                        self.diff_level = 'easy'
                     elif self.diff_level == 'easy':
-                        print(self.diff_level)
+                        self.diff_level = 'hard'
 
             pygame.display.flip()
             self.timer.tick(20)

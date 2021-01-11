@@ -48,7 +48,7 @@ class Interaction:
         self.sprites = sprites
         self.malen = malen
         self.diff_level = diff_level
-        self.speed = 0
+        self.mob_speed = 0
         self.pain_sound = pygame.mixer.Sound('data/sound/deadmon.wav')
         self.pain_sound.set_volume(0.5)
         self.heal_sound = pygame.mixer.Sound('data/sound/heal.wav')
@@ -134,7 +134,7 @@ class Interaction:
                         if key == 0:
                             obj.d_open_trigger = True
                             obj.blocked = None
-                            self.speed = 3  # Изменение скорости мобов при попадании к боссу
+                            self.mob_speed = 3  # Изменение скорости мобов при попадании к боссу
                     # Открытие дверей
                     if obj.tp in {'h_door', 'v_door'} and obj.dist_to_sprite < CELL:
                         obj.d_open_trigger = True
@@ -208,8 +208,8 @@ class Interaction:
         if abs(obj.dist_to_sprite) > CELL:
             dx = obj.x - self.gamer.pos[0]
             dy = obj.y - self.gamer.pos[1]
-            obj.x = obj.x + self.mob_speed + self.speed if dx < 0 else obj.x - self.mob_speed - self.speed
-            obj.y = obj.y + self.mob_speed + self.speed if dy < 0 else obj.y - self.mob_speed - self.speed
+            obj.x = obj.x + self.mob_speed if dx < 0 else obj.x - self.mob_speed
+            obj.y = obj.y + self.mob_speed if dy < 0 else obj.y - self.mob_speed
 
     def play_music(self):  # загружаем музыку, которая играет во время игры
         pygame.mixer.pre_init(44100, -16, 2, 2048)
