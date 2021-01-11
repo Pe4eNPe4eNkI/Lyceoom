@@ -317,6 +317,7 @@ class Malen:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.terminate()
+
             pygame.mouse.set_visible(True)
             self.monitor.blit(self.menu_picture, (0, 0))
             x += 1
@@ -376,14 +377,14 @@ class Malen:
                 pygame.mixer.music.load('data/sound/hit_menu1.mp3')
                 pygame.mixer.music.play()
                 '''
-                if mouse_click[0]:
+                pygame.draw.rect(self.monitor, BLACK, button_optimize, border_radius=25)
+                self.monitor.blit(optimize_on if self.corps_on else optimize_off,
+                                  (button_optimize.centerx - 87, button_optimize.centery - 12))
+                if pygame.event.wait().type == pygame.MOUSEBUTTONDOWN:
                     if self.corps_on:
                         self.corps_on = False
-                        print(self.corps_on)
-
                     else:
                         self.corps_on = True
-                        print(self.corps_on)
 
             elif button_dif_lvl.collidepoint(mouse_pos):
                 '''
@@ -391,7 +392,9 @@ class Malen:
                 pygame.mixer.music.load('data/sound/hit_menu1.mp3')
                 pygame.mixer.music.play()
                 '''
-                if mouse_click[0]:
+                pygame.draw.rect(self.monitor, BLACK, button_dif_lvl, border_radius=25)
+                self.monitor.blit(self.difficulty[0], (self.difficulty[1], self.difficulty[2]))
+                if pygame.event.wait().type == pygame.MOUSEBUTTONDOWN:
                     if self.diff_level == 'hard':
                         self.diff_level = 'normal'
                     elif self.diff_level == 'normal':
